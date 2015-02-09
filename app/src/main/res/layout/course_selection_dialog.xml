@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".CourseSelectionScreen">
 
     <ListView
         android:id="@+id/list_dialog"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:entries="@array/course_list" />
+        android:entries="@array/course_list"
+        style="@android:style/Theme.Holo.Dialog.NoActionBar" />
 
 </LinearLayout>

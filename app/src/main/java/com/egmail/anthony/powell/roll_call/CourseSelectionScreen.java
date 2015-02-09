@@ -8,24 +8,35 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class CourseSelectionScreen extends Activity {
+
+    private SharedPreferences studentInfo;
+    public static final String TAG = "tag";
+    public static final String LAST = "last";
+    public static final String T = "tNum";
+    public static final String COURSE = "course";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_selection);
 
-        final SharedPreferences studentAccount = getSharedPreferences("StudentInfo", 0);
-        final SharedPreferences.Editor editor = studentAccount.edit();
+        studentInfo = getSharedPreferences(TAG, MODE_PRIVATE);
+
+//        Toast.makeText(this, studentInfo.getAll().toString(),Toast.LENGTH_LONG).show();
+        final SharedPreferences.Editor edit = studentInfo.edit();
 
         Button reReg = (Button) findViewById(R.id.ReRegisterButton);
 
         reReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editor.clear();
-                editor.apply();
+                edit.clear();
+                edit.apply();
                 startActivity(new Intent(CourseSelectionScreen.this, StudentReg.class));
                 finish();
             }
@@ -39,55 +50,44 @@ public class CourseSelectionScreen extends Activity {
 
             private void populateList() {
 
-                final AlertDialog.Builder builder = new AlertDialog.Builder(CourseSelectionScreen.this);
-                builder.setTitle("Select Course")
-                        .setItems(R.array.course_list, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                //Open SignIn.java with the Title being the selections list
-                                switch (which) {
-                                    //First selection
-                                    case 0:
-                                        //===Add Toast to screen !!(Works Without)!!
-                                        //Toast.makeText(CourseSelectionScreen.this,dialog. ,Toast.LENGTH_SHORT);
+                final ListView lv = new ListView(CourseSelectionScreen.this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(CourseSelectionScreen.this).setTitle("Select Course");
+                builder.setItems(R.array.course_list, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        TextView tv = (TextView) findViewById(R.id.SignInTitle);
+                        switch (which) {
+                            case 0:
+                                startActivity(new Intent(CourseSelectionScreen.this, SignIn.class));
+                                edit.putString(COURSE, "CS12401");
+                                edit.apply();
+                                Toast.makeText(CourseSelectionScreen.this, "CS12401", Toast.LENGTH_LONG).show();
+                                break;
+                            case 1:
+                                startActivity(new Intent(CourseSelectionScreen.this, SignIn.class));
+                                edit.putString(COURSE, "CS116WE1");
+                                edit.apply();
+                                Toast.makeText(CourseSelectionScreen.this, "CS116WE1", Toast.LENGTH_LONG).show();
+                                break;
+                            case 2:
+                                startActivity(new Intent(CourseSelectionScreen.this, SignIn.class));
+                                edit.putString(COURSE, "BIOL13204");
+                                edit.apply();
+                                Toast.makeText(CourseSelectionScreen.this, "BIOL13204", Toast.LENGTH_LONG).show();
+                                break;
+                            case 3:
+                                startActivity(new Intent(CourseSelectionScreen.this, SignIn.class));
+                                edit.putString(COURSE, "BIOL23201");
+                                edit.apply();
+                                Toast.makeText(CourseSelectionScreen.this, "BIOL23201", Toast.LENGTH_LONG).show();
+                                break;
 
-                                        //startActivity(new Intent(CourseSelectionScreen.this, SignIn.class));
-                                        break;
-                                    //Second selection
-                                    case 1:
-                                        startActivity(new Intent(CourseSelectionScreen.this, SignIn.class));
-                                        break;
-                                    //Third selection
-                                    case 2:
-                                        startActivity(new Intent(CourseSelectionScreen.this, SignIn.class));
-                                        break;
-                                    //Fourth selection
-                                    case 3:
-                                        startActivity(new Intent(CourseSelectionScreen.this, SignIn.class));
-                                        break;
-                                    default:
-                                        AlertDialog.Builder d = new AlertDialog.Builder(CourseSelectionScreen.this);
-                                        d.setTitle("Selection Error!");
-                                        d.setMessage("Please make a valid selection.");
-                                        final AlertDialog alertDialog = d.create();
-                                        d.setPositiveButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                alertDialog.dismiss();
-                                            }
-                                        });
-                                }
-
-                                //Toast.makeText(this, );
-                                // The 'which' argument contains the index position
-                                // of the selected item
-                            }
-                        });
+                        }
+                    }
+                });
                 AlertDialog dialog = builder.create();
                 dialog.show();
-//                builder.show();
-
             }
-
         });
     }
 

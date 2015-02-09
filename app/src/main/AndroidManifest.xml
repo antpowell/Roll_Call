@@ -1,21 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.egmail.anthony.powell.roll_call" >
+    package="com.egmail.anthony.powell.roll_call">
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/splash_rollcall_icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".StudentReg"
+            android:label="@string/title_activity_student_reg">
+            <intent-filter>
+                <action android:name=".StudentReg" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".CourseSelectionScreen"
+            android:label="@string/title_activity_course_selection_screen">
+            <intent-filter>
+                <action android:name=".CourseSelectionScreen" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".SignIn"
+            android:label="SignIn">
+            <intent-filter>
+                <action android:name=".SignIn" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Proxy"
+            android:label="Proxy">
+            <intent-filter>
+                <action android:name=".Proxy" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

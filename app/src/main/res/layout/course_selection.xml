@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        style="@style/Base.Widget.AppCompat.ActionButton" />
+        style="?android:attr/borderlessButtonStyle" />
 
 
     <Button
@@ -31,9 +31,9 @@
         android:id="@+id/ReRegisterButton"
         android:text="Re-Register"
         android:layout_marginTop="100dp"
-        style="@style/Base.Widget.AppCompat.ActionButton"
         android:layout_below="@+id/course_selection"
         android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        style="?android:attr/borderlessButtonStyle" />
 
 </RelativeLayout>
