@@ -9,7 +9,7 @@
     <string name="welcomeLogo">welcomeLogo</string>
     <string name="RegButton">Register</string>
     <string name="SplashScreenDescription">SplashScreen</string>
-    <string name="tnumberHint">TNumber NUMBERS ONLY Ex. 002XXXXX</string>
+    <string name="tnumberHint">NUMBERS ONLY Ex:002XXXXX</string>
     <string name="title_activity_course_selection_screen">CourseSelectionScreen</string>
     <string-array name="course_list">
         <item>CS12401</item>

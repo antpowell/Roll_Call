@@ -132,7 +132,7 @@ public class StudentReg extends ActionBarActivity {
         edit.putString(LAST, lastName.getText().toString()).apply();
         edit.putString(T, Tnum.getText().toString()).apply();
         Toast.makeText(StudentReg.this, lastName.getText().toString() + " \n" + "T" + Tnum.getText().toString(), Toast.LENGTH_LONG).show();
-        edit.commit();
+        edit.apply();
         //Display a Toast showing all current content of studentInfo
         //Toast.makeText(StudentReg.this, studentInfo.getAll().toString(), Toast.LENGTH_LONG).show();
     }

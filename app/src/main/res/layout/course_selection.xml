@@ -2,18 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15sp"
     android:gravity="center_horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:text="Select Course"
-        android:layout_marginTop="45dp"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/select_course_text" />
+    <include
+        android:id="@+id/core_sel_app_bar"
+        layout="@layout/core_sel_app_bar" />
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textSize="25sp"-->
+    <!--android:text="Select Course"-->
+    <!--android:layout_marginTop="45dp"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:id="@+id/select_course_text" />-->
 
     <Button
         android:id="@+id/course_selection"

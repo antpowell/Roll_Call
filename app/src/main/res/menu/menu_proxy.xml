@@ -1,10 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity">
+    tools:context="com.egmail.anthony.powell.roll_call.CourseSelectionScreen">
     <item
         android:id="@+id/action_settings"
+        android:title="Re-Register"
         android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="Re-Register" />
+        app:showAsAction="always" />
 
 </menu>

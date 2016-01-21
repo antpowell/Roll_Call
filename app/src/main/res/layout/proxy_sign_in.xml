@@ -5,14 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".Proxy">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Proxy Sign In"
-        android:textSize="25sp"
-        android:id="@+id/ProxyTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp" />
+    <include
+        android:id="@+id/proxy_app_bar"
+        layout="@layout/proxy_app_bar" />
 
     <EditText
         android:layout_width="fill_parent"
@@ -22,7 +17,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"
-        android:layout_below="@+id/ProxyTitle"
+        android:layout_below="@+id/proxy_app_bar"
         android:layout_marginLeft="@dimen/inner_margin"
         android:layout_marginRight="@dimen/inner_margin" />
 

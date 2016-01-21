@@ -4,7 +4,7 @@
     tools:context="com.egmail.anthony.powell.roll_call.CourseSelectionScreen">
     <item
         android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+        android:title="Re-Register"
         android:orderInCategory="100"
         app:showAsAction="never" />
 </menu>
