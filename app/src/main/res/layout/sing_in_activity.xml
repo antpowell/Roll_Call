@@ -8,24 +8,16 @@
         layout="@layout/sign_in_app_bar" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Sign In"
+        android:text="Sign Roll"
         android:id="@+id/signIn_button"
-        android:layout_alignTop="@+id/editText"
         android:layout_alignParentLeft="true"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_marginLeft="25dp"
-        style="?android:attr/borderlessButtonStyle" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Proxy Sign In"
-        android:id="@+id/ProxyButton"
-        android:layout_below="@+id/editText"
-        android:layout_centerHorizontal="true"
+        android:layout_marginRight="25dp"
         android:layout_marginTop="75dp"
-        style="?android:attr/borderlessButtonStyle" />
+        android:layout_below="@+id/editText" />
 
     <EditText
         android:layout_width="fill_parent"
@@ -34,8 +26,7 @@
         android:hint="Password"
         android:layout_centerVertical="true"
         android:layout_marginRight="25dp"
-        android:layout_toRightOf="@+id/signIn_button"
-        android:layout_below="@id/editText" />
+        android:layout_marginLeft="25dp" />
 
 
 </RelativeLayout>

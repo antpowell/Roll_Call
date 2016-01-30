@@ -13,7 +13,8 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.telephony.gsm.SmsManager;
+import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -42,6 +44,10 @@ public class SignIn extends ActionBarActivity {
 
     private SharedPreferences studentInfo;
     private SharedPreferences proxyInfo;
+    private String studentLAST;
+    private String studentID;
+    private String c;
+    private String studentPass;
 
 
     @Override
@@ -59,9 +65,10 @@ public class SignIn extends ActionBarActivity {
 
         password = (EditText) findViewById(R.id.editText);
 
-        final String studentLAST = studentInfo.getString(LAST, "Not found");
-        final String studentID = studentInfo.getString(T, "Not found");
-        final String c = studentInfo.getString(COURSE, "Not found");
+        studentLAST = studentInfo.getString(LAST, "Not found");
+        studentID = studentInfo.getString(T, "Not found");
+        c = studentInfo.getString(COURSE, "Not found");
+
 
 //        Toast.makeText(this, studentInfo.getAll().toString(), Toast.LENGTH_LONG).show();
 
@@ -75,6 +82,7 @@ public class SignIn extends ActionBarActivity {
                 String proxyLAST = proxyInfo.getString(LAST, "Not found");
                 String proxyID = proxyInfo.getString(T, "Not found");
                 String POD = password.getText().toString();
+                studentPass = POD;
 
                 final Date ts = new Date();
                 final String date = new SimpleDateFormat("dd/MM/yy HH:mm").format(ts);
@@ -92,12 +100,10 @@ public class SignIn extends ActionBarActivity {
                 if (proxyID.equals("Not found") || proxyLAST.equals("Not found")) {
                     //store password of the day
 
-
+                    //Send users Course, Last Name, StudentID, and Time/Date stamp as a message
                     sentMessage(studentMessage, contactNumber);
 
-                    //Send users Course, Last Name, StudentID, and Time/Date stamp as a message
-//                    SmsManager smsManager = SmsManager.getDefault();
-//                    smsManager.sendTextMessage(contactNumber, null, studentMessage, null, null);
+
 
 
                     //get all data from MAIN STUDENT prefs and send it with course and date/time stamp in message
@@ -111,12 +117,11 @@ public class SignIn extends ActionBarActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 
+                                    //Send users Course, Last Name, StudentID, and Time/Date stamp as a message
                                     sentMessage(proxyMessage, contactNumber);
 
 
-                                    //Send users Course, Last Name, StudentID, and Time/Date stamp as a message
-//                                    SmsManager smsManager = SmsManager.getDefault();
-//                                    smsManager.sendTextMessage(contactNumber, null, proxyMessage, null, null);
+//
 
                                     //get data from PROXY STUDENT prefs and send it with course and date/time stamp in a message
                                     Toast.makeText(SignIn.this, proxyMessage, Toast.LENGTH_LONG).show();
@@ -147,15 +152,15 @@ public class SignIn extends ActionBarActivity {
         //---- This section now being handled by the options button on the app bar.----//
 
         //Proxy button click to take user to proxy screen
-        Button proxy = (Button) findViewById(R.id.ProxyButton);
-        proxy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SignIn.this, Proxy.class));
-                //finish(); --->if finished when back button is press returns to the Course Selection Activity (ADD || DROP)?
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });
+//        Button proxy = (Button) findViewById(R.id.ProxyButton);
+//        proxy.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(SignIn.this, Proxy.class));
+//                //finish(); --->if finished when back button is press returns to the Course Selection Activity (ADD || DROP)?
+//                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//            }
+//        });
     }
 
     @Override
@@ -172,6 +177,17 @@ public class SignIn extends ActionBarActivity {
     }
 
     public void sentMessage(String messageToSend, String contactNumber) {
+        //Google Forms HTTP section found @http://goo.gl/forms/HCtiSG0c0D
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                googleForms();
+            }
+        });
+        t.start();
+//        googleForms();
+
+        //end Google Forms HTTP
         String sent = "MESSAGE_SENT";
         PendingIntent sentPI = PendingIntent.getBroadcast(this, 0, new Intent(sent), 0);
 
@@ -194,6 +210,14 @@ public class SignIn extends ActionBarActivity {
 //        Intent sendMessage = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+contactNumber));
 //        sendMessage.putExtra("sms_body",messageToSend);
 //        startActivity(sendMessage);
+    }
+    public void googleForms(){
+        final String fullURL = "https://docs.google.com/forms/d/1WDmi765k2Gw4CZzOl-Z0L3ay9-hFTNPZwq8isSGUgy4/formResponse";
+        HttpRequest request = new HttpRequest();
+
+        final String data = "entry_1539962042" + URLEncoder.encode(c)+"&"+"entry_1214969775" + URLEncoder.encode(studentLAST)+"&"+"entry_1234716850" + URLEncoder.encode(studentID)+"&"+"entry_1489146300" + URLEncoder.encode(studentPass);
+        final String response = request.sendPost(fullURL, data);
+        Log.i("Sent to Sheets!", response);
     }
 
     @Override
