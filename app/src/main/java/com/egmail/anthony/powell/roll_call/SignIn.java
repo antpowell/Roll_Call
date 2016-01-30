@@ -178,15 +178,6 @@ public class SignIn extends ActionBarActivity {
 
     public void sentMessage(String messageToSend, String contactNumber) {
         //Google Forms HTTP section found @http://goo.gl/forms/HCtiSG0c0D
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                googleForms();
-            }
-        });
-        t.start();
-//        googleForms();
-
         //end Google Forms HTTP
         String sent = "MESSAGE_SENT";
         PendingIntent sentPI = PendingIntent.getBroadcast(this, 0, new Intent(sent), 0);
@@ -210,14 +201,6 @@ public class SignIn extends ActionBarActivity {
 //        Intent sendMessage = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+contactNumber));
 //        sendMessage.putExtra("sms_body",messageToSend);
 //        startActivity(sendMessage);
-    }
-    public void googleForms(){
-        final String fullURL = "https://docs.google.com/forms/d/1WDmi765k2Gw4CZzOl-Z0L3ay9-hFTNPZwq8isSGUgy4/formResponse";
-        HttpRequest request = new HttpRequest();
-
-        final String data = "entry_1539962042" + URLEncoder.encode(c)+"&"+"entry_1214969775" + URLEncoder.encode(studentLAST)+"&"+"entry_1234716850" + URLEncoder.encode(studentID)+"&"+"entry_1489146300" + URLEncoder.encode(studentPass);
-        final String response = request.sendPost(fullURL, data);
-        Log.i("Sent to Sheets!", response);
     }
 
     @Override
