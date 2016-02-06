@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.egmail.anthony.powell.roll_call"
-        minSdkVersion 19
+        minSdkVersion 13
         targetSdkVersion 21
         versionCode 1
         versionName "2.1"
