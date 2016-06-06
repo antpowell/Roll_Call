@@ -68,35 +68,40 @@ public class CourseSelectionScreen extends ActionBarActivity {
                         switch (which) {
                             case 0:
                                 courseSign("CS12401");
-                                /*startActivity(new Intent(CourseSelectionScreen.this, SignIn.class));
-                                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-                                edit.putString(COURSE, "CS12401");
-                                edit.apply();
-                                //Toast.makeText(CourseSelectionScreen.this, "CS12401", Toast.LENGTH_LONG).show();*/
                                 break;
                             case 1:
                                 courseSign("CS116WE1");
-                                /*startActivity(new Intent(CourseSelectionScreen.this, SignIn.class));
-                                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-                                edit.putString(COURSE, "CS116WE1");
-                                edit.apply();
-                                //Toast.makeText(CourseSelectionScreen.this, "CS116WE1", Toast.LENGTH_LONG).show();*/
                                 break;
                             case 2:
                                 courseSign("BIOL13204");
-                                /*startActivity(new Intent(CourseSelectionScreen.this, SignIn.class));
-                                edit.putString(COURSE, "BIOL13204");
-                                edit.apply();
-                                //Toast.makeText(CourseSelectionScreen.this, "BIOL13204", Toast.LENGTH_LONG).show();*/
                                 break;
                             case 3:
                                 courseSign("BIOL23201");
-                                /*startActivity(new Intent(CourseSelectionScreen.this, SignIn.class));
-                                edit.putString(COURSE, "BIOL23201");
-                                edit.apply();
-                                //Toast.makeText(CourseSelectionScreen.this, "BIOL23201", Toast.LENGTH_LONG).show();*/
                                 break;
-
+                            case 4:
+                                courseSign("MATH134");
+                                break;
+                            case 5:
+                                courseSign("MATH135");
+                                break;
+                            case 6:
+                                courseSign("MATH241");
+                                break;
+                            case 7:
+                                courseSign("HIST231");
+                                break;
+                            case 8:
+                                courseSign("HIST232");
+                                break;
+                            case 9:
+                                courseSign("ENG131");
+                                break;
+                            case 10:
+                                courseSign("ENG132");
+                                break;
+                            case 11:
+                                courseSign("ENG230");
+                                break;
                         }
                     }
                 });

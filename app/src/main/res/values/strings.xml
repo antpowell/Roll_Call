@@ -16,6 +16,14 @@
         <item>CS116WE1</item>
         <item>BIOL13204</item>
         <item>BIOL23201</item>
+        <item>MATH134</item>
+        <item>MATH135</item>
+        <item>MATH241</item>
+        <item>HIST231</item>
+        <item>HIST232</item>
+        <item>ENG131</item>
+        <item>ENG132</item>
+        <item>ENG230</item>
     </string-array>
 
 </resources>

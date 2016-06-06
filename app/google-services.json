@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "779617525367",
+    "firebase_url": "https://project-1118780014783319201.firebaseio.com",
+    "project_id": "project-1118780014783319201",
+    "storage_bucket": "project-1118780014783319201.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779617525367:android:e142418458ecac24",
+        "android_client_info": {
+          "package_name": "com.egmail.anthony.powell.roll_call"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "779617525367-e6gq9cuhpr2silh8e7ocq9q7n1h3hdbe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.egmail.anthony.powell.roll_call",
+            "certificate_hash": "056F55A7DE02A3665EC0AE496A3C5D176C56B48D"
+          }
+        },
+        {
+          "client_id": "779617525367-i61kaqg4obgpbfoi609o0aj5s7kpfvru.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDStKIHvx9WPvEUd7YVyYy3y78rhf2lBBw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "779617525367-i61kaqg4obgpbfoi609o0aj5s7kpfvru.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -105,7 +105,6 @@ public class SignIn extends ActionBarActivity {
 
 
 
-
                     //get all data from MAIN STUDENT prefs and send it with course and date/time stamp in message
                     Toast.makeText(SignIn.this, studentMessage, Toast.LENGTH_LONG).show();
                 } else {
