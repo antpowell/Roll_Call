@@ -12,10 +12,11 @@
     <string name="tnumberHint">NUMBERS ONLY Ex:002XXXXX</string>
     <string name="title_activity_course_selection_screen">CourseSelectionScreen</string>
     <string-array name="course_list">
-        <item>CS12401</item>
+        <item>CS124</item>
         <item>CS116WE1</item>
-        <item>BIOL13204</item>
-        <item>BIOL23201</item>
+        <item>BIOL132</item>
+        <item>BIOL232</item>
+        <item>MATH133</item>
         <item>MATH134</item>
         <item>MATH135</item>
         <item>MATH241</item>

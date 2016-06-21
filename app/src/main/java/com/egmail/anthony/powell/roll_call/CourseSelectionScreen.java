@@ -67,18 +67,21 @@ public class CourseSelectionScreen extends ActionBarActivity {
                         //TextView tv = (TextView) findViewById(R.id.SignInTitle);
                         switch (which) {
                             case 0:
-                                courseSign("CS12401");
+                                courseSign("CS124");
                                 break;
                             case 1:
                                 courseSign("CS116WE1");
                                 break;
                             case 2:
-                                courseSign("BIOL13204");
+                                courseSign("BIOL132");
                                 break;
                             case 3:
-                                courseSign("BIOL23201");
+                                courseSign("BIOL232");
                                 break;
                             case 4:
+                                courseSign("MATH133");
+                                break;
+                            case 12:
                                 courseSign("MATH134");
                                 break;
                             case 5:

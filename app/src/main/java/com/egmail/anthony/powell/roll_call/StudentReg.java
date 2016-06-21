@@ -34,6 +34,7 @@ public class StudentReg extends ActionBarActivity {
         setSupportActionBar(tb);
         getSupportActionBar().setTitle("Registration");
 
+
         studentInfo = getSharedPreferences(TAG, MODE_PRIVATE);
         Toast.makeText(this, studentInfo.getAll().toString(), Toast.LENGTH_LONG).show();
 
@@ -108,6 +109,18 @@ public class StudentReg extends ActionBarActivity {
                             });
                     AlertDialog LastError = builder.create();
                     LastError.show();
+                }else if(!lastName.getText().toString().matches("^[a-zA-Z\\s]+$")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(StudentReg.this).setTitle("Entry error!")
+                            .setMessage("Invalid Character(s)... ONLY LETTERS").setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    AlertDialog LastContainsError = builder.create();
+                    LastContainsError.show();
+
                 } else {
                     storeUserInfo();
                     startActivity(new Intent(StudentReg.this, CourseSelectionScreen.class));
@@ -118,6 +131,18 @@ public class StudentReg extends ActionBarActivity {
             }
         });
     }
+
+//    private boolean checkContents(String s) {
+//        char invalChar[] = {'.', '-', '@', '#', ',', '$', '%', '^', '&', '"', '*', '(', ')', '+', '=', '[', ']', ';', '<', '{', '}', '?', '/', ':', '>', '!'};
+//        for (char c : invalChar) {
+//            if (s.contains(c)) {
+//
+//                return false;
+//            }
+//        }
+//        ;
+//        return true;
+//    }
 
     /*Function to save Student's last name and account number in studentInfo shared prefs the Email and Pass will be stored in a
     * another prefs setting later since it will not be sent in the message to the server phone.*/
