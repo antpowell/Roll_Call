@@ -1,9 +1,11 @@
 package com.egmail.anthony.powell.roll_call;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -85,6 +87,7 @@ public class StudentReg extends ActionBarActivity {
         });
 
         regButton.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.ECLAIR)
             @Override
             public void onClick(View v) {
                 if (Tnum.getText().toString().length() != 8) {
