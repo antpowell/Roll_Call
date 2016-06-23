@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".Proxy">
 
-    <!--<include-->
-        <!--android:id="@+id/proxy_app_bar"-->
-        <!--layout="@layout/proxy_app_bar" />-->
+    <include
+        android:id="@+id/proxy_app_bar"
+        layout="@layout/proxy_app_bar" />
 
     <EditText
         android:layout_width="fill_parent"

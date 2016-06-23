@@ -22,7 +22,7 @@ public class StudentReg extends ActionBarActivity {
     public static final String LAST = "last";
     public static final String T = "tNum";
     private boolean nameEntered, idEntered;
-    private Toolbar tb;
+//    private Toolbar tb;
 
     EditText lastName, Tnum;
     private SharedPreferences studentInfo;
@@ -32,13 +32,12 @@ public class StudentReg extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_reg);
 
-        tb = (Toolbar) findViewById(R.id.reg_app_bar);
-        setSupportActionBar(tb);
-        getSupportActionBar().setTitle("Registration");
-
+//        tb = (Toolbar) findViewById(R.id.reg_app_bar);
+//        setSupportActionBar(tb);
+        getSupportActionBar().setTitle( "Student Registration");
 
         studentInfo = getSharedPreferences(TAG, MODE_PRIVATE);
-        Toast.makeText(this, studentInfo.getAll().toString(), Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, studentInfo.getAll().toString(), Toast.LENGTH_LONG).show();
 
         final Button regButton = (Button) findViewById(R.id.RegisterButton);
         lastName = (EditText) this.findViewById(R.id.LastNameTextBox);
@@ -91,39 +90,11 @@ public class StudentReg extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 if (Tnum.getText().toString().length() != 8) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(StudentReg.this).setTitle("Invalid T-Number")
-                            .setMessage("T Number must contain 8 numbers ex.00102222").setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    AlertDialog TError = builder.create();
-                    TError.show();
+                    Tnum.setError("T Number must contain 8 numbers ex.00102222");
                 } else if (lastName.getText().toString().trim().isEmpty()) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(StudentReg.this).setTitle("Entry error!")
-                            .setMessage("Must enter last name!").setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    AlertDialog LastError = builder.create();
-                    LastError.show();
+                    lastName.setError("Must enter last name!");
                 }else if(!lastName.getText().toString().matches("^[a-zA-Z\\s]+$")){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(StudentReg.this).setTitle("Entry error!")
-                            .setMessage("Invalid Character(s)... ONLY LETTERS").setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    AlertDialog LastContainsError = builder.create();
-                    LastContainsError.show();
-
+                    lastName.setError("Invalid Character(s)... ONLY LETTERS");
                 } else {
                     storeUserInfo();
                     startActivity(new Intent(StudentReg.this, CourseSelectionScreen.class));
@@ -134,18 +105,6 @@ public class StudentReg extends ActionBarActivity {
             }
         });
     }
-
-//    private boolean checkContents(String s) {
-//        char invalChar[] = {'.', '-', '@', '#', ',', '$', '%', '^', '&', '"', '*', '(', ')', '+', '=', '[', ']', ';', '<', '{', '}', '?', '/', ':', '>', '!'};
-//        for (char c : invalChar) {
-//            if (s.contains(c)) {
-//
-//                return false;
-//            }
-//        }
-//        ;
-//        return true;
-//    }
 
     /*Function to save Student's last name and account number in studentInfo shared prefs the Email and Pass will be stored in a
     * another prefs setting later since it will not be sent in the message to the server phone.*/

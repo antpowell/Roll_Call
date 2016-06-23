@@ -7,6 +7,7 @@
     android:background="@color/yellow500"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:theme="@style/MyAppBar"
-    android:elevation="4dp">
+    android:elevation="4dp"
+    style="@style/Base.ThemeOverlay.AppCompat.ActionBar">
 
 </android.support.v7.widget.Toolbar>

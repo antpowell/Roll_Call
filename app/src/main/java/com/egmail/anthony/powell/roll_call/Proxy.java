@@ -23,7 +23,7 @@ public class Proxy extends ActionBarActivity {
     public static final String LAST = "last";
     public static final String T = "tNum";
     public TextView proxy_last, proxy_id;
-    private Toolbar tb;
+//    private Toolbar tb;
 
     private SharedPreferences proxyInfo;
 
@@ -31,8 +31,8 @@ public class Proxy extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.proxy_sign_in);
-        tb = (Toolbar) findViewById(R.id.proxy_app_bar);
-        setSupportActionBar(tb);
+//        tb = (Toolbar) findViewById(R.id.proxy_app_bar);
+//        setSupportActionBar(tb);
         getSupportActionBar().setTitle("Proxy User");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

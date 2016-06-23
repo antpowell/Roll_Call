@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -24,14 +25,14 @@ public class CourseSelectionScreen extends ActionBarActivity {
     public static final String T = "tNum";
     public static final String COURSE = "course";
     private SharedPreferences studentInfo;
-    Toolbar tb;
+//    Toolbar tb;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_selection);
 
-        tb = (Toolbar) findViewById(R.id.core_sel_app_bar);
-        setSupportActionBar(tb);
+//        tb = (Toolbar) findViewById(R.id.core_sel_app_bar);
+//        setSupportActionBar(tb);
         getSupportActionBar().setTitle("Course Selection");
 
         studentInfo = getSharedPreferences(TAG, MODE_PRIVATE);
@@ -39,18 +40,18 @@ public class CourseSelectionScreen extends ActionBarActivity {
 //        Toast.makeText(this, studentInfo.getAll().toString(),Toast.LENGTH_LONG).show();
         final SharedPreferences.Editor edit = studentInfo.edit();
 
-        Button reReg = (Button) findViewById(R.id.ReRegisterButton);
-
-        reReg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                edit.clear();
-                edit.apply();
-                startActivity(new Intent(CourseSelectionScreen.this, StudentReg.class));
-                finish();
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-            }
-        });
+//        Button reReg = (Button) findViewById(R.id.ReRegisterButton);
+//
+//        reReg.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                edit.clear();
+//                edit.apply();
+//                startActivity(new Intent(CourseSelectionScreen.this, StudentReg.class));
+//                finish();
+//                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+//            }
+//        });
         Button course = (Button) findViewById(R.id.course_selection);
         course.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +133,14 @@ public class CourseSelectionScreen extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == android.R.id.home) {
+            startActivity(new Intent(CourseSelectionScreen.this, StudentReg.class));
+            finish();
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            SharedPreferences.Editor edit = studentInfo.edit().clear();
+            edit.apply();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -141,17 +150,28 @@ public class CourseSelectionScreen extends ActionBarActivity {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
         final SharedPreferences.Editor edit = studentInfo.edit();
-
+        finish();
         edit.putString(COURSE, courseID);
         edit.apply();
         //Toast.makeText(CourseSelectionScreen.this, "CS12401", Toast.LENGTH_LONG).show();
     }
 
+//    @Override
+//    public void onBackPressed() {
+//        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+//        super.onBackPressed();
+//        SharedPreferences.Editor edit = studentInfo.edit().clear();
+//        edit.apply();
+//    }
     @Override
     public void onBackPressed() {
+        NavUtils.navigateUpFromSameTask(this);
+//        finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         super.onBackPressed();
+//        SharedPreferences.Editor edit = studentInfo.edit().clear();
+//        edit.apply();
     }
-
-
 }
+
+

@@ -39,7 +39,7 @@ public class SignIn extends ActionBarActivity {
     public static final String T = "tNum";
     public static final String COURSE = "course";
 
-    private Toolbar tb;
+//    private Toolbar tb;
     private EditText password;
 
     private SharedPreferences studentInfo;
@@ -56,8 +56,8 @@ public class SignIn extends ActionBarActivity {
         setContentView(R.layout.sing_in_activity);
 
         //Enable Custom Toolbar
-        tb = (Toolbar) findViewById(R.id.sign_in_app_bar);
-        setSupportActionBar(tb);
+//        tb = (Toolbar) findViewById(R.id.sign_in_app_bar);
+//        setSupportActionBar(tb);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         studentInfo = getSharedPreferences(TAG, MODE_PRIVATE);
@@ -228,9 +228,9 @@ public class SignIn extends ActionBarActivity {
             return true;
         }
         if (id == android.R.id.home) {
-            NavUtils.navigateUpFromSameTask(this);
+            startActivity(new Intent(SignIn.this, CourseSelectionScreen.class));
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -238,8 +238,9 @@ public class SignIn extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        NavUtils.navigateUpFromSameTask(this);
+        startActivity(new Intent(SignIn.this, CourseSelectionScreen.class));
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        finish();
         super.onBackPressed();
     }
 }

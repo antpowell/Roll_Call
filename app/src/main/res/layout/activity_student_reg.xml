@@ -5,9 +5,9 @@
 
     tools:context=".StudentReg">
 
-    <include
-        android:id="@+id/reg_app_bar"
-        layout="@layout/reg_app_bar" />
+    <!--<include-->
+        <!--android:id="@+id/reg_app_bar"-->
+        <!--layout="@layout/reg_app_bar" />-->
 
     <ImageView
         android:id="@+id/imageView"
@@ -21,66 +21,88 @@
         android:visibility="visible"
         android:layout_marginTop="-50dp" />
 
-    <EditText
-        android:id="@+id/LastNameTextBox"
-        android:layout_width="fill_parent"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/inner_margin"
-        android:layout_marginRight="@dimen/inner_margin"
-        android:ems="10"
-        android:hint="Last Name"
-        android:inputType="textCapWords"
-        android:layout_centerInParent="true" />
+        android:id="@+id/viewLastName"
+        android:layout_below="@+id/imageView">
+        <EditText
+            android:id="@+id/LastNameTextBox"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/inner_margin"
+            android:layout_marginRight="@dimen/inner_margin"
+            android:ems="10"
+            android:hint="Last Name"
+            android:inputType="textPersonName"
+            android:layout_centerInParent="true" />
+</android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewTNumber"
+        android:layout_below="@+id/viewLastName">
 
-    <EditText
-        android:id="@+id/TNumberTextBox"
-        android:layout_width="fill_parent"
+        <EditText
+            android:id="@+id/TNumberTextBox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/LastNameTextBox"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/inner_margin"
+            android:layout_marginRight="@dimen/inner_margin"
+            android:hint="@string/tnumberHint"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/LastNameTextBox"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="@dimen/inner_margin"
-        android:layout_marginRight="@dimen/inner_margin"
-        android:hint="@string/tnumberHint"
-        android:inputType="number" />
-
-    <EditText
-        android:id="@+id/EmailTextBox"
-        android:layout_width="fill_parent"
+        android:id="@+id/viewEmail"
+        android:layout_below="@+id/viewTNumber">
+        <EditText
+            android:id="@+id/EmailTextBox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/TNumberTextBox"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/inner_margin"
+            android:layout_marginRight="@dimen/inner_margin"
+            android:ems="10"
+            android:hint="Email Address(Optional)"
+            android:inputType="textEmailAddress" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/TNumberTextBox"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="@dimen/inner_margin"
-        android:layout_marginRight="@dimen/inner_margin"
-        android:ems="10"
-        android:hint="Email Address(Optional)"
-        android:inputType="textEmailAddress" />
-
-    <EditText
-        android:id="@+id/PassTextBox"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/EmailTextBox"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="@dimen/inner_margin"
-        android:layout_marginRight="@dimen/inner_margin"
-        android:ems="10"
-        android:hint="Create Password(Optional)"
-        android:inputType="textPassword" />
+        android:id="@+id/viewPassword"
+        android:layout_below="@+id/viewEmail">
+        <EditText
+            android:id="@+id/PassTextBox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/EmailTextBox"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/inner_margin"
+            android:layout_marginRight="@dimen/inner_margin"
+            android:ems="10"
+            android:hint="Create Password(Optional)"
+            android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/RegisterButton"
-        style="?android:attr/borderlessButtonStyle"
+        style="@android:style/Widget.Material.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="false"
         android:layout_centerHorizontal="true"
         android:enabled="false"
         android:text="@string/RegButton"
-        android:layout_below="@+id/PassTextBox" />
+        android:layout_below="@+id/viewPassword" />
 </RelativeLayout>

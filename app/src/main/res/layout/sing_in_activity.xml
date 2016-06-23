@@ -3,30 +3,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/sign_in_app_bar"
-        layout="@layout/sign_in_app_bar" />
+    <!--<include-->
+        <!--android:id="@+id/sign_in_app_bar"-->
+        <!--layout="@layout/sign_in_app_bar" />-->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/PasswordOfDayView">
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText"
+            android:hint="Password"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:singleLine="true"
+            android:inputType="textVisiblePassword"/>
+
+    </android.support.design.widget.TextInputLayout>
+
 
     <Button
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Roll"
         android:id="@+id/signIn_button"
-        android:layout_alignParentLeft="true"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="75dp"
-        android:layout_below="@+id/editText" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:hint="Password"
+        android:layout_alignParentLeft="false"
+        style="@android:style/Widget.Material.Button.Colored"
         android:layout_centerVertical="true"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/PasswordOfDayView"
+        android:layout_marginTop="64dp" />
 
 
 </RelativeLayout>
