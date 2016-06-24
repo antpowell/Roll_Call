@@ -23,7 +23,8 @@
             android:layout_marginRight="25dp"
             android:layout_marginLeft="25dp"
             android:singleLine="true"
-            android:inputType="textVisiblePassword" />
+            android:inputType="textVisiblePassword"
+            android:drawableLeft="@drawable/ic_lock_outline"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -38,7 +39,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/PasswordOfDayView"
-        android:layout_marginTop="64dp" />
+        android:layout_marginTop="64dp"/>
 
 
 </RelativeLayout>
