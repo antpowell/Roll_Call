@@ -4,38 +4,25 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal">
 
-    <!--<include-->
-        <!--android:id="@+id/core_sel_app_bar"-->
-        <!--layout="@layout/core_sel_app_bar" />-->
 
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:textSize="25sp"-->
-    <!--android:text="Select Course"-->
-    <!--android:layout_marginTop="45dp"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:id="@+id/select_course_text" />-->
-
-    <Button
-        android:id="@+id/course_selection"
-        android:text="Course List"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/list_dialog"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        style="@android:style/Widget.Material.Button.Colored"
-        />
+        android:entries="@array/course_list"
+        android:layout_marginTop="96dp" />
 
-    <!--<Button-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/ReRegisterButton"-->
-        <!--android:text="Re-Register"-->
-        <!--android:layout_marginTop="100dp"-->
-        <!--android:layout_below="@+id/course_selection"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--style="@android:style/Widget.Material.Button.Colored" />-->
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Select your course."
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:textSize="32dp"
+        android:gravity="center_horizontal" />
 </RelativeLayout>

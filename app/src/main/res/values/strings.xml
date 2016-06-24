@@ -4,13 +4,13 @@
     <string name="app_name">Roll_Call</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_splash">SplashActivity</string>
-    <string name="title_activity_student_reg">StudentReg</string>
+    <string name="title_activity_splash">Roll Call</string>
+    <string name="title_activity_student_reg">Student Registration</string>
     <string name="welcomeLogo">welcomeLogo</string>
     <string name="RegButton">Register</string>
     <string name="SplashScreenDescription">SplashScreen</string>
     <string name="tnumberHint">NUMBERS ONLY Ex:002XXXXX</string>
-    <string name="title_activity_course_selection_screen">CourseSelectionScreen</string>
+    <string name="title_activity_course_selection_screen">Course Selection</string>
     <string-array name="course_list">
         <item>CS124</item>
         <item>CS116WE1</item>
@@ -26,5 +26,12 @@
         <item>ENG132</item>
         <item>ENG230</item>
     </string-array>
+    <array name="course_imgs">
+        <item>@drawable/ic_code_braces</item>
+        <item>@drawable/ic_biohazard</item>
+        <item>@drawable/ic_sigma</item>
+        <item>@drawable/ic_timetable</item>
+        <item>@drawable/ic_book_open_page_variant</item>
+    </array>
 
 </resources>

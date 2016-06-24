@@ -4,14 +4,25 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v4.view.ViewGroupCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 /*This Activity is form the student to select the course they wish to sign in to(current course)
  * onCreate the 'Course List' and 'Re-Register buttons are displayed
@@ -25,15 +36,17 @@ public class CourseSelectionScreen extends ActionBarActivity {
     public static final String T = "tNum";
     public static final String COURSE = "course";
     private SharedPreferences studentInfo;
+
+
 //    Toolbar tb;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_selection);
 
-//        tb = (Toolbar) findViewById(R.id.core_sel_app_bar);
-//        setSupportActionBar(tb);
-        getSupportActionBar().setTitle("Course Selection");
+        Resources res = getResources();
+        String[] listText = res.getStringArray(R.array.course_list);
+        TypedArray listIcon = res.obtainTypedArray(R.array.course_imgs);
 
         studentInfo = getSharedPreferences(TAG, MODE_PRIVATE);
 
@@ -52,68 +65,121 @@ public class CourseSelectionScreen extends ActionBarActivity {
 //                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 //            }
 //        });
-        Button course = (Button) findViewById(R.id.course_selection);
-        course.setOnClickListener(new View.OnClickListener() {
+//        populateList();
+
+//        CustomList adapter = new CustomList(CourseSelectionScreen.this, R.layout.course_selection_dialog);
+
+        ListAdapter popUpList = new CustomList(this, listText, listIcon);
+        ListView listView = (ListView) findViewById(R.id.list_dialog);
+        listView.setAdapter(popUpList);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                populateList();
-            }
-
-            private void populateList() {
-
-                final AlertDialog.Builder builder = new AlertDialog.Builder(CourseSelectionScreen.this).setTitle("Select Course");
-                builder.setItems(R.array.course_list, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //TextView tv = (TextView) findViewById(R.id.SignInTitle);
-                        switch (which) {
-                            case 0:
-                                courseSign("CS124");
-                                break;
-                            case 1:
-                                courseSign("CS116WE1");
-                                break;
-                            case 2:
-                                courseSign("BIOL132");
-                                break;
-                            case 3:
-                                courseSign("BIOL232");
-                                break;
-                            case 4:
-                                courseSign("MATH133");
-                                break;
-                            case 12:
-                                courseSign("MATH134");
-                                break;
-                            case 5:
-                                courseSign("MATH135");
-                                break;
-                            case 6:
-                                courseSign("MATH241");
-                                break;
-                            case 7:
-                                courseSign("HIST231");
-                                break;
-                            case 8:
-                                courseSign("HIST232");
-                                break;
-                            case 9:
-                                courseSign("ENG131");
-                                break;
-                            case 10:
-                                courseSign("ENG132");
-                                break;
-                            case 11:
-                                courseSign("ENG230");
-                                break;
-                        }
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        courseSign("CS124");
+                        break;
+                    case 1:
+                        courseSign("CS116WE1");
+                        break;
+                    case 2:
+                        courseSign("BIOL132");
+                        break;
+                    case 3:
+                        courseSign("BIOL232");
+                        break;
+                    case 4:
+                        courseSign("MATH133");
+                        break;
+                    case 12:
+                        courseSign("MATH134");
+                        break;
+                    case 5:
+                        courseSign("MATH135");
+                        break;
+                    case 6:
+                        courseSign("MATH241");
+                        break;
+                    case 7:
+                        courseSign("HIST231");
+                        break;
+                    case 8:
+                        courseSign("HIST232");
+                        break;
+                    case 9:
+                        courseSign("ENG131");
+                        break;
+                    case 10:
+                        courseSign("ENG132");
+                        break;
+                    case 11:
+                        courseSign("ENG230");
+                        break;
+                }
             }
         });
+
+//        ListView listView = (ListView) findViewById(R.id.list_dialog);
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                switch (position) {
+//                    case 0:
+//                        courseSign("CS124");
+//                        break;
+//                    case 1:
+//                        courseSign("CS116WE1");
+//                        break;
+//                    case 2:
+//                        courseSign("BIOL132");
+//                        break;
+//                    case 3:
+//                        courseSign("BIOL232");
+//                        break;
+//                    case 4:
+//                        courseSign("MATH133");
+//                        break;
+//                    case 12:
+//                        courseSign("MATH134");
+//                        break;
+//                    case 5:
+//                        courseSign("MATH135");
+//                        break;
+//                    case 6:
+//                        courseSign("MATH241");
+//                        break;
+//                    case 7:
+//                        courseSign("HIST231");
+//                        break;
+//                    case 8:
+//                        courseSign("HIST232");
+//                        break;
+//                    case 9:
+//                        courseSign("ENG131");
+//                        break;
+//                    case 10:
+//                        courseSign("ENG132");
+//                        break;
+//                    case 11:
+//                        courseSign("ENG230");
+//                        break;
+//                }
+//            }
+//        });
+//        Button course = (Button) findViewById(R.id.course_selection);
+//        course.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                populateList();
+//            }
     }
+
+    private void populateList() {
+        Intent[] listImageID;
+        String[] listStringValue;
+
+}
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -131,6 +197,11 @@ public class CourseSelectionScreen extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(CourseSelectionScreen.this, StudentReg.class));
+            finish();
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            SharedPreferences.Editor edit = studentInfo.edit().clear();
+            edit.apply();
             return true;
         }
         if (id == android.R.id.home) {
@@ -156,7 +227,7 @@ public class CourseSelectionScreen extends ActionBarActivity {
         //Toast.makeText(CourseSelectionScreen.this, "CS12401", Toast.LENGTH_LONG).show();
     }
 
-//    @Override
+    //    @Override
 //    public void onBackPressed() {
 //        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 //        super.onBackPressed();
@@ -165,8 +236,8 @@ public class CourseSelectionScreen extends ActionBarActivity {
 //    }
     @Override
     public void onBackPressed() {
-        NavUtils.navigateUpFromSameTask(this);
-//        finish();
+//        NavUtils.navigateUpFromSameTask(this);
+        finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         super.onBackPressed();
 //        SharedPreferences.Editor edit = studentInfo.edit().clear();

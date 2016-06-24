@@ -10,7 +10,8 @@
         android:theme="@style/MyAppBar">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +21,8 @@
 
         <activity
             android:name=".StudentReg"
-            android:label="@string/title_activity_student_reg">
+            android:label="@string/title_activity_student_reg"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name=".StudentReg" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -29,19 +31,21 @@
 
         <activity
             android:name=".CourseSelectionScreen"
-            android:label="@string/title_activity_course_selection_screen">
+            android:label="@string/title_activity_course_selection_screen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name=".CourseSelectionScreen" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".StudentReg" />
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value=".StudentReg" />-->
         </activity>
 
         <activity
             android:name=".SignIn"
-            android:label="SignIn">
+            android:label="SignIn"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name=".SignIn" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -52,7 +56,8 @@
         </activity>
         <activity
             android:name=".Proxy"
-            android:label="Proxy">
+            android:label="Proxy"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name=".Proxy" />
                 <category android:name="android.intent.category.DEFAULT" />
