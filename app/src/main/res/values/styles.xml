@@ -1,19 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
-    <!--&lt;!&ndash; Base application theme. &ndash;&gt;-->
-    <!--<style name="MyAppBar" parent="Theme.AppCompat.Light.DarkActionBar">-->
-        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-        <!--<item name="android:textColorPrimary">@color/darkColor</item>-->
-        <!--<item name="android:textColorSecondary">@color/darkColor</item>-->
-    <!--</style>-->
-    <!---->
-    <!--<style name="Base.Theme.AppCompat.Light.DarkActionBar." parent="Theme.AppCompat.Light.DarkActionBar">-->
-        <!---->
-    <!--</style>-->
 
     <style name="MyAppBar" parent="@style/Theme.AppCompat">
         <!--<item name="android:windowTranslucentNavigation">false</item>-->
         <!--<item name="android:windowTranslucentStatus">true</item>-->
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:icon">@drawable/splash_rollcall_icon</item>
+        <item name="logo">@drawable/splash_rollcall_icon</item>
+        <item name="displayOptions">useLogo|showHome|showTitle</item>
         <item name="colorPrimary">@color/Brown500</item>
         <item name="colorPrimaryDark">@color/Brown700</item>
         <item name="colorAccent">@color/teal700</item>

@@ -60,6 +60,7 @@ public class SignIn extends AppCompatActivity {
     private String studentLAST, studentID, c;
     private final String contactNumber = /*"8327418926"*/"7138998111";
     private String studentMessage, proxyMessage;
+    private BroadcastReceiver broadcastReceiver;
 
 
 
@@ -67,10 +68,7 @@ public class SignIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sing_in_activity);
-
         user = new Users().getUser(this);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         proxyInfo = getSharedPreferences(PROXYTAG, MODE_PRIVATE);
 
@@ -81,6 +79,7 @@ public class SignIn extends AppCompatActivity {
         c = user.get_course();
 
         setTitle(this, c);
+
 
         //Click sign in button saves password of the day entry then sends the sharedpreferences as a text message
         final Button signInButton = (Button) findViewById(R.id.signIn_button);
@@ -98,7 +97,7 @@ public class SignIn extends AppCompatActivity {
                 final Calendar cal = Calendar.getInstance();
 
                 //Messages strings
-                studentMessage = "(" + c + "," + studentLAST + "," + "T" + studentID + "," + date + "," + POD + ")";
+                studentMessage = "(" + c + "," + studentLAST + ","  + studentID + "," + date + "," + POD + ")";
                 proxyMessage = "(" + c + "," + proxyLAST + "," + "T" + proxyID + "," + date + "," + POD + ")";
 
 
@@ -152,7 +151,6 @@ public class SignIn extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-//        unregisterReceiver();
         super.onStop();
     }
 
@@ -197,9 +195,9 @@ public class SignIn extends AppCompatActivity {
         String sent = "MESSAGE_SENT";
         PendingIntent sentPI = PendingIntent.getBroadcast(this, 0, new Intent(sent), 0);
 
-        registerReceiver(new BroadcastReceiver() {
+        broadcastReceiver = new BroadcastReceiver() {
             @Override
-            public void onReceive(Context arg0, Intent arg1) {
+            public void onReceive(Context context, Intent intent) {
                 if (getResultCode() == Activity.RESULT_OK) {
                     Toast.makeText(SignIn.this, "Signed in with:\n" + studentMessage, Toast.LENGTH_LONG).show();
                     Toast.makeText(getBaseContext(), "SMS sent",
@@ -209,13 +207,11 @@ public class SignIn extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 }
             }
-        }, new IntentFilter(sent));
+        };
+        registerReceiver(broadcastReceiver,new IntentFilter(sent));
 
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(contactNumber, null, messageToSend, sentPI, null);
-
-
-
     }
 
     @Override
@@ -258,6 +254,11 @@ public class SignIn extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }
 

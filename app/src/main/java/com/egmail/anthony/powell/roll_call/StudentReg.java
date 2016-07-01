@@ -1,30 +1,27 @@
 package com.egmail.anthony.powell.roll_call;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.os.PersistableBundle;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class StudentReg extends ActionBarActivity {
     private boolean nameEntered, idEntered;
     protected Users user;
     private DBController dbController;
+    public static Context context;
+
 
     Button regButton;
     EditText lastName, Tnum;
@@ -34,6 +31,7 @@ public class StudentReg extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_reg);
+        context = this;
 //        View hooks
         regButton = (Button) findViewById(R.id.RegisterButton);
         lastName = (EditText) this.findViewById(R.id.LastNameTextBox);
@@ -101,19 +99,30 @@ public class StudentReg extends ActionBarActivity {
     /*Function to save Student's last name and account number in studentInfo shared prefs the Email and Pass will be stored in a
     * another prefs setting later since it will not be sent in the message to the server phone.*/
     private void storeUserInfo() {
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Toast.makeText(StudentReg.this, dataSnapshot.getValue().toString().trim(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
         EditText eMail = (EditText) this.findViewById(R.id.EmailTextBox);
         EditText studentPass = (EditText) this.findViewById(R.id.PassTextBox);
         //Create User
         user = new Users(this,lastName.getText().toString(), Tnum.getText().toString(), eMail.getText().toString(), studentPass.getText().toString());
         if (user.hasUser()) {
-            Toast.makeText(this, user.get_lastName() + " \n" + "T" + user.get_tNum(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, user.get_lastName() + " \n" + user.get_tNum(), Toast.LENGTH_SHORT).show();
             //Save use to DB
         dbController= new DBController();
 //            if(!dbController.getKEY().isEmpty()){
 //                dbController.dropUser();
 //            }
             dbController.addUser(user);
-            Toast.makeText(this, dbController.getKEY(),Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, dbController.getKEY(user),Toast.LENGTH_SHORT).show();
 
 
         }else Toast.makeText(this, "Error storing user data, please inform admin.",Toast.LENGTH_LONG).show();

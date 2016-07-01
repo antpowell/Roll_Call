@@ -2,6 +2,8 @@ package com.egmail.anthony.powell.roll_call;
 
 
 import android.content.SharedPreferences;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.ChildEventListener;
@@ -17,7 +19,8 @@ public class DBController {
     //Web
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference ref = firebaseDatabase.getReference("Users");
-    private static String KEY;
+    private Users currentDBUser;
+    private static String postID, dbEnteryTime;
 
 
 //    FirebaseDatabase rootDBRef = FirebaseDatabase.getInstance().getReference();
@@ -32,59 +35,26 @@ public class DBController {
         * Unique ID as parent
         * User data as child
         * User:{
-        *       ID:{
+        *       T Number:{
         *           name: name
         *           tNum: 0000000
         *           email: email@email.com
         *           time: 00:00
         *           }
         *       }*/
-
-        ref.child(ref.push().getKey()).setValue(user);
+        ref.child(user.get_tNum()).setValue(user);
 
     }
 
     //Delete user form DB
-    public void dropUser() {
-        ref.child(KEY).removeValue();
-    }
-
-    //    Update user's current DB entery
-    public void updateUser(Users oldUser, Users newUser) {
+    public void dropUser(Users user) {
+        ref.child(user.get_tNum()).removeValue();
 
     }
 
-    public String getKEY() {
-        return KEY;
+    public String getKEY(Users user) {
+        return user.get_tNum();
     }
-
-    ChildEventListener childEventListener = new ChildEventListener() {
-        @Override
-        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-            KEY = dataSnapshot.getKey();
-        }
-
-        @Override
-        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-        }
-
-        @Override
-        public void onChildRemoved(DataSnapshot dataSnapshot) {
-            //Check local DB for reference to this Child
-            //if found remove it
-        }
-
-        @Override
-        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-        }
-
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-
-        }
-    };
 
 }
 

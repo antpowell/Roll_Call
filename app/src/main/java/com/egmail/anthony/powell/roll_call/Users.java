@@ -85,9 +85,7 @@ public class Users {
         return _lastName;
     }
 
-    public String get_tNum() {
-        return _tNum;
-    }
+    public String get_tNum() {return "T"+_tNum;}
 
     public String get_email() {
         return _email;

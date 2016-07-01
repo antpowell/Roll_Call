@@ -47,7 +47,6 @@ public class MainActivity extends Activity {
                     } else {
                         startActivity(new Intent(MainActivity.this, CourseSelectionScreen.class));
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        Toast.makeText(MainActivity.this, "Student data found", Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
