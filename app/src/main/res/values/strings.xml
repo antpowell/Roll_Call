@@ -9,13 +9,16 @@
     <string name="welcomeLogo">welcomeLogo</string>
     <string name="RegButton">Register</string>
     <string name="SplashScreenDescription">SplashScreen</string>
-    <string name="tnumberHint">NUMBERS ONLY Ex:002XXXXX</string>
+    <string name="tnumberHint">Student T# Ex:00283233</string>
     <string name="title_activity_course_selection_screen">Course Selection</string>
     <string-array name="course_list">
         <item>CS124</item>
         <item>CS116WE1</item>
         <item>BIOL132</item>
+        <item>BIOL143</item>
         <item>BIOL232</item>
+        <item>BIOL438</item>
+        <item>BIOL438L</item>
         <item>MATH133</item>
         <item>MATH134</item>
         <item>MATH135</item>

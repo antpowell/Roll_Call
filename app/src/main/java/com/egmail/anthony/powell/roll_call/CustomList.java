@@ -21,14 +21,10 @@ public class CustomList extends ArrayAdapter<String> {
 
 //    private final int listImageID;
 
-    private TypedArray listItemImg;
 
 
-
-    public CustomList(Context context, String[] itemText, TypedArray itemImg) {
+    public CustomList(Context context, String[] itemText) {
         super(context, R.layout.course_selection_dialog, itemText);
-        listItemImg = itemImg;
-
     }
 
     @Override
@@ -53,23 +49,11 @@ public class CustomList extends ArrayAdapter<String> {
             listItemImgView.setImageResource(R.drawable.bookshelf);
         }
 
-//        listItemImgView.setImageResource(listItemImg);
+
 
 
         return listItemView;
     }
-
-//    public View listItemCreator(int position, View view, ViewGroup parent) {
-//        LayoutInflater inflater = context.getLayoutInflater();
-//        View rowView = inflater.inflate(R.layout.course_selection_dialog, null, true);
-//        TextView listItemText = (TextView) rowView.findViewById(R.id.listText);
-//
-//        ImageView listItemImg = (ImageView) rowView.findViewById(R.id.listImg);
-//        listItemText.setText(listStringValue);
-//
-//        listItemImg.setImageResource(listImageID);
-//        return rowView;
-//    }
 
 
 }

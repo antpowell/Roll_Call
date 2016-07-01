@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.egmail.anthony.powell.roll_call">
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/splash_rollcall_icon"

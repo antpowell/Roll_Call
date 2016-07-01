@@ -1,9 +1,12 @@
 package com.egmail.anthony.powell.roll_call;
 
+import android.*;
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
 import static com.egmail.anthony.powell.roll_call.R.layout.activity_splash;
@@ -14,6 +17,7 @@ public class MainActivity extends Activity {
     public static final String TAG = "tag";
     public static final String LAST = "last";
     public static final String T = "tNum";
+
 
     //Use SharedPreferences(like database) to get store student Last Name and Student Number
     private SharedPreferences studentInfo;
