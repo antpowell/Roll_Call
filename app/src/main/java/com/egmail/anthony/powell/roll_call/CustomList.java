@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 /**
@@ -20,11 +21,15 @@ public class CustomList extends ArrayAdapter<String> {
 
 
 //    private final int listImageID;
+    SearchView searchView;
 
 
 
     public CustomList(Context context, String[] itemText) {
         super(context, R.layout.course_selection_dialog, itemText);
+        Activity activity = (Activity) context;
+        searchView = (SearchView) activity.findViewById(R.id.editTextSearch);
+
     }
 
     @Override
@@ -35,6 +40,18 @@ public class CustomList extends ArrayAdapter<String> {
         TextView listItemTextView = (TextView) listItemView.findViewById(R.id.listText);
         ImageView listItemImgView = (ImageView) listItemView.findViewById(R.id.listImg);
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                CustomList.this.getFilter().filter(newText);
+                return false;
+            }
+        });
 
         listItemTextView.setText(getItem(position));
         if (getItem(position).contains("CS")){

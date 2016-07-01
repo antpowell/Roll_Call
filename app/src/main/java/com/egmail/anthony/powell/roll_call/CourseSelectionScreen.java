@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,66 +43,35 @@ public class CourseSelectionScreen extends ActionBarActivity {
         setContentView(R.layout.course_selection);
 
 
-        EditText search = (EditText) findViewById(R.id.editTextSearch);
-        search.setText(new DBController().getKEY());
+        SearchView search = (SearchView) findViewById(R.id.editTextSearch);
+
+//        search.setText(new DBController().getKEY());
         //Get User
         user = new Users().getUser(this);
 
         Resources res = getResources();
         String[] listText = res.getStringArray(R.array.course_list);
 
-        ListAdapter popUpList = new CustomList(this, listText);
+        final ListAdapter popUpList = new CustomList(this, listText);
         final ListView listView = (ListView) findViewById(R.id.list_dialog);
         listView.setAdapter(popUpList);
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView courseTextView = (TextView) view.findViewById(R.id.listText);
 //                Toast.makeText(CourseSelectionScreen.this, courseTextView.getText().toString().trim(),Toast.LENGTH_SHORT).show();
                 courseSign(courseTextView.getText().toString().trim());
-
-
-//                switch (position) {
-//                    case 0:
-//                        courseSign("CS124");
-//                        break;
-//                    case 1:
-//                        courseSign("CS116WE1");
-//                        break;
-//                    case 2:
-//                        courseSign("BIOL132");
-//                        break;
-//                    case 3:
-//                        courseSign("BIOL232");
-//                        break;
-//                    case 4:
-//                        courseSign("MATH133");
-//                        break;
-//                    case 12:
-//                        courseSign("MATH134");
-//                        break;
-//                    case 5:
-//                        courseSign("MATH135");
-//                        break;
-//                    case 6:
-//                        courseSign("MATH241");
-//                        break;
-//                    case 7:
-//                        courseSign("HIST231");
-//                        break;
-//                    case 8:
-//                        courseSign("HIST232");
-//                        break;
-//                    case 9:
-//                        courseSign("ENG131");
-//                        break;
-//                    case 10:
-//                        courseSign("ENG132");
-//                        break;
-//                    case 11:
-//                        courseSign("ENG230");
-//                        break;
-//                }
             }
         });
 

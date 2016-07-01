@@ -109,9 +109,9 @@ public class StudentReg extends ActionBarActivity {
             Toast.makeText(this, user.get_lastName() + " \n" + "T" + user.get_tNum(), Toast.LENGTH_LONG).show();
             //Save use to DB
         dbController= new DBController();
-            if(!dbController.getKEY().isEmpty()){
-                dbController.dropUser();
-            }
+//            if(!dbController.getKEY().isEmpty()){
+//                dbController.dropUser();
+//            }
             dbController.addUser(user);
             Toast.makeText(this, dbController.getKEY(),Toast.LENGTH_SHORT).show();
 
