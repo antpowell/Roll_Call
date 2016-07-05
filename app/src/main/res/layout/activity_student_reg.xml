@@ -123,5 +123,13 @@
             android:layout_below="@+id/viewPassword" />
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Version: "
+        android:id="@+id/textViewVersionNumber"
+        android:layout_weight="1"
+        android:textSize="10dp" />
+
 
 </LinearLayout>

@@ -12,7 +12,7 @@
         android:layout_alignParentTop="false"
         android:layout_centerHorizontal="true"
         android:entries="@array/course_list"
-        android:layout_below="@+id/searchCourseCustomView" />
+        android:layout_below="@+id/editTextSearch" />
 
     <TextView
         android:id="@+id/textView"
@@ -26,24 +26,15 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="32dp" />
 
-    <android.support.design.widget.TextInputLayout
+    <SearchView
+        android:id="@+id/editTextSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/textView"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:id="@+id/searchCourseCustomView">
-
-        <SearchView
-            android:id="@+id/editTextSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/textView"
-            android:layout_marginLeft="8dp"
-            android:hint="Search" />
-    </android.support.design.widget.TextInputLayout>
+        android:hint="Search" />
 
 
 </RelativeLayout>

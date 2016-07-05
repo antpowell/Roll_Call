@@ -32,7 +32,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.net.URLEncoder;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -48,6 +47,7 @@ public class SignIn extends AppCompatActivity {
     public static final String T = "tNum";
     public static final String COURSE = "course";
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
+    private dataJSONFormatter dataJSONFormatter;
     //    private final int permissionCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.SEND_SMS);
 //    public int MY_PERMISSIONS_REQUEST_SEND_SMS;
 
@@ -57,8 +57,8 @@ public class SignIn extends AppCompatActivity {
     private SharedPreferences proxyInfo;
     private Users user;
 
-    private String studentLAST, studentID, c;
-    private final String contactNumber = /*"8327418926"*/"7138998111";
+    private String studentLAST, studentID, c, POD;
+    private final static String contactNumber = /*"8327418926"*/"7138998111";
     private String studentMessage, proxyMessage;
     private BroadcastReceiver broadcastReceiver;
 
@@ -90,7 +90,7 @@ public class SignIn extends AppCompatActivity {
             public void onClick(View v) {
                 String proxyLAST = proxyInfo.getString(LAST, "Not found");
                 String proxyID = proxyInfo.getString(T, "Not found");
-                String POD = password.getText().toString();
+                POD = password.getText().toString();
 
                 final Date ts = new Date();
                 final String date = new SimpleDateFormat("dd/MM/yy HH:mm").format(ts);
@@ -212,6 +212,13 @@ public class SignIn extends AppCompatActivity {
 
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(contactNumber, null, messageToSend, sentPI, null);
+
+        dataJSONFormatter= new dataJSONFormatter(user, POD);
+
+
+        DBController dbController = new DBController("Attendance");
+        dbController.getDB().child(dataJSONFormatter.get_courseNumber()).child(String.valueOf(new SimpleDateFormat("EEE, MMM d, yyyy").format(new Date()))).child(dataJSONFormatter.get_tNumber()).setValue(dataJSONFormatter.loginObject());
+
     }
 
     @Override
@@ -260,5 +267,6 @@ public class SignIn extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
     }
+
 }
 

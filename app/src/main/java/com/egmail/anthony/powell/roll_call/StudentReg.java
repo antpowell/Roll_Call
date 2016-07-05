@@ -3,12 +3,17 @@ package com.egmail.anthony.powell.roll_call;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.appcompat.*;
+import android.support.v7.appcompat.BuildConfig;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +36,13 @@ public class StudentReg extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_reg);
+        PackageInfo pInfo = null;
+        try {
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
         context = this;
 //        View hooks
         regButton = (Button) findViewById(R.id.RegisterButton);
@@ -85,6 +97,9 @@ public class StudentReg extends ActionBarActivity {
 
             }
         });
+
+        TextView versionTextView = (TextView) findViewById(R.id.textViewVersionNumber);
+        versionTextView.append(pInfo.versionName);
     }
 
     public boolean checkEnabled(){
@@ -127,5 +142,9 @@ public class StudentReg extends ActionBarActivity {
 
         }else Toast.makeText(this, "Error storing user data, please inform admin.",Toast.LENGTH_LONG).show();
     }
+
+
+
+
 
 }

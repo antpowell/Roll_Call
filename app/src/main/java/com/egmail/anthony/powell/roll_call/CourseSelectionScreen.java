@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -28,6 +30,8 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 /*This Activity is form the student to select the course they wish to sign in to(current course)
  * onCreate the 'Course List' and 'Re-Register buttons are displayed
    * if the Course List button is clicked a Alert with a ListView populated with the current courses appears,
@@ -41,7 +45,6 @@ public class CourseSelectionScreen extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_selection);
-
 
         SearchView search = (SearchView) findViewById(R.id.editTextSearch);
 

@@ -12,14 +12,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.json.JSONObject;
+
 /**
  * Created by SGT_POWELL on 6/26/2016.
  */
 public class DBController {
     //Web
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference ref = firebaseDatabase.getReference("Users");
-    private Users currentDBUser;
+    private DatabaseReference ref;
+    private String _db;
     private static String postID, dbEnteryTime;
 
 
@@ -27,6 +29,11 @@ public class DBController {
 
 
     protected DBController() {
+        ref = firebaseDatabase.getReference("Users");
+    }
+    protected  DBController(String db){
+        _db = db;
+        ref = firebaseDatabase.getReference(db);
     }
 
     //Add user to DB
@@ -54,6 +61,10 @@ public class DBController {
 
     public String getKEY(Users user) {
         return user.get_tNum();
+    }
+
+    public DatabaseReference getDB(){
+        return ref;
     }
 
 }
