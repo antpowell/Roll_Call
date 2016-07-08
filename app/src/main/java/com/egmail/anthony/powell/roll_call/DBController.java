@@ -18,26 +18,27 @@ import org.json.JSONObject;
  * Created by SGT_POWELL on 6/26/2016.
  */
 public class DBController {
-    //Web
-    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference ref;
-    private String _db;
-    private static String postID, dbEnteryTime;
+ //Web
+ private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+ private DatabaseReference ref;
+ private String _db;
+ private static String postID, dbEnteryTime;
 
 
 //    FirebaseDatabase rootDBRef = FirebaseDatabase.getInstance().getReference();
 
 
-    protected DBController() {
-        ref = firebaseDatabase.getReference("Users");
-    }
-    protected  DBController(String db){
-        _db = db;
-        ref = firebaseDatabase.getReference(db);
-    }
+ protected DBController() {
+  ref = firebaseDatabase.getReference("Users");
+ }
 
-    //Add user to DB
-    public void addUser(Users user) {
+ protected DBController(String db) {
+  _db = db;
+  ref = firebaseDatabase.getReference(db);
+ }
+
+ //Add user to DB
+ public void addUser(Users user) {
         /*
         * Unique ID as parent
         * User data as child
@@ -49,23 +50,23 @@ public class DBController {
         *           time: 00:00
         *           }
         *       }*/
-        ref.child(user.get_tNum()).setValue(user);
+  ref.child(user.get_tNum()).setValue(user);
 
-    }
+ }
 
-    //Delete user form DB
-    public void dropUser(Users user) {
-        ref.child(user.get_tNum()).removeValue();
+ //Delete user form DB
+ public void dropUser(Users user) {
+  ref.child(user.get_tNum()).removeValue();
 
-    }
+ }
 
-    public String getKEY(Users user) {
-        return user.get_tNum();
-    }
+ public String getKEY(Users user) {
+  return user.get_tNum();
+ }
 
-    public DatabaseReference getDB(){
-        return ref;
-    }
+ public DatabaseReference getDB() {
+  return ref;
+ }
 
 }
 
