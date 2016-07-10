@@ -1,7 +1,5 @@
-package com.egmail.anthony.powell.roll_call;
+package com.egmail.anthony.powell.roll_call_2;
 
-import android.*;
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,16 +8,13 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
-
-import junit.runner.Version;
 
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
 
-import static com.egmail.anthony.powell.roll_call.R.layout.activity_splash;
+import static com.egmail.anthony.powell.roll_call_2.R.layout.activity_splash;
 
 
 public class MainActivity extends Activity {

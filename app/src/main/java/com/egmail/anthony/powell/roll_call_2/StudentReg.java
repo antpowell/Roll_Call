@@ -1,29 +1,15 @@
-package com.egmail.anthony.powell.roll_call;
+package com.egmail.anthony.powell.roll_call_2;
 
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.appcompat.*;
-import android.support.v7.appcompat.BuildConfig;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-
-import org.jsoup.Jsoup;
-
-import java.io.IOException;
 
 
 public class StudentReg extends ActionBarActivity {

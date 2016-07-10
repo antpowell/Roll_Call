@@ -1,10 +1,7 @@
-package com.egmail.anthony.powell.roll_call;
+package com.egmail.anthony.powell.roll_call_2;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Build;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.widget.Toast;
 
 /**
