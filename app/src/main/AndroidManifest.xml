@@ -2,7 +2,7 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.egmail.anthony.powell.roll_call">
+    package="com.egmail.anthony.powell.roll_call_2">
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:theme="@style/MyAppBar">
         <activity
-            android:name=".MainActivity"
+            android:name="com.egmail.anthony.powell.roll_call_2.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -23,7 +23,7 @@
         </activity>
 
         <activity
-            android:name=".StudentReg"
+            android:name="com.egmail.anthony.powell.roll_call_2.StudentReg"
             android:label="@string/title_activity_student_reg"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -33,7 +33,7 @@
         </activity>
 
         <activity
-            android:name=".CourseSelectionScreen"
+            android:name="com.egmail.anthony.powell.roll_call_2.CourseSelectionScreen"
             android:label="@string/title_activity_course_selection_screen"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -46,7 +46,7 @@
         </activity>
 
         <activity
-            android:name=".SignIn"
+            android:name="com.egmail.anthony.powell.roll_call_2.SignIn"
             android:label="SignIn"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -55,10 +55,10 @@
             </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CourseSelectionScreen" />
+                android:value="com.egmail.anthony.powell.roll_call_2.CourseSelectionScreen" />
         </activity>
         <activity
-            android:name=".Proxy"
+            android:name="com.egmail.anthony.powell.roll_call_2.Proxy"
             android:label="Proxy"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -67,7 +67,7 @@
             </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SignIn" />
+                android:value="com.egmail.anthony.powell.roll_call_2.SignIn" />
         </activity>
 
 

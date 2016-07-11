@@ -1,6 +1,8 @@
 package com.egmail.anthony.powell.roll_call_2;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -55,68 +57,103 @@ public class MainActivity extends Activity {
 
   user = studentInfo.getString(LAST, "Not found");
   t = studentInfo.getString(T, "Not found");
+ }
 
   //Toast.makeText(this, studentInfo.getAll().toString(),Toast.LENGTH_LONG).show();
+//  Thread splashTimer = new Thread() {
+//   public void run() {
+//    try {
+//     sleep(2000);
+//     //check if student info is stored on the device. If so goto Course Selection screen if not goto StudentReg screen.
+//     if (t.equals("Not found") || user.equals("Not found")) {
+//      startActivity(new Intent(MainActivity.this, StudentReg.class));
+//      overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//
+//     } else {
+//      startActivity(new Intent(MainActivity.this, CourseSelectionScreen.class));
+//      overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//     }
+//    } catch (Exception e) {
+//     e.printStackTrace();
+//    } finally {
+//     finish();
+//    }
+//   }
+//
+//  };
+//  splashTimer.start();
 
-
- }
-
- class getVersionNumberTask extends AsyncTask<Void, Void, String> {
-  @Override
-  protected void onPreExecute() {
-   super.onPreExecute();
-  }
-
-  @Override
-  protected String doInBackground(Void... params) {
-   try {
-    playVersionCode = Jsoup.connect("https://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName() + "&hl=en")
-      .timeout(30000)
-      .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
-      .referrer("http://www.google.com")
-      .get()
-      .select("div[itemprop=softwareVersion]")
-      .first()
-      .ownText();
-   } catch (IOException e) {
-    e.printStackTrace();
+  class getVersionNumberTask extends AsyncTask<Void, Void, String> {
+   @Override
+   protected void onPreExecute() {
+    super.onPreExecute();
    }
-   return playVersionCode;
-  }
 
-  @Override
-  protected void onPostExecute(String s) {
+   @Override
+   protected String doInBackground(Void... params) {
+    try {
+     playVersionCode = Jsoup.connect("https://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName() + "&hl=en")
+       .timeout(30000)
+       .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+       .referrer("http://www.google.com")
+       .get()
+       .select("div[itemprop=softwareVersion]")
+       .first()
+       .ownText();
+    } catch (IOException e) {
+     e.printStackTrace();
+    }
+    return playVersionCode;
+   }
+
+   @Override
+   protected void onPostExecute(String s) {
 //   if (Integer.parseInt(playVersionCode.trim())>Integer.parseInt(versionName.trim()))
-   if (!playVersionCode.equals(versionName)) {
-    //FORCE USER TO UPDATE VIA PLAY STORE
-    Toast.makeText(MainActivity.this, "THIS APPLICATION IS NOT IN SYNC", Toast.LENGTH_SHORT).show();
-    startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("market://details?id=" + getApplicationContext().getPackageName())));
-   } else {
-    Toast.makeText(MainActivity.this, "YOU ARE RUNNING THE CURRENT VERSION OF THIS APP! THANK YOU FOR YOUR SUPPORT", Toast.LENGTH_SHORT).show();
-    Thread splashTimer = new Thread() {
-     public void run() {
-      try {
-       sleep(2000);
-       //check if student info is stored on the device. If so goto Course Selection screen if not goto StudentReg screen.
-       if (t.equals("Not found") || user.equals("Not found")) {
-        startActivity(new Intent(MainActivity.this, StudentReg.class));
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
-       } else {
-        startActivity(new Intent(MainActivity.this, CourseSelectionScreen.class));
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-       }
-      } catch (Exception e) {
-       e.printStackTrace();
-      } finally {
+    if (!playVersionCode.equals(versionName)) {
+     //FORCE USER TO UPDATE VIA PLAY STORE
+     new AlertDialog.Builder(MainActivity.this)
+       .setTitle("Update Available")
+       .setMessage("Please update application to continue.")
+       .setPositiveButton("Update", new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialog, int which) {
+       startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("market://details?id=" + getApplicationContext().getPackageName())));
+      }
+     })
+     .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialog, int which) {
        finish();
       }
-     }
-    };
-    splashTimer.start();
+     })
+       .show();
+
+    } else {
+//     Toast.makeText(MainActivity.this, "Verification Complete... Thank you.", Toast.LENGTH_SHORT).show();
+     Thread splashTimer = new Thread() {
+      public void run() {
+       try {
+        sleep(2000);
+        //check if student info is stored on the device. If so goto Course Selection screen if not goto StudentReg screen.
+        if (t.equals("Not found") || user.equals("Not found")) {
+         startActivity(new Intent(MainActivity.this, StudentReg.class));
+         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+        } else {
+         startActivity(new Intent(MainActivity.this, CourseSelectionScreen.class));
+         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }
+       } catch (Exception e) {
+        e.printStackTrace();
+       } finally {
+        finish();
+       }
+      }
+     };
+     splashTimer.start();
+    }
+    super.onPostExecute(s);
    }
-   super.onPostExecute(s);
   }
  }
 
-}
