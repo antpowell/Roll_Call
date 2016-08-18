@@ -1,4 +1,4 @@
-# Roll_Call
+# Roll Call
 Roll Call is an application that allows students enrolled in courses where the professor has opted in to use the service.
 This native application allows those students to sign the roll for the above mentioned courses.
 
