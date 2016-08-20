@@ -205,6 +205,7 @@ public class SignIn extends AppCompatActivity {
   registerReceiver(broadcastReceiver, new IntentFilter(sent));
 
   SmsManager sms = SmsManager.getDefault();
+  //if SMS not sent message user
   sms.sendTextMessage(contactNumber, null, messageToSend, sentPI, null);
 
   dataJSONFormatter = new dataJSONFormatter(user, POD);
@@ -237,7 +238,7 @@ public class SignIn extends AppCompatActivity {
    startActivity(new Intent(SignIn.this, Proxy.class));
    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
    //finish();  --->if finished when back button is press returns to the Course Selection Activity (ADD || DROP)?
-
+   unregisterReceiver(broadcastReceiver);
    return true;
   }
   if (id == android.R.id.home) {
