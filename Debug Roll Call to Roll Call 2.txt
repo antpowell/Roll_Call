@@ -1,0 +1,14 @@
+Error:Execution failed for task ':app:transformResourcesWithMergeJavaResForDebug'.
+> com.android.build.api.transform.TransformException: com.android.builder.packaging.DuplicateFileException: Duplicate files copied in APK META-INF/BCKEY.DSA
+	File1: C:\Users\SGT_POWELL\.gradle\caches\modules-2\files-2.1\org.bouncycastle\bcprov-jdk15on\1.48\960dea7c9181ba0b17e8bab0c06a43f0a5f04e65\bcprov-jdk15on-1.48.jar
+	File2: C:\Users\SGT_POWELL\.gradle\caches\modules-2\files-2.1\org.bouncycastle\bcpkix-jdk15on\1.48\28b7614b908a47844bb27e3c94b45b6893656265\bcpkix-jdk15on-1.48.jar
+Deleted C:\Users\SGT_POWELL\.gradle\caches\modules-2\files-2.1\org.bouncycastle\ folder.
+Still same error.
+Resync Roll Call with master from GitHub.
+Refractor to com.egmail.anthony.powell.roll_call_2.
+Added new application to Firebase called Roll Call 2 and added the apps SHA1.
+Ran and recieved Error:Error:Execution failed for task ':app:processDebugGoogleServices'.
+> No matching client found for package name 'com.egmail.anthony.powell.roll_call'
+Forgot to change the package name in the gradle file.
+Changed the name of the package in the gradle file build without error.
+Application ran with new package name and new firebase application setting.
