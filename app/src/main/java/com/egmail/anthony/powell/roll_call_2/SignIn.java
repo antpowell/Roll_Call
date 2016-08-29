@@ -211,7 +211,7 @@ public class SignIn extends AppCompatActivity {
   dataJSONFormatter = new dataJSONFormatter(user, POD);
 
 
-  DBController dbController = new DBController("Attendance");
+  DBController dbController = new DBController(this,"Attendance");
   dbController.getDB().child(dataJSONFormatter.get_courseNumber()).child(String.valueOf(new SimpleDateFormat("EEE, MMM d, yyyy").format(new Date()))).child(dataJSONFormatter.get_tNumber()).setValue(dataJSONFormatter.loginObject());
 
  }

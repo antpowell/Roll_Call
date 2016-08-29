@@ -86,7 +86,7 @@ public class CourseSelectionScreen extends ActionBarActivity {
             user.dropUser(this);
             if (!user.hasUser()) Toast.makeText(this, "User Deleted...", Toast.LENGTH_SHORT).show();
             //Clear DB
-            new DBController().dropUser(user);
+            new DBController(this).dropUser(user);
             return true;
         }
         if (id == android.R.id.home) {

@@ -1,6 +1,18 @@
 package com.egmail.anthony.powell.roll_call_2;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.widget.Toast;
+
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -13,16 +25,24 @@ public class DBController {
  private DatabaseReference ref;
  private String _db;
  private static String postID, dbEnteryTime;
+// private GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//   .requestIdToken(getString())
+//   .requestEmail()
+//   .build();
+ private FirebaseAuth auth;
+ private Context cx;
 
 
 //    FirebaseDatabase rootDBRef = FirebaseDatabase.getInstance().getReference();
 
 
- protected DBController() {
+ protected DBController(Context c) {
+  cx = c;
   ref = firebaseDatabase.getReference("Users");
  }
 
- protected DBController(String db) {
+ protected DBController(Context c, String db) {
+  cx = c;
   _db = db;
   ref = firebaseDatabase.getReference(db);
  }
@@ -56,6 +76,36 @@ public class DBController {
 
  public DatabaseReference getDB() {
   return ref;
+ }
+
+ public boolean CreateUser(Users user){
+//  FirebaseAuth mAuth;
+//  mAuth = FirebaseAuth.getInstance();
+//
+//  mAuth.createUserWithEmailAndPassword(cx, new OnCompleteListener<AuthResult>(){
+//   @Override
+//   public void onComplete(@NonNull Task<AuthResult> task) {
+//
+////    if(!task.isSuccessful()){
+////     Toast.makeText(cx, "Sorry could not register you as a user at the moment... \nTry again shortly.", Toast.LENGTH_SHORT).show();
+////    }
+//   }
+//  });
+
+  return false;
+ }
+ public void CreateUserGoogle(Users user){
+
+ }
+ public boolean UserSignIn(Users user){
+//  Intent signInEvent = Auth.GoogleSignInApi.getSignInIntent();
+  return false;
+ }
+ public boolean UserSignOut(Users user){
+  return false;
+ }
+ public boolean DeleteUser(Users user){
+  return false;
  }
 
 }
