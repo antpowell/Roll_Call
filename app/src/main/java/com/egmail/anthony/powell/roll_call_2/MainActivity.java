@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Display;
 import android.widget.Toast;
 
 import org.jsoup.Jsoup;
@@ -57,6 +59,15 @@ public class MainActivity extends Activity {
 
   user = studentInfo.getString(LAST, "Not found");
   t = studentInfo.getString(T, "Not found");
+
+//  ====================>SCREEN SIZE IN PIXELS<====================
+//  Display display = getWindowManager().getDefaultDisplay();
+//  Point size = new Point();
+//  display.getSize(size);
+//  int width = size.x;
+//  int height = size.y;
+//  Toast.makeText(this, width + ", " + height, Toast.LENGTH_LONG).show();
+
  }
 
   //Toast.makeText(this, studentInfo.getAll().toString(),Toast.LENGTH_LONG).show();
