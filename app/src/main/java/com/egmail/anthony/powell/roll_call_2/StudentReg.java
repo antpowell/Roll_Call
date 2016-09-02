@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,13 +14,13 @@ import android.widget.Toast;
 
 
 public class StudentReg extends ActionBarActivity {
- private boolean nameEntered, idEntered;
+ private boolean nameEntered, idEntered, emailEntered, passwordEntered;
  protected Users user;
  private DBController dbController;
  public static Context context;
 
  Button regButton;
- EditText lastName, Tnum;
+ EditText lastName, Tnum, eMail, password;
 
 
  @Override
@@ -32,6 +33,8 @@ public class StudentReg extends ActionBarActivity {
   regButton = (Button) findViewById(R.id.RegisterButton);
   lastName = (EditText) this.findViewById(R.id.LastNameTextBox);
   Tnum = (EditText) this.findViewById(R.id.TNumberTextBox);
+  eMail = (EditText) this.findViewById(R.id.EmailTextBox);
+  password = (EditText) this.findViewById(R.id.PassTextBox);
 
   lastName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
    @Override
@@ -69,6 +72,41 @@ public class StudentReg extends ActionBarActivity {
    }
   });
 
+  eMail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+   @Override
+   public void onFocusChange(View v, boolean hasFocus) {
+    if (!hasFocus) {
+     if (!Patterns.EMAIL_ADDRESS.matcher(eMail.getText().toString()).matches()) {
+      eMail.setError("Incorrect Email Format");
+      emailEntered = false;
+     } else if (eMail.getText().toString().length() == 0) {
+      eMail.setError("Must enter a email address");
+      emailEntered = false;
+     } else {
+      emailEntered = true;
+     }
+     activateRegistrationButton();
+    }
+   }
+  });
+  password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+   @Override
+   public void onFocusChange(View v, boolean hasFocus) {
+    if (!hasFocus) {
+     if (password.getText().toString().length() < 7 || password.getText().toString().length() > 10) {
+      password.setError("Password must be 7 to 10 characters long");
+      passwordEntered = false;
+     } else if (password.getText().toString().length() == 0) {
+      password.setError("Must enter a password");
+      passwordEntered = false;
+     } else {
+      passwordEntered = true;
+     }
+     activateRegistrationButton();
+    }
+   }
+  });
+
   regButton.setOnClickListener(new View.OnClickListener() {
    @TargetApi(Build.VERSION_CODES.ECLAIR)
    @Override
@@ -85,7 +123,7 @@ public class StudentReg extends ActionBarActivity {
  }
 
  public boolean checkEnabled() {
-  return nameEntered && idEntered;
+  return nameEntered && idEntered && emailEntered && passwordEntered;
  }
 
  public void activateRegistrationButton() {
@@ -109,6 +147,7 @@ public class StudentReg extends ActionBarActivity {
    dbController = new DBController(this);
 
    dbController.addUser(user);
+   dbController.CreateUser(user);
 
 
   } else

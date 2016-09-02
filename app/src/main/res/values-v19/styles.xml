@@ -7,8 +7,5 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
-    <style name="CustomButton" parent="Widget.AppCompat.Button.Borderless">
-        <item name="android:colorControlHighlight">@color/DeepOrangeA400</item>
-        <item name="android:colorButtonNormal">@color/teal700</item>
-    </style>
+
 </resources>

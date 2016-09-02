@@ -1,9 +1,11 @@
 package com.egmail.anthony.powell.roll_call_2;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -22,27 +24,40 @@ import com.google.firebase.database.FirebaseDatabase;
 public class DBController {
  //Web
  private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+ private FirebaseAuth  authRef;
+ private FirebaseAuth.AuthStateListener authListener;
  private DatabaseReference ref;
  private String _db;
  private static String postID, dbEnteryTime;
+ boolean userWasCreated = false;
 // private GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
 //   .requestIdToken(getString())
 //   .requestEmail()
 //   .build();
- private FirebaseAuth auth;
- private Context cx;
+ private Context context, TAG;
 
 
 //    FirebaseDatabase rootDBRef = FirebaseDatabase.getInstance().getReference();
+DBController(){
+ authRef = FirebaseAuth.getInstance();
+ authListener = new FirebaseAuth.AuthStateListener(){
+  @Override
+  public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+   FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
+  }
+ };
+
+}
 
  protected DBController(Context c) {
-  cx = c;
+  this();
+  this.context = c;
   ref = firebaseDatabase.getReference("Users");
  }
 
  protected DBController(Context c, String db) {
-  cx = c;
+  this.context = c;
   _db = db;
   ref = firebaseDatabase.getReference(db);
  }
@@ -66,8 +81,8 @@ public class DBController {
 
  //Delete user form DB
  public void dropUser(Users user) {
+  UserSignOut(user);
   ref.child(user.get_tNum()).removeValue();
-
  }
 
  public String getKEY(Users user) {
@@ -78,35 +93,55 @@ public class DBController {
   return ref;
  }
 
- public boolean CreateUser(Users user){
-//  FirebaseAuth mAuth;
-//  mAuth = FirebaseAuth.getInstance();
-//
-//  mAuth.createUserWithEmailAndPassword(cx, new OnCompleteListener<AuthResult>(){
-//   @Override
-//   public void onComplete(@NonNull Task<AuthResult> task) {
-//
-////    if(!task.isSuccessful()){
-////     Toast.makeText(cx, "Sorry could not register you as a user at the moment... \nTry again shortly.", Toast.LENGTH_SHORT).show();
-////    }
-//   }
-//  });
-
-  return false;
+ public void CreateUser(Users user) {
+  authRef.createUserWithEmailAndPassword(user.get_email(), user.get_password())
+    .addOnCompleteListener((Activity)context, new OnCompleteListener<AuthResult>() {
+     @Override
+     public void onComplete(@NonNull Task<AuthResult> task) {
+      Log.d(String.valueOf(context), "createUserWithEmail:onComplete:" + task.isSuccessful());
+      if(!task.isSuccessful()){
+       Toast.makeText(context, "Could not register you as a user, sorry!", Toast.LENGTH_SHORT).show();
+      }
+     }
+    });
  }
+
  public void CreateUserGoogle(Users user){
 
  }
  public boolean UserSignIn(Users user){
+
 //  Intent signInEvent = Auth.GoogleSignInApi.getSignInIntent();
-  return false;
+  authRef.signInWithEmailAndPassword(user.get_email(), user.get_password())
+    .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
+     @Override
+     public void onComplete(@NonNull Task<AuthResult> task) {
+      Log.d(String.valueOf(context), "signInWithEmail:onComplete:" + task.isSuccessful());
+      userWasCreated = true;
+      if(!task.isSuccessful()){
+       Toast.makeText(context, "Could not sign you in at this time, sorry!", Toast.LENGTH_SHORT).show();
+      }
+     }
+    });
+  return userWasCreated;
  }
- public boolean UserSignOut(Users user){
-  return false;
+ public void UserSignOut(Users user){
+  authRef.signOut();
  }
  public boolean DeleteUser(Users user){
   return false;
  }
 
+ public void startListener(){
+  authRef.addAuthStateListener(authListener);
+ }
+
+ public void stopLitener(){
+  if(authListener != null) {
+   authRef.removeAuthStateListener(authListener);
+  }
+ }
+
 }
+
 
