@@ -34,7 +34,7 @@ public class DBController {
 //   .requestIdToken(getString())
 //   .requestEmail()
 //   .build();
- private Context context, TAG;
+ private Context context;
 
 
 //    FirebaseDatabase rootDBRef = FirebaseDatabase.getInstance().getReference();
@@ -93,24 +93,26 @@ DBController(){
   return ref;
  }
 
- public void CreateUser(Users user) {
+ public boolean CreateUser(Users user) {
   authRef.createUserWithEmailAndPassword(user.get_email(), user.get_password())
     .addOnCompleteListener((Activity)context, new OnCompleteListener<AuthResult>() {
      @Override
      public void onComplete(@NonNull Task<AuthResult> task) {
       Log.d(String.valueOf(context), "createUserWithEmail:onComplete:" + task.isSuccessful());
+      userWasCreated = true;
       if(!task.isSuccessful()){
        Toast.makeText(context, "Could not register you as a user, sorry!", Toast.LENGTH_SHORT).show();
+       userWasCreated = false;
       }
      }
     });
+  return userWasCreated;
  }
 
  public void CreateUserGoogle(Users user){
 
  }
  public boolean UserSignIn(Users user){
-
 //  Intent signInEvent = Auth.GoogleSignInApi.getSignInIntent();
   authRef.signInWithEmailAndPassword(user.get_email(), user.get_password())
     .addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
@@ -120,6 +122,7 @@ DBController(){
       userWasCreated = true;
       if(!task.isSuccessful()){
        Toast.makeText(context, "Could not sign you in at this time, sorry!", Toast.LENGTH_SHORT).show();
+       userWasCreated = false;
       }
      }
     });
@@ -128,8 +131,7 @@ DBController(){
  public void UserSignOut(Users user){
   authRef.signOut();
  }
- public boolean DeleteUser(Users user){
-  return false;
+ public void DeleteUser(Users user){
  }
 
  public void startListener(){

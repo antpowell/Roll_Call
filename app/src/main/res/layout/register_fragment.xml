@@ -10,27 +10,11 @@
     <!--android:id="@+id/reg_app_bar"-->
     <!--layout="@layout/reg_app_bar" />-->
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="190dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/reg_app_bar"
-        android:layout_gravity="left"
-        android:layout_marginLeft="-15dp"
-        android:layout_marginTop="-30dp"
-        android:contentDescription="@string/welcomeLogo"
-        android:src="@drawable/splash_rollcall3"
-        android:visibility="visible"
-        android:layout_weight="0"/>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_below="@+id/imageView"
-        android:layout_marginTop="-30dp"
-        android:layout_weight="2"
+        android:layout_marginTop="8dp"
         android:gravity="top|center"
         android:orientation="vertical">
 
@@ -117,22 +101,22 @@
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="30dp">
 
-            <EditText
-                android:id="@+id/EmailTextBox"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerHorizontal="true"
-                android:ems="10"
-                android:hint="Email Address(Optional)"
-                android:inputType="textEmailAddress"
-                android:allowUndo="false"/>
+                <EditText
+                    android:id="@+id/EmailTextBox"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerHorizontal="true"
+                    android:ems="10"
+                    android:hint="Email Address(Optional)"
+                    android:inputType="textEmailAddress"
+                    android:allowUndo="false"/>
             </android.support.design.widget.TextInputLayout>
         </RelativeLayout>
 
-        
-        
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -166,9 +150,6 @@
                     android:typeface="sans"/>
             </android.support.design.widget.TextInputLayout>
         </RelativeLayout>
-
-        
-
         <Button
             android:id="@+id/RegisterButton"
             style="@android:style/Widget.Material.Button.Colored"
@@ -182,6 +163,7 @@
             android:layout_gravity="center"
             android:textAlignment="gravity"
             android:text="@string/RegButton"/>
+
     </LinearLayout>
 
 

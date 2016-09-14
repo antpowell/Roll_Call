@@ -11,6 +11,7 @@
     <string name="SplashScreenDescription">SplashScreen</string>
     <string name="tnumberHint">Student T# Ex:00283233</string>
     <string name="title_activity_course_selection_screen">Course Selection</string>
+    <string name="LoginButton">LOGIN</string>
     <string-array name="course_list">
         <item>CS124</item>
         <item>CS116WE1</item>

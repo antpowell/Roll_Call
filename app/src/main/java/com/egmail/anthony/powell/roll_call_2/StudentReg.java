@@ -5,12 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Patterns;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import info.hoang8f.android.segmented.SegmentedGroup;
 
 
 public class StudentReg extends ActionBarActivity {
@@ -21,6 +28,9 @@ public class StudentReg extends ActionBarActivity {
 
  Button regButton;
  EditText lastName, Tnum, eMail, password;
+ RadioButton loginSegment, registerSegment;
+ SegmentedGroup login_registation_group;
+ RelativeLayout nameLayout, tnumLayout, emailLayout, passwordLayout;
 
 
  @Override
@@ -29,12 +39,9 @@ public class StudentReg extends ActionBarActivity {
   setContentView(R.layout.activity_student_reg);
 
   context = this;
-//        View hooks
-  regButton = (Button) findViewById(R.id.RegisterButton);
-  lastName = (EditText) this.findViewById(R.id.LastNameTextBox);
-  Tnum = (EditText) this.findViewById(R.id.TNumberTextBox);
-  eMail = (EditText) this.findViewById(R.id.EmailTextBox);
-  password = (EditText) this.findViewById(R.id.PassTextBox);
+  createAssociationsWithView();
+  handlers();
+
 
   lastName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
    @Override
@@ -142,16 +149,78 @@ public class StudentReg extends ActionBarActivity {
   //Create User
   user = new Users(this, lastName.getText().toString(), Tnum.getText().toString(), eMail.getText().toString(), studentPass.getText().toString());
   if (user.hasUser()) {
-   Toast.makeText(this, user.get_lastName() + " \n" + user.get_tNum(), Toast.LENGTH_SHORT).show();
    //Save use to DB
    dbController = new DBController(this);
+   dbController.CreateUser(user);
+   if(dbController.userWasCreated){
+    Toast.makeText(this, user.get_lastName() + " \n" + user.get_tNum(), Toast.LENGTH_SHORT).show();
+   }
 
    dbController.addUser(user);
-   dbController.CreateUser(user);
-
-
   } else
    Toast.makeText(this, "Error storing user data, please inform admin.", Toast.LENGTH_LONG).show();
  }
+
+ protected void createAssociationsWithView(){
+  //        View hooks
+  //Buttons
+  regButton = (Button) findViewById(R.id.RegisterButton);
+  //TextFields
+  lastName = (EditText) this.findViewById(R.id.LastNameTextBox);
+  Tnum = (EditText) this.findViewById(R.id.TNumberTextBox);
+  eMail = (EditText) this.findViewById(R.id.EmailTextBox);
+  password = (EditText) this.findViewById(R.id.PassTextBox);
+//  TextInputLayout
+  nameLayout = (RelativeLayout) findViewById(R.id.name_view);
+  tnumLayout = (RelativeLayout) findViewById(R.id.tnumber_view);
+  emailLayout = (RelativeLayout) findViewById(R.id.email_view);
+  passwordLayout = (RelativeLayout) findViewById(R.id.passowrd_view);
+
+
+  //Segments
+  loginSegment = (RadioButton) findViewById(R.id.login_switch_segment);
+  registerSegment = (RadioButton) findViewById(R.id.register_switch_segment);
+  login_registation_group = (SegmentedGroup) findViewById(R.id.log_reg_seg);
+  registerSegment.setChecked(true);
+ }
+
+ protected void handlers(){
+  login_registation_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+   @Override
+   public void onCheckedChanged(RadioGroup radioGroup, int i) {
+    switch(i){
+     case R.id.login_switch_segment:
+      //handle events while login segment is active
+
+      //view animations
+      nameLayout.animate().alpha(0.0f);
+      tnumLayout.animate().alpha(0.0f);
+      emailLayout.animate().translationY(-250);
+      passwordLayout.animate().translationY(-250);
+      regButton.animate().translationY(-250);
+
+      break;
+
+     case R.id.register_switch_segment:
+      //handle events while login segment is active
+
+      //view animations
+      nameLayout.animate().alpha(1.0f);
+      tnumLayout.animate().alpha(1.0f);
+      emailLayout.animate().translationY(0);
+      passwordLayout.animate().translationY(0);
+      regButton.animate().translationY(0);
+
+      break;
+
+      default:
+       //Nothing to do
+
+    }
+   }
+  });
+//  loginSegment.setOnClickListener();
+ }
+
 
 }
