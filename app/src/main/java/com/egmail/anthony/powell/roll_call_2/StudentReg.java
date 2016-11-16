@@ -43,6 +43,115 @@ public class StudentReg extends ActionBarActivity {
   handlers();
 
 
+ }
+
+ public boolean checkEnabled() {
+  return nameEntered && idEntered && emailEntered && passwordEntered;
+ }
+
+ public void activateRegistrationButton() {
+  if (checkEnabled())
+   regButton.setEnabled(!lastName.getText().toString().trim().isEmpty() && Tnum.getText().toString().trim().length() < 9);
+  else
+   regButton.setEnabled(lastName.getText().toString().trim().isEmpty() && Tnum.getText().toString().trim().length() < 9);
+ }
+
+ /*Function to save Student's last name and account number in studentInfo shared prefs the Email and Pass will be stored in a
+ * another prefs setting later since it will not be sent in the message to the server phone.*/
+ private void storeUserInfo() {
+  EditText eMail = (EditText) this.findViewById(R.id.EmailTextBox);
+  EditText studentPass = (EditText) this.findViewById(R.id.PassTextBox);
+  //Create User
+  user = new Users(this, lastName.getText().toString(), Tnum.getText().toString(), eMail.getText().toString(), studentPass.getText().toString());
+  if (user.hasUser()) {
+   //Save use to DB
+   dbController = new DBController(this);
+   dbController.CreateUser(user);
+   if (dbController.wasUserCreated()) {
+    Toast.makeText(this, user.get_lastName() + " \n" + user.get_tNum(), Toast.LENGTH_SHORT).show();
+    dbController.UserSignIn(user);
+    if (dbController.UserSignIn(user)) {
+
+    }
+   }
+
+   dbController.addUser(user);
+  } else
+   Toast.makeText(this, "Error storing user data, please inform admin.", Toast.LENGTH_LONG).show();
+ }
+
+ protected void createAssociationsWithView() {
+  //        View hooks
+  //Buttons
+  regButton = (Button) findViewById(R.id.RegisterButton);
+  //TextFields
+  lastName = (EditText) this.findViewById(R.id.LastNameTextBox);
+  Tnum = (EditText) this.findViewById(R.id.TNumberTextBox);
+  eMail = (EditText) this.findViewById(R.id.EmailTextBox);
+  password = (EditText) this.findViewById(R.id.PassTextBox);
+//  TextInputLayout
+  nameLayout = (RelativeLayout) findViewById(R.id.name_view);
+  tnumLayout = (RelativeLayout) findViewById(R.id.tnumber_view);
+  emailLayout = (RelativeLayout) findViewById(R.id.email_view);
+  passwordLayout = (RelativeLayout) findViewById(R.id.passowrd_view);
+
+
+  //Segments
+  loginSegment = (RadioButton) findViewById(R.id.login_switch_segment);
+  registerSegment = (RadioButton) findViewById(R.id.register_switch_segment);
+  login_registation_group = (SegmentedGroup) findViewById(R.id.log_reg_seg);
+  registerSegment.setChecked(true);
+ }
+
+ protected void handlers() {
+  login_registation_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+   @Override
+   public void onCheckedChanged(RadioGroup radioGroup, int i) {
+    switch (i) {
+     case R.id.login_switch_segment:
+      //handle events while login segment is active
+
+      //view animations
+      nameLayout.animate().alpha(0.0f);
+      tnumLayout.animate().alpha(0.0f);
+      emailLayout.animate().translationY(-250);
+      passwordLayout.animate().translationY(-250);
+      regButton.animate().translationY(-250);
+      //set a delay on removing visibility for animation to show then remove.
+      new android.os.Handler().postDelayed(
+        new Runnable() {
+         @Override
+         public void run() {
+          nameLayout.setVisibility(View.INVISIBLE);
+          tnumLayout.setVisibility(View.INVISIBLE);
+         }
+        },
+        300);
+
+
+      break;
+
+     case R.id.register_switch_segment:
+      //handle events while login segment is active
+      nameLayout.setVisibility(View.VISIBLE);
+      tnumLayout.setVisibility(View.VISIBLE);
+
+      //view animations
+      nameLayout.animate().alpha(1.0f);
+      tnumLayout.animate().alpha(1.0f);
+      emailLayout.animate().translationY(0);
+      passwordLayout.animate().translationY(0);
+      regButton.animate().translationY(0);
+
+      break;
+
+     default:
+      //Nothing to do
+
+    }
+   }
+  });
+
   lastName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
    @Override
    public void onFocusChange(View v, boolean hasFocus) {
@@ -129,98 +238,22 @@ public class StudentReg extends ActionBarActivity {
 
  }
 
- public boolean checkEnabled() {
-  return nameEntered && idEntered && emailEntered && passwordEntered;
+ private void login() {
+
  }
 
- public void activateRegistrationButton() {
-  if (checkEnabled())
-   regButton.setEnabled(!lastName.getText().toString().trim().isEmpty() && Tnum.getText().toString().trim().length() < 9);
-  else
-   regButton.setEnabled(lastName.getText().toString().trim().isEmpty() && Tnum.getText().toString().trim().length() < 9);
- }
-
-
- /*Function to save Student's last name and account number in studentInfo shared prefs the Email and Pass will be stored in a
- * another prefs setting later since it will not be sent in the message to the server phone.*/
- private void storeUserInfo() {
-  EditText eMail = (EditText) this.findViewById(R.id.EmailTextBox);
-  EditText studentPass = (EditText) this.findViewById(R.id.PassTextBox);
-  //Create User
-  user = new Users(this, lastName.getText().toString(), Tnum.getText().toString(), eMail.getText().toString(), studentPass.getText().toString());
-  if (user.hasUser()) {
-   //Save use to DB
-   dbController = new DBController(this);
-   dbController.CreateUser(user);
-   if(dbController.userWasCreated){
-    Toast.makeText(this, user.get_lastName() + " \n" + user.get_tNum(), Toast.LENGTH_SHORT).show();
-   }
-
-   dbController.addUser(user);
-  } else
-   Toast.makeText(this, "Error storing user data, please inform admin.", Toast.LENGTH_LONG).show();
- }
-
- protected void createAssociationsWithView(){
-  //        View hooks
-  //Buttons
-  regButton = (Button) findViewById(R.id.RegisterButton);
-  //TextFields
-  lastName = (EditText) this.findViewById(R.id.LastNameTextBox);
-  Tnum = (EditText) this.findViewById(R.id.TNumberTextBox);
-  eMail = (EditText) this.findViewById(R.id.EmailTextBox);
-  password = (EditText) this.findViewById(R.id.PassTextBox);
-//  TextInputLayout
-  nameLayout = (RelativeLayout) findViewById(R.id.name_view);
-  tnumLayout = (RelativeLayout) findViewById(R.id.tnumber_view);
-  emailLayout = (RelativeLayout) findViewById(R.id.email_view);
-  passwordLayout = (RelativeLayout) findViewById(R.id.passowrd_view);
-
-
-  //Segments
-  loginSegment = (RadioButton) findViewById(R.id.login_switch_segment);
-  registerSegment = (RadioButton) findViewById(R.id.register_switch_segment);
-  login_registation_group = (SegmentedGroup) findViewById(R.id.log_reg_seg);
-  registerSegment.setChecked(true);
- }
-
- protected void handlers(){
-  login_registation_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+ private void register() {
+  regButton.setOnClickListener(new View.OnClickListener() {
+   @TargetApi(Build.VERSION_CODES.ECLAIR)
    @Override
-   public void onCheckedChanged(RadioGroup radioGroup, int i) {
-    switch(i){
-     case R.id.login_switch_segment:
-      //handle events while login segment is active
-
-      //view animations
-      nameLayout.animate().alpha(0.0f);
-      tnumLayout.animate().alpha(0.0f);
-      emailLayout.animate().translationY(-250);
-      passwordLayout.animate().translationY(-250);
-      regButton.animate().translationY(-250);
-
-      break;
-
-     case R.id.register_switch_segment:
-      //handle events while login segment is active
-
-      //view animations
-      nameLayout.animate().alpha(1.0f);
-      tnumLayout.animate().alpha(1.0f);
-      emailLayout.animate().translationY(0);
-      passwordLayout.animate().translationY(0);
-      regButton.animate().translationY(0);
-
-      break;
-
-      default:
-       //Nothing to do
-
-    }
+   public void onClick(View v) {
+    storeUserInfo();
+    startActivity(new Intent(StudentReg.this, CourseSelectionScreen.class));
+    finish();
+    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
    }
+
+
   });
-//  loginSegment.setOnClickListener();
  }
-
-
 }

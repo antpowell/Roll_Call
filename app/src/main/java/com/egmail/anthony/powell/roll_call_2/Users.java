@@ -14,35 +14,28 @@ public class Users {
  private static final String LAST = "last";
  private static final String COURSE = "course";
  private static final String T = "tNum";
- private static final String VERSION_CODE = "versionCode";
- private static final String VERSION_NUMBER = "versionNumber";
 
  private String _lastName;
  private String _tNum;
  private String _email;
  private String _password;
  private String _course;
- private String key;
- private String _versionCode;
- private int _versionNumber;
 
  public Users() {
  }
 
  public Users(Context context) {
   studentInfo = context.getSharedPreferences(TAG, Context.MODE_PRIVATE);
-  _versionCode = studentInfo.getString(VERSION_CODE, "Not Found");
-  _versionNumber = studentInfo.getInt(VERSION_NUMBER, -1);
+
  }
 
  public Users(Context context, String lastName, String tNum, String email, String password) {
   studentInfo = context.getSharedPreferences(TAG, Context.MODE_PRIVATE);
-  _lastName = lastName;
-  _tNum = tNum;
-  _email = email;
-  _password = password;
-  _versionCode = studentInfo.getString(VERSION_CODE, "Not Found");
-  _versionNumber = studentInfo.getInt(VERSION_NUMBER, -1);
+  this._lastName = lastName;
+  this._tNum = tNum;
+  this._email = email;
+  this._password = password;
+
 
   addUser();
  }
@@ -51,8 +44,6 @@ public class Users {
   studentInfo = context.getSharedPreferences(TAG, Context.MODE_PRIVATE);
   _lastName = lastName;
   _tNum = tNum;
-  _versionCode = studentInfo.getString(VERSION_CODE, "Not Found");
-  _versionNumber = studentInfo.getInt(VERSION_NUMBER, -1);
   addUser();
  }
 

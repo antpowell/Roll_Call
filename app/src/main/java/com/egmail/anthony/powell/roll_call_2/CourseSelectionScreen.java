@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 /*This Activity is form the student to select the course they wish to sign in to(current course)
  * onCreate the 'Course List' and 'Re-Register buttons are displayed
    * if the Course List button is clicked a Alert with a ListView populated with the current courses appears,
@@ -22,6 +25,8 @@ import android.widget.Toast;
 public class CourseSelectionScreen extends ActionBarActivity {
 
     public Users user;
+    DBController dbController;
+    private ArrayList courseData = new ArrayList();
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,7 @@ public class CourseSelectionScreen extends ActionBarActivity {
 //        search.setText(new DBController().getKEY());
         //Get User
         user = new Users().getUser(this);
+
 
         Resources res = getResources();
         String[] listText = res.getStringArray(R.array.course_list);
@@ -57,8 +63,13 @@ public class CourseSelectionScreen extends ActionBarActivity {
                 TextView courseTextView = (TextView) view.findViewById(R.id.listText);
 //                Toast.makeText(CourseSelectionScreen.this, courseTextView.getText().toString().trim(),Toast.LENGTH_SHORT).show();
                 courseSign(courseTextView.getText().toString().trim());
+
+
             }
         });
+        dbController = new DBController(this);
+        dbController.get_dbCourse();
+//        Toast.makeText(this, dbController.get_dbCourse(), Toast.LENGTH_LONG).show();
 
     }
 
@@ -79,16 +90,25 @@ public class CourseSelectionScreen extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            startActivity(new Intent(CourseSelectionScreen.this, StudentReg.class));
-            finish();
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-            //Clear local data
-            user.dropUser(this);
-            if (!user.hasUser()) Toast.makeText(this, "User Deleted...", Toast.LENGTH_SHORT).show();
-            //Clear DB
-            DBController dbController = new DBController(this);
-            dbController.dropUser(user);
-            return true;
+         //DBController dbController = new DBController(this);
+
+
+         //Clear local data
+         user.dropUser(this);
+         if (!user.hasUser()) Toast.makeText(this, "User Deleted...", Toast.LENGTH_SHORT).show();
+         //Clear DB
+//            DBController dbController = new DBController(this);
+         dbController.dropUser(user);
+
+         if(!user.hasUser() && dbController.wasUserDeleted()) {
+          startActivity(new Intent(CourseSelectionScreen.this, StudentReg.class));
+          finish();
+          overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+          return true;
+         }else{
+          return false;
+         }
+
         }
         if (id == android.R.id.home) {
             startActivity(new Intent(CourseSelectionScreen.this, StudentReg.class));

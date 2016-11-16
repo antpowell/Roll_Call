@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -18,7 +19,7 @@ public class CustomList extends ArrayAdapter<String> {
 
 //    private final int listImageID;
     SearchView searchView;
-
+    private ListView listView;
 
 
     public CustomList(Context context, String[] itemText) {
@@ -36,6 +37,7 @@ public class CustomList extends ArrayAdapter<String> {
         TextView listItemTextView = (TextView) listItemView.findViewById(R.id.listText);
         ImageView listItemImgView = (ImageView) listItemView.findViewById(R.id.listImg);
 
+        //Set up search view to query ListView
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
