@@ -192,7 +192,7 @@ DBController(){
     Map<String, String> map = (Map<String, String>) dataSnapshot.getValue();
     map.remove("Images");
     Log.v("E_VALUE", "Retrieved Map: "+ map);
-    Toast.makeText(context, map.entrySet().toString(), Toast.LENGTH_SHORT).show();
+    Toast.makeText(context, dataSnapshot.getClass().getName(), Toast.LENGTH_SHORT).show();
 
    }
 
@@ -203,6 +203,8 @@ DBController(){
   });
   return _dbCourse;
  }
+
+// {8=MATH134, 1=CS124, 10=MATH136, 6=BIOL300, 7=BIOL443, 0=CS116-WE1, 4=BIOL231, 5=BIOL232, 11=CHEM131, 9=MATH135, 3=BIOL132, 2=BIOL131}
 }
 
 
