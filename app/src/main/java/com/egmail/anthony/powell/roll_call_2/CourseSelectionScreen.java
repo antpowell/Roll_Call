@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /*This Activity is form the student to select the course they wish to sign in to(current course)
  * onCreate the 'Course List' and 'Re-Register buttons are displayed
@@ -26,7 +27,7 @@ public class CourseSelectionScreen extends ActionBarActivity {
 
     public Users user;
     DBController dbController;
-    private ArrayList courseData = new ArrayList();
+    private List<String> courses;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,14 @@ public class CourseSelectionScreen extends ActionBarActivity {
 
 
         Resources res = getResources();
+        courses = new DBController().get_dbCourse();
+
+
+//        String[] listText = courses.toArray(new String[courses.size()]);
         String[] listText = res.getStringArray(R.array.course_list);
+
+
+
 
         final ListAdapter popUpList = new CustomList(this, listText);
         final ListView listView = (ListView) findViewById(R.id.list_dialog);

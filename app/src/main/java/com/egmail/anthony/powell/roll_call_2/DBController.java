@@ -4,12 +4,15 @@ package com.egmail.anthony.powell.roll_call_2;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.egmail.anthony.powell.roll_call_2.model.DataItem;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,9 +38,11 @@ public class DBController {
  private FirebaseAuth  authRef;
  private FirebaseUser _dbUser;
  private FirebaseAuth.AuthStateListener authListener;
- private DatabaseReference ref;
+ private DatabaseReference ref, courseRef;
  private String _db;
  private Map<String,String> _dbCourse;
+ private List<String> courses;
+
 
 // private Object _dbCourse;
  private static String postID, dbEnteryTime;
@@ -51,6 +57,7 @@ public class DBController {
 
 //    FirebaseDatabase rootDBRef = FirebaseDatabase.getInstance().getReference();
 DBController(){
+ courseRef = firebaseDatabase.getReference("Courses").child("Codes");
  authRef = FirebaseAuth.getInstance();
  authListener = new FirebaseAuth.AuthStateListener(){
   @Override
@@ -69,6 +76,7 @@ DBController(){
  }
 
  protected DBController(Context c, String db) {
+  this();
   this.context = c;
   _db = db;
   ref = firebaseDatabase.getReference(db);
@@ -184,24 +192,30 @@ DBController(){
   return userDeleted;
  }
 
- public Map<String, String> get_dbCourse() {
-  firebaseDatabase.getReference("Courses").addListenerForSingleValueEvent(new ValueEventListener() {
+ public List<String> get_dbCourse() {
+  courseRef.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
    @Override
    public void onDataChange(DataSnapshot dataSnapshot) {
 
-    Map<String, String> map = (Map<String, String>) dataSnapshot.getValue();
-    map.remove("Images");
-    Log.v("E_VALUE", "Retrieved Map: "+ map);
-    Toast.makeText(context, dataSnapshot.getClass().getName(), Toast.LENGTH_SHORT).show();
+
+    final ArrayAdapter<String> coursesAdapter = new ArrayAdapter<String>(c,R.layout.)
+    DataItem data = dataSnapshot.getValue(DataItem.class);
+
+//    courses = (List<String>) dataSnapshot.getValue();
+
+//    Map<String, String> map = (Map<String, String>) dataSnapshot.getValue();
+//    map.remove("Images");
+//    Log.v("E_VALUE", "Retrieved Map: "+ map);
+    Toast.makeText(context, "made it", Toast.LENGTH_SHORT).show();
+    Toast.makeText(context, data.toString(), Toast.LENGTH_SHORT).show();
 
    }
-
    @Override
    public void onCancelled(DatabaseError databaseError) {
 
    }
   });
-  return _dbCourse;
+  return courses;
  }
 
 // {8=MATH134, 1=CS124, 10=MATH136, 6=BIOL300, 7=BIOL443, 0=CS116-WE1, 4=BIOL231, 5=BIOL232, 11=CHEM131, 9=MATH135, 3=BIOL132, 2=BIOL131}

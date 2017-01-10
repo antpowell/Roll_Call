@@ -15,6 +15,10 @@ public class DataItem {
 
 
  public DataItem(){}
+ public DataItem(String itemIndex, String itemName){
+  this.itemIndex = itemIndex;
+  this.itemName = itemName;
+ }
 
  public DataItem(String itemIndex, String itemName, String itemImage) {
   this.itemIndex = itemIndex;
