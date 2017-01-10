@@ -43,6 +43,7 @@ public class CourseSelectionScreen extends ActionBarActivity {
         dbController = new DBController();
         setupListItem();
         adaptorSetup();
+        ListenerHandler();
 
         //Get User
         user = new Users().getUser(this);
@@ -97,12 +98,6 @@ public class CourseSelectionScreen extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void courseSign(String courseID) {
-        startActivity(new Intent(CourseSelectionScreen.this, SignIn.class));
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        user.addCourse(courseID);
-        finish();
-    }
 
     @Override
     public void onBackPressed() {
@@ -117,14 +112,31 @@ public class CourseSelectionScreen extends ActionBarActivity {
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, courses);
         listView.setAdapter(adapter);
 
-
-
     }
 
 
     private void setupListItem(){
         courses = new DBController().get_dbCourse();
     }
+
+    private void ListenerHandler(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView courseTextView = (TextView) view.findViewById(R.id.listText);
+//                Toast.makeText(CourseSelectionScreen.this, courseTextView.getText().toString().trim(),Toast.LENGTH_SHORT).show();
+                courseSign(courseTextView.getText().toString().trim());
+            }
+        });
+    }
+
+    public void courseSign(String courseID) {
+        startActivity(new Intent(CourseSelectionScreen.this, SignIn.class));
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        user.addCourse(courseID);
+        finish();
+    }
+
 
 }
 
