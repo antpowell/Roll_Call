@@ -40,24 +40,10 @@ public class CourseSelectionScreen extends ActionBarActivity {
         setContentView(R.layout.course_selection);
         listView = (ListView) findViewById(R.id.list_dialog);
 
-//        dbController = new DBController();
+        dbController = new DBController();
         setupListItem();
         adaptorSetup();
-        ListHandler();
 
-
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                TextView courseTextView = (TextView) view.findViewById(R.id.listText);
-//                courseSign(courseTextView.getText().toString().trim());
-//
-//
-//            }
-//        });
-
-//
-//        search.setText(new DBController().getKEY());
         //Get User
         user = new Users().getUser(this);
 
@@ -88,9 +74,9 @@ public class CourseSelectionScreen extends ActionBarActivity {
          if (!user.hasUser()) Toast.makeText(this, "User Deleted...", Toast.LENGTH_SHORT).show();
          //Clear DB
 //            DBController dbController = new DBController(this);
-         dbController.dropUser(user);
+//         dbController.dropUser(user);
 
-         if(!user.hasUser() && dbController.wasUserDeleted()) {
+         if(!user.hasUser() /*&& dbController.wasUserDeleted()*/) {
           startActivity(new Intent(CourseSelectionScreen.this, StudentReg.class));
           finish();
           overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -126,37 +112,15 @@ public class CourseSelectionScreen extends ActionBarActivity {
     }
 
     protected void adaptorSetup() {
+        final ListAdapter adapter = new CustomList(this, courses);
 //        DataItemAdapter adapter = new DataItemAdapter(this, android.R.layout.simple_expandable_list_item_1, courses);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, courses);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, courses);
         listView.setAdapter(adapter);
 
 
-    }
-
-    private void ListHandler(){
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(CourseSelectionScreen.this, "Clicked ->" + listView.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        SearchView search = (SearchView) findViewById(R.id.editTextSearch);
-
-        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return true;
-            }
-        });
-
 
     }
+
 
     private void setupListItem(){
         courses = new DBController().get_dbCourse();

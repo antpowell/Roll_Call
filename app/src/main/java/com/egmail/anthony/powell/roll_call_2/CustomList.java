@@ -11,6 +11,10 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Map;
+
 /**
  * Created by SGT_POWELL on 6/23/2016.
  */
@@ -20,6 +24,19 @@ public class CustomList extends ArrayAdapter<String> {
 //    private final int listImageID;
     SearchView searchView;
     private ListView listView;
+    private Map<String, String> listImgs;
+
+    public CustomList(Context context, ArrayList<String> itemText){
+        super(context, R.layout.course_selection_dialog, itemText);
+        Activity activity = (Activity)context;
+        searchView = (SearchView) activity.findViewById(R.id.editTextSearch);
+    }
+
+    public CustomList(Context context, ArrayList<String> itemText, Map<String, String> imgs){
+        super(context, R.layout.course_selection_dialog, itemText);
+        Activity activity = (Activity)context;
+        searchView = (SearchView) activity.findViewById(R.id.editTextSearch);
+    }
 
 
     public CustomList(Context context, String[] itemText) {
@@ -63,8 +80,6 @@ public class CustomList extends ArrayAdapter<String> {
         }else if (getItem(position).contains("ENG")){
             listItemImgView.setImageResource(R.drawable.bookshelf);
         }
-
-
 
 
         return listItemView;
