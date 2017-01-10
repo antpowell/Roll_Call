@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -41,10 +42,9 @@ public class DBController {
  private DatabaseReference ref, courseRef;
  private String _db;
  private Map<String,String> _dbCourse;
- private List<String> courses;
+ private ArrayList<String> courses = new ArrayList<>();
 
 
-// private Object _dbCourse;
  private static String postID, dbEnteryTime;
  private boolean userWasCreated = false, userDeleted = false;
  private Users _user;
@@ -192,22 +192,16 @@ DBController(){
   return userDeleted;
  }
 
- public List<String> get_dbCourse() {
+ public ArrayList<String> get_dbCourse() {
   courseRef.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
    @Override
    public void onDataChange(DataSnapshot dataSnapshot) {
 
+    courses.addAll((ArrayList<String>)dataSnapshot.getValue());
 
-    final ArrayAdapter<String> coursesAdapter = new ArrayAdapter<String>(c,R.layout.)
-    DataItem data = dataSnapshot.getValue(DataItem.class);
-
-//    courses = (List<String>) dataSnapshot.getValue();
-
-//    Map<String, String> map = (Map<String, String>) dataSnapshot.getValue();
-//    map.remove("Images");
-//    Log.v("E_VALUE", "Retrieved Map: "+ map);
-    Toast.makeText(context, "made it", Toast.LENGTH_SHORT).show();
-    Toast.makeText(context, data.toString(), Toast.LENGTH_SHORT).show();
+    if(context!= null){
+     Toast.makeText(context, "Made it", Toast.LENGTH_SHORT).show();
+    }
 
    }
    @Override

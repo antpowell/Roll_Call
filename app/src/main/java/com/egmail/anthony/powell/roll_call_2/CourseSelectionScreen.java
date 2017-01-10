@@ -1,5 +1,6 @@
 package com.egmail.anthony.powell.roll_call_2;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -9,11 +10,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.egmail.anthony.powell.roll_call_2.model.DataItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,57 +31,35 @@ public class CourseSelectionScreen extends ActionBarActivity {
 
     public Users user;
     DBController dbController;
-    private List<String> courses;
+    private ArrayList<String> courses = new ArrayList<>();
+    private ListView listView;
 
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.course_selection);
+        listView = (ListView) findViewById(R.id.list_dialog);
 
-        SearchView search = (SearchView) findViewById(R.id.editTextSearch);
+//        dbController = new DBController();
+        setupListItem();
+        adaptorSetup();
+        ListHandler();
 
+
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                TextView courseTextView = (TextView) view.findViewById(R.id.listText);
+//                courseSign(courseTextView.getText().toString().trim());
+//
+//
+//            }
+//        });
+
+//
 //        search.setText(new DBController().getKEY());
         //Get User
         user = new Users().getUser(this);
-
-
-        Resources res = getResources();
-        courses = new DBController().get_dbCourse();
-
-
-//        String[] listText = courses.toArray(new String[courses.size()]);
-        String[] listText = res.getStringArray(R.array.course_list);
-
-
-
-
-        final ListAdapter popUpList = new CustomList(this, listText);
-        final ListView listView = (ListView) findViewById(R.id.list_dialog);
-        listView.setAdapter(popUpList);
-        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView courseTextView = (TextView) view.findViewById(R.id.listText);
-//                Toast.makeText(CourseSelectionScreen.this, courseTextView.getText().toString().trim(),Toast.LENGTH_SHORT).show();
-                courseSign(courseTextView.getText().toString().trim());
-
-
-            }
-        });
-        dbController = new DBController(this);
-        dbController.get_dbCourse();
-//        Toast.makeText(this, dbController.get_dbCourse(), Toast.LENGTH_LONG).show();
 
     }
 
@@ -142,6 +124,43 @@ public class CourseSelectionScreen extends ActionBarActivity {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         super.onBackPressed();
     }
-}
 
+    protected void adaptorSetup() {
+//        DataItemAdapter adapter = new DataItemAdapter(this, android.R.layout.simple_expandable_list_item_1, courses);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, courses);
+        listView.setAdapter(adapter);
+
+
+    }
+
+    private void ListHandler(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(CourseSelectionScreen.this, "Clicked ->" + listView.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        SearchView search = (SearchView) findViewById(R.id.editTextSearch);
+
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return true;
+            }
+        });
+
+
+    }
+
+    private void setupListItem(){
+        courses = new DBController().get_dbCourse();
+    }
+
+}
 
