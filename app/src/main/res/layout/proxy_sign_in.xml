@@ -17,7 +17,6 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"
-        android:layout_below="@+id/proxy_app_bar"
         android:layout_marginLeft="@dimen/inner_margin"
         android:layout_marginRight="@dimen/inner_margin" />
 
