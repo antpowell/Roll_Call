@@ -7,6 +7,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.View;
 import android.view.ViewGroup;
@@ -170,6 +172,28 @@ public class StudentReg extends ActionBarActivity {
    }
   });
 
+  lastName.addTextChangedListener(new TextWatcher() {
+   @Override
+   public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+   }
+
+   @Override
+   public void onTextChanged(CharSequence s, int start, int before, int count) {
+    if (!lastName.getText().toString().matches("^[a-zA-Z\\s]+$")) {
+     lastName.setError("Invalid Character(s)... ONLY LETTERS");
+     nameEntered = false;
+    } else {
+     nameEntered = true;
+    }
+   }
+
+   @Override
+   public void afterTextChanged(Editable s) {
+
+   }
+  });
+
   Tnum.setOnFocusChangeListener(new View.OnFocusChangeListener() {
    @Override
    public void onFocusChange(View v, boolean hasFocus) {
@@ -185,6 +209,26 @@ public class StudentReg extends ActionBarActivity {
      }
      activateRegistrationButton();
     }
+   }
+  });
+
+  Tnum.addTextChangedListener(new TextWatcher() {
+   @Override
+   public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+   }
+
+   @Override
+   public void onTextChanged(CharSequence s, int start, int before, int count) {
+    if (Tnum.getText().toString().length() == 8) {
+     idEntered = true;
+     activateRegistrationButton();
+    }
+   }
+
+   @Override
+   public void afterTextChanged(Editable s) {
+
    }
   });
 
@@ -205,6 +249,27 @@ public class StudentReg extends ActionBarActivity {
     }
    }
   });
+
+  eMail.addTextChangedListener(new TextWatcher() {
+   @Override
+   public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+   }
+
+   @Override
+   public void onTextChanged(CharSequence s, int start, int before, int count) {
+    if (Patterns.EMAIL_ADDRESS.matcher(eMail.getText().toString()).matches()) {
+     emailEntered = true;
+     activateRegistrationButton();
+    }
+   }
+
+   @Override
+   public void afterTextChanged(Editable s) {
+
+   }
+  });
+
   password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
    @Override
    public void onFocusChange(View v, boolean hasFocus) {
@@ -220,6 +285,29 @@ public class StudentReg extends ActionBarActivity {
      }
      activateRegistrationButton();
     }
+   }
+  });
+
+
+  password.addTextChangedListener(new TextWatcher() {
+   @Override
+   public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+   }
+
+   @Override
+   public void onTextChanged(CharSequence s, int start, int before, int count) {
+    if(password.getText().toString().length() != 0){
+     if (password.getText().toString().length() > 7 || password.getText().toString().length() < 10) {
+      passwordEntered = true;
+      activateRegistrationButton();
+     }
+    }
+   }
+
+   @Override
+   public void afterTextChanged(Editable s) {
+
    }
   });
 

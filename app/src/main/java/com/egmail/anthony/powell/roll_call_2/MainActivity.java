@@ -120,7 +120,7 @@ public class MainActivity extends Activity {
    @Override
    protected void onPostExecute(String s) {
 //   if (Integer.parseInt(playVersionCode.trim())>Integer.parseInt(versionName.trim()))
-    if (!playVersionCode.equals(versionName)) {
+    if (false/*!playVersionCode.equals(versionName)*/) {
      //FORCE USER TO UPDATE VIA PLAY STORE
      new AlertDialog.Builder(MainActivity.this)
        .setTitle("Update Available")
