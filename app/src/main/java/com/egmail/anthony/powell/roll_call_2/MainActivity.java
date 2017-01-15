@@ -70,29 +70,6 @@ public class MainActivity extends Activity {
 
  }
 
-  //Toast.makeText(this, studentInfo.getAll().toString(),Toast.LENGTH_LONG).show();
-//  Thread splashTimer = new Thread() {
-//   public void run() {
-//    try {
-//     sleep(2000);
-//     //check if student info is stored on the device. If so goto Course Selection screen if not goto StudentReg screen.
-//     if (t.equals("Not found") || user.equals("Not found")) {
-//      startActivity(new Intent(MainActivity.this, StudentReg.class));
-//      overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//
-//     } else {
-//      startActivity(new Intent(MainActivity.this, CourseSelectionScreen.class));
-//      overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//     }
-//    } catch (Exception e) {
-//     e.printStackTrace();
-//    } finally {
-//     finish();
-//    }
-//   }
-//
-//  };
-//  splashTimer.start();
 
   class getVersionNumberTask extends AsyncTask<Void, Void, String> {
    @Override
@@ -120,7 +97,7 @@ public class MainActivity extends Activity {
    @Override
    protected void onPostExecute(String s) {
 //   if (Integer.parseInt(playVersionCode.trim())>Integer.parseInt(versionName.trim()))
-    if (false/*!playVersionCode.equals(versionName)*/) {
+    if (!playVersionCode.equals(versionName)) {
      //FORCE USER TO UPDATE VIA PLAY STORE
      new AlertDialog.Builder(MainActivity.this)
        .setTitle("Update Available")

@@ -36,11 +36,11 @@ import java.util.List;
 public class CourseSelectionScreen extends ActionBarActivity {
 
  public Users user;
- DBController dbController;
+ public CustomList adapter;
  private ArrayList<String> courses = new ArrayList<>();
  private ListView listView;
- public CustomList adapter;
  private DatabaseReference courseRef;
+ DBController dbController;
 
  public void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
@@ -49,15 +49,12 @@ public class CourseSelectionScreen extends ActionBarActivity {
 
   adaptorSetup();
 
-  courseRef = FirebaseDatabase.getInstance().getReference("Courses").child("Codes");
-
   ListenerHandler();
 
   //Get User
   user = new Users().getUser(this);
 
  }
-
 
  @Override
  public boolean onCreateOptionsMenu(Menu menu) {
@@ -106,7 +103,6 @@ public class CourseSelectionScreen extends ActionBarActivity {
   return super.onOptionsItemSelected(item);
  }
 
-
  @Override
  public void onBackPressed() {
   finish();
@@ -115,7 +111,6 @@ public class CourseSelectionScreen extends ActionBarActivity {
  }
 
  public void adaptorSetup() {
-  final CustomList customList;
   courseRef = FirebaseDatabase.getInstance().getReference("Courses").child("Codes");
   courseRef.addListenerForSingleValueEvent(new ValueEventListener() {
    @Override
@@ -124,7 +119,6 @@ public class CourseSelectionScreen extends ActionBarActivity {
 
     adapter = new CustomList(CourseSelectionScreen.this, courses);
     listView.setAdapter(adapter);
-
    }
 
    @Override
@@ -136,7 +130,6 @@ public class CourseSelectionScreen extends ActionBarActivity {
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, courses);
 
  }
-
 
  private void ListenerHandler() {
   listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
