@@ -113,6 +113,8 @@ public class StudentReg extends ActionBarActivity {
      case R.id.login_switch_segment:
       //handle events while login segment is active
 
+      regButton.setText("Login");
+
       //view animations
       nameLayout.animate().alpha(0.0f);
       tnumLayout.animate().alpha(0.0f);
@@ -137,6 +139,7 @@ public class StudentReg extends ActionBarActivity {
       //handle events while login segment is active
       nameLayout.setVisibility(View.VISIBLE);
       tnumLayout.setVisibility(View.VISIBLE);
+      regButton.setText("Register");
 
       //view animations
       nameLayout.animate().alpha(1.0f);
