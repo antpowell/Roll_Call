@@ -2,13 +2,16 @@ package com.egmail.anthony.powell.roll_call_2;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
@@ -26,23 +29,23 @@ public class CustomList extends ArrayAdapter<String> {
     private ListView listView;
     private Map<String, String> listImgs;
 
-    public CustomList(Context context, ArrayList<String> itemText){
+    public CustomList(Context context, ArrayList<String> itemText, SearchView searchView){
         super(context, R.layout.course_selection_dialog, itemText);
-        Activity activity = (Activity)context;
-        searchView = (SearchView) activity.findViewById(R.id.editTextSearch);
+//        get searchView from activity to filter through list
+        this.searchView = searchView;
     }
 
-    public CustomList(Context context, ArrayList<String> itemText, Map<String, String> imgs){
+    public CustomList(Context context, ArrayList<String> itemText, Map<String, String> imgs, SearchView searchView){
         super(context, R.layout.course_selection_dialog, itemText);
-        Activity activity = (Activity)context;
-        searchView = (SearchView) activity.findViewById(R.id.editTextSearch);
+//        get searchView from activity to filter through list
+        this.searchView = searchView;
     }
 
 
-    public CustomList(Context context, String[] itemText) {
+    public CustomList(Context context, String[] itemText, SearchView searchView) {
         super(context, R.layout.course_selection_dialog, itemText);
-        Activity activity = (Activity) context;
-        searchView = (SearchView) activity.findViewById(R.id.editTextSearch);
+//        get searchView from activity to filter through list
+        this.searchView = searchView;
 
     }
 

@@ -7,4 +7,17 @@
         android:title="Re-Register"
         android:orderInCategory="100"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/editTextSearch"
+        android:title="Search List"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView"/>
+    <SearchView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:hint="Search" />
 </menu>

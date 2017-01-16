@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +17,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,13 +35,14 @@ import java.util.List;
    * if the Course List button is clicked a Alert with a ListView populated with the current courses appears,
    * student selects course the name of the course gets saved in sharedPrefs and assigned to the title for the SignIn Activity
    * else if the student press Re-Register the studentInfo sharedPrefs are cleared they are taken back to the registration Activity to re register*/
-public class CourseSelectionScreen extends ActionBarActivity {
+public class CourseSelectionScreen extends AppCompatActivity {
 
  public Users user;
  public CustomList adapter;
  private ArrayList<String> courses = new ArrayList<>();
  private ListView listView;
  private DatabaseReference courseRef;
+ private SearchView searchView;
  DBController dbController;
 
  public void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,11 @@ public class CourseSelectionScreen extends ActionBarActivity {
  public boolean onCreateOptionsMenu(Menu menu) {
   // Inflate the menu; this adds items to the action bar if it is present.
   getMenuInflater().inflate(R.menu.menu_course_selection_screen, menu);
+  //setup search view from menu
+  MenuItem searchItem = menu.findItem(R.id.editTextSearch);
+  searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+
   return true;
  }
 
@@ -117,7 +125,7 @@ public class CourseSelectionScreen extends ActionBarActivity {
    public void onDataChange(DataSnapshot dataSnapshot) {
     courses = (ArrayList<String>) dataSnapshot.getValue();
 
-    adapter = new CustomList(CourseSelectionScreen.this, courses);
+    adapter = new CustomList(CourseSelectionScreen.this, courses, searchView);
     listView.setAdapter(adapter);
    }
 

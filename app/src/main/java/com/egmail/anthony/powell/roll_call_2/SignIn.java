@@ -194,11 +194,9 @@ public class SignIn extends AppCompatActivity {
    public void onReceive(Context context, Intent intent) {
     if (getResultCode() == Activity.RESULT_OK) {
      Toast.makeText(SignIn.this, "Signed in with:\n" + studentMessage, Toast.LENGTH_LONG).show();
-     Toast.makeText(getBaseContext(), "SMS sent",
-       Toast.LENGTH_SHORT).show();
+     Toast.makeText(getBaseContext(), "SMS sent", Toast.LENGTH_SHORT).show();
     } else {
-     Toast.makeText(getBaseContext(), "SMS could not sent",
-       Toast.LENGTH_SHORT).show();
+     Toast.makeText(getBaseContext(), "SMS could not sent", Toast.LENGTH_SHORT).show();
     }
    }
   };
