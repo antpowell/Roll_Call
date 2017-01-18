@@ -382,13 +382,17 @@ public class StudentReg extends ActionBarActivity {
   regButton.setOnClickListener(new View.OnClickListener() {
    @Override
    public void onClick(View v) {
-    if (isUserLoggingIn) {
-     login();
-    } else if (isUserRegistering) {
-     Log.d(D, "User trying to register w/ reg button");
-     register();
 
-    }
+    Log.d(D, "User trying to register w/ reg button");
+    register();
+
+//    if (isUserLoggingIn) {
+//     login();
+//    } else if (isUserRegistering) {
+//     Log.d(D, "User trying to register w/ reg button");
+//     register();
+//
+//    }
 
    }
   });
