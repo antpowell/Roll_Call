@@ -118,18 +118,20 @@ DBController(){
 
 //Create User in Firebase Authentication
  public boolean CreateUser(Users user) {
-  authRef.createUserWithEmailAndPassword(user.get_email(), user.get_password())
-    .addOnCompleteListener((Activity)context, new OnCompleteListener<AuthResult>() {
-     @Override
-     public void onComplete(@NonNull Task<AuthResult> task) {
-      Log.d(String.valueOf(context), "createUserWithEmail:onComplete:" + task.isSuccessful());
-      userWasCreated = true;
-      if(!task.isSuccessful()){
-       Toast.makeText(context, "Could not register you as a user, sorry!", Toast.LENGTH_SHORT).show();
-       userWasCreated = false;
+  if(user.hasUser()){
+   authRef.createUserWithEmailAndPassword(user.get_email(), user.get_password())
+     .addOnCompleteListener((Activity)context, new OnCompleteListener<AuthResult>() {
+      @Override
+      public void onComplete(@NonNull Task<AuthResult> task) {
+       Log.d(String.valueOf(context), "createUserWithEmail:onComplete:" + task.isSuccessful());
+       userWasCreated = true;
+       if(!task.isSuccessful()){
+        Toast.makeText(context, "Could not register you as a user, sorry!", Toast.LENGTH_SHORT).show();
+        userWasCreated = false;
+       }
       }
-     }
-    });
+     });
+  }
   return userWasCreated;
  }
 //Create user using Google Login

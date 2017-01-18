@@ -2,6 +2,7 @@ package com.egmail.anthony.powell.roll_call_2;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -70,7 +71,7 @@ public class Users {
  }
 
  protected boolean hasUser() {
-  return studentInfo.getString(LAST, null) != null || studentInfo.getString(T, null) != null;
+  return !studentInfo.getString(LAST, "").equals("") || !studentInfo.getString(T, "").equals("");
  }
 
  protected Users getUser(Context context) {
