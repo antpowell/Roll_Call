@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "169911930724",
+    "firebase_url": "https://roll-call-2.firebaseio.com",
+    "project_id": "roll-call-2",
+    "storage_bucket": "roll-call-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169911930724:android:39e90d00cb528083",
+        "android_client_info": {
+          "package_name": "com.egmail.anthony.powell.roll_call_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169911930724-ecbtg41ealb96uofim4u3lsivuf328rk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.egmail.anthony.powell.roll_call_2",
+            "certificate_hash": "056F55A7DE02A3665EC0AE496A3C5D176C56B48D"
+          }
+        },
+        {
+          "client_id": "169911930724-1ghkcgd93lqtfssahl2amm1hv31rigmk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAURgOKFVZOC3FAnm-ARaHfWKYnP4LN5P0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169911930724-1ghkcgd93lqtfssahl2amm1hv31rigmk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

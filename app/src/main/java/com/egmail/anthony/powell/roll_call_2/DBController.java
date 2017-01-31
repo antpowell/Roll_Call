@@ -39,7 +39,7 @@ public class DBController {
  private FirebaseAuth  authRef;
  private FirebaseUser _dbUser;
  private FirebaseAuth.AuthStateListener authListener;
- private DatabaseReference ref, courseRef;
+ private DatabaseReference ref, courseRef, userRef, attendanceRef;
  private String _db;
  private Map<String,String> _dbCourse;
  private ArrayList<String> courses = new ArrayList<>();
@@ -57,6 +57,8 @@ public class DBController {
 
 //    FirebaseDatabase rootDBRef = FirebaseDatabase.getInstance().getReference();
 DBController(){
+ attendanceRef = firebaseDatabase.getReference("Attendance");
+ userRef = firebaseDatabase.getReference("Users");
  courseRef = firebaseDatabase.getReference("Courses").child("Codes");
  authRef = FirebaseAuth.getInstance();
  authListener = new FirebaseAuth.AuthStateListener(){
@@ -83,7 +85,7 @@ DBController(){
  }
 
  //Add user to DB
- public void addUser(Users user) {
+ public void addUserRecord(Users user) {
         /*
         * Unique ID as parent
         * User data as child
@@ -96,7 +98,7 @@ DBController(){
         *           }
         *       }*/
   _user = user;
-  ref.child(_user.get_tNum()).setValue(_user);
+  userRef.child(_user.get_tNum()).setValue(_user);
 
  }
 

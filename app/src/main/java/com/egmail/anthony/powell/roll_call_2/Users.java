@@ -21,17 +21,20 @@ public class Users {
  private String _email;
  private String _password;
  private String _course;
+ private Context context;
 
  public Users() {
  }
 
  public Users(Context context) {
   studentInfo = context.getSharedPreferences(TAG, Context.MODE_PRIVATE);
+  this.context = context;
 
  }
 
  public Users(Context context, String lastName, String tNum, String email, String password) {
   studentInfo = context.getSharedPreferences(TAG, Context.MODE_PRIVATE);
+  this.context = context;
   this._lastName = lastName;
   this._tNum = tNum;
   this._email = email;
@@ -43,6 +46,7 @@ public class Users {
 
  public Users(Context context, String lastName, String tNum) {
   studentInfo = context.getSharedPreferences(TAG, Context.MODE_PRIVATE);
+  this.context = context;
   _lastName = lastName;
   _tNum = tNum;
   addUser();
@@ -78,11 +82,16 @@ public class Users {
   studentInfo = context.getSharedPreferences(TAG, Context.MODE_PRIVATE);
   _course = studentInfo.getString(COURSE, "Not Found");
   if (!studentInfo.getString(COURSE, "Not Found").equals("Not Found")) {
-   Users user = new Users(context, studentInfo.getString(LAST, "Not found"), studentInfo.getString(T, "Not found"));
+   Users user = new Users(context, get_lastName(), get_tNum(), get_email(), null);
    user.addCourse(studentInfo.getString(COURSE, "Not found"));
    return user;
   }
   return new Users(context, studentInfo.getString(LAST, "Not found"), studentInfo.getString(T, "Not found"));
+ }
+
+ protected Users getUser(){
+  Users user = new Users(context, studentInfo.getString(LAST, "Not found"), studentInfo.getString(T, "Not found"), get_email(), null);
+  return user;
  }
 
  public String get_lastName() {
@@ -101,7 +110,9 @@ public class Users {
   return _course;
  }
 
- public String get_password() { return _password;}
+ public String get_password() {
+  return _password;
+ }
 
 
 }

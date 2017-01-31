@@ -90,8 +90,10 @@ public class StudentReg extends ActionBarActivity {
   EditText studentPass = (EditText) this.findViewById(R.id.PassTextBox);
   //Create User
   user = new Users(this, lastName.getText().toString(), Tnum.getText().toString(), eMail.getText().toString(), studentPass.getText().toString());
+  new DBController(this).addUserRecord(user);
   Toast.makeText(context, String.valueOf(user.hasUser() ? "Created user" : "Unable to create user"), Toast.LENGTH_SHORT).show();
   Toast.makeText(context, user.get_tNum() + ":" + user.get_lastName(), Toast.LENGTH_SHORT).show();
+
 
   //TODO:Fix user returning true when no user is in storage
 
