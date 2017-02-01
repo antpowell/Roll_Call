@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -83,7 +84,7 @@ DBController(){
  }
 
  //Add user to DB
- public void addUser(Users user) {
+ public void addUser(HashMap<String, String> user) {
         /*
         * Unique ID as parent
         * User data as child
@@ -95,8 +96,8 @@ DBController(){
         *           time: 00:00
         *           }
         *       }*/
-  _user = user;
-  ref.child(_user.get_tNum()).setValue(_user);
+
+  ref.child(user.get("TNum")).setValue(user);
 
  }
 

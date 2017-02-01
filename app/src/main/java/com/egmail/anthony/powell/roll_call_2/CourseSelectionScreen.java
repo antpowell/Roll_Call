@@ -42,13 +42,14 @@ public class CourseSelectionScreen extends AppCompatActivity {
  private ArrayList<String> courses = new ArrayList<>();
  private ListView listView;
  private DatabaseReference courseRef;
- private SearchView searchView;
+ private  static SearchView searchView;
  DBController dbController;
 
  public void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.course_selection);
   listView = (ListView) findViewById(R.id.list_dialog);
+
 
   adaptorSetup();
 

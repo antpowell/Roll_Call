@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 /**
  * Created by SGT_POWELL on 6/26/2016.
  */
@@ -21,6 +23,7 @@ public class Users {
  private String _email;
  private String _password;
  private String _course;
+ private HashMap<String, String> userMap = new HashMap<>();
 
  public Users() {
  }
@@ -39,6 +42,8 @@ public class Users {
 
 
   addUser();
+  setUserMap();
+
  }
 
  public Users(Context context, String lastName, String tNum) {
@@ -104,4 +109,21 @@ public class Users {
  public String get_password() { return _password;}
 
 
+ public HashMap<String, String> getUserMap() {
+  return userMap;
+ }
+
+ public void setUserMap() {
+  if (!_lastName.isEmpty() && !_tNum.isEmpty()) {
+
+   userMap.put("Last Name", _lastName);
+   userMap.put("TNum", "T"+_tNum);
+
+  }else{
+
+  }
+  if(!_email.isEmpty()){
+   userMap.put("Email", _email);
+  }
+ }
 }
