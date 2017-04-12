@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.view.Display;
 import android.widget.Toast;
 
+import com.egmail.anthony.powell.roll_call_2.model.DataItemImage;
+
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
@@ -37,6 +39,8 @@ public class MainActivity extends Activity {
  protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(activity_splash);
+
+  new DataItemImage().getImages();
 
   getVersionNumberTask task = new getVersionNumberTask();
   task.execute();

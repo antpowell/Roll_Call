@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '21.1.2'
 
     defaultConfig {
         applicationId "com.egmail.anthony.powell.roll_call_2"
@@ -37,5 +37,9 @@ dependencies {
     compile 'info.hoang8f:android-segmented:1.0.6'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha3'
     compile 'com.google.code.gson:gson:2.8.0'
+
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
 }
 apply plugin: 'com.google.gms.google-services'

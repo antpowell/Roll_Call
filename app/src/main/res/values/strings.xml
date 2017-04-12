@@ -13,29 +13,7 @@
     <string name="title_activity_course_selection_screen">Course Selection</string>
     <string name="LoginButton">LOGIN</string>
     <string-array name="course_list">
-        <item>CS124</item>
-        <item>CS116WE1</item>
-        <item>BIOL131</item>
-        <item>BIOL132</item>
-        <item>BIOL143</item>
-        <item>BIOL231</item>
-        <item>BIOL232</item>
-        <item>BIOL300</item>
-        <item>BIOL438</item>
-        <item>BIOL438L</item>
-        <item>BIOL443</item>
-        <item>GEOL141</item>
-        <item>MATH133</item>
-        <item>MATH134</item>
-        <item>MATH135</item>
-        <item>MATH136</item>
-        <item>MATH231</item>
-        <item>MATH241</item>
-        <item>HIST231</item>
-        <item>HIST232</item>
-        <item>ENG131</item>
-        <item>ENG132</item>
-        <item>ENG230</item>
+        <item>LOADING... Please Wait</item>
     </string-array>
     <array name="course_imgs">
         <item>@drawable/ic_code_braces</item>

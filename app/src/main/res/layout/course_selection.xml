@@ -27,15 +27,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="32dp" />
 
-    <!--<SearchView-->
-        <!--android:id="@+id/editTextSearch"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_below="@+id/textView"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:hint="Search" />-->
 
 
 </RelativeLayout>
