@@ -1,14 +1,9 @@
 package com.egmail.anthony.powell.roll_call_2;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
@@ -16,7 +11,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -524,7 +518,7 @@ public class StudentReg extends ActionBarActivity {
    @Override
    public void onTextChanged(CharSequence s, int start, int before, int count) {
     if (password.getText().toString().length() != 0) {
-     if (password.getText().toString().length() > 6 && password.getText().toString().length() < 11) {
+     if (password.getText().toString().length() > 2) {
 
 //      Log.d("DEBUG", String.valueOf(nameEntered && idEntered && passwordEntered && emailEntered));
 

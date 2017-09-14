@@ -1,5 +1,6 @@
 package com.egmail.anthony.powell.roll_call_2;
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -7,11 +8,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Display;
 import android.widget.Toast;
 
 import com.egmail.anthony.powell.roll_call_2.model.DataItemImage;
@@ -100,7 +99,9 @@ public class MainActivity extends Activity {
 
    @Override
    protected void onPostExecute(String s) {
-//   if (Integer.parseInt(playVersionCode.trim())>Integer.parseInt(versionName.trim()))
+/**    Test app version */
+//    Toast.makeText(MainActivity.this, String.format("Play Version: %s\nCurrent Version: %s", playVersionCode, versionName), Toast.LENGTH_SHORT).show();
+
     if (!playVersionCode.equals(versionName)) {
      //FORCE USER TO UPDATE VIA PLAY STORE
      new AlertDialog.Builder(MainActivity.this)
@@ -121,12 +122,12 @@ public class MainActivity extends Activity {
        .show();
 
     } else {
-//     Toast.makeText(MainActivity.this, "Verification Complete... Thank you.", Toast.LENGTH_SHORT).show();
+     Toast.makeText(MainActivity.this, "Verification Complete... Thank you.", Toast.LENGTH_SHORT).show();
      Thread splashTimer = new Thread() {
       public void run() {
        try {
         sleep(2000);
-        //check if student info is stored on the device. If so goto Course Selection screen if not goto StudentReg screen.
+        //Check if student info is stored on the device. If so goto Course Selection screen if not goto StudentReg screen.
         if (t.equals("Not found") || user.equals("Not found")) {
          startActivity(new Intent(MainActivity.this, StudentReg.class));
          overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -147,5 +148,7 @@ public class MainActivity extends Activity {
     super.onPostExecute(s);
    }
   }
+
  }
+
 

@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +45,7 @@ public class CourseSelectionScreen extends AppCompatActivity {
  public CustomList adapter;
  private ArrayList<String> courses = new ArrayList<>();
  private ListView listView;
+ private TableRow tableRow;
  private DatabaseReference courseRef;
  private  static SearchView searchView;
  DBController dbController;
@@ -48,14 +53,44 @@ public class CourseSelectionScreen extends AppCompatActivity {
  public void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.course_selection);
-  listView = (ListView) findViewById(R.id.list_dialog);
+  RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.course_selection_layout);
+  
+  relativeLayout.setOnClickListener(new View.OnClickListener() {
+   @Override
+   public void onClick(View v) {
+    Toast.makeText(CourseSelectionScreen.this, v.toString(), Toast.LENGTH_SHORT).show();
+   }
+  });
+  TextView TV = (TextView)findViewById(R.id.course_selection_title);
+  TV.setOnClickListener(new View.OnClickListener() {
+   @Override
+   public void onClick(View view) {
+    Toast.makeText(CourseSelectionScreen.this, String.format("Course Selection Title Clicked"), Toast.LENGTH_SHORT).show();
+   }
+  });
+  
+
+  
+  listView = (ListView) findViewById(R.id.course_selection_list_dialog);
+//  listView.setOnClickListener(new View.OnClickListener() {
+//   @Override
+//   public void onClick(View view) {
+//    Toast.makeText(CourseSelectionScreen.this, String.format("Course Selection List View Clicked"), Toast.LENGTH_SHORT).show();
+//   }
+//  });
 
 
   adaptorSetup();
 
+
+
   ListenerHandler();
 
-  //Get User
+  //Pull in current user info from device local storage.
+  /**
+   * Pull in current User info from device Local Storage
+   * i.e. Email, and  TNUmber
+   */
   user = new Users().getUser(this);
 
  }
@@ -119,6 +154,12 @@ public class CourseSelectionScreen extends AppCompatActivity {
   super.onBackPressed();
  }
 
+
+ /**
+  * Get course listings from Firebase and create the course listings
+  * with the adapter.
+  *
+  */
  public void adaptorSetup() {
   courseRef = FirebaseDatabase.getInstance().getReference("Courses").child("Codes");
   courseRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -141,14 +182,19 @@ public class CourseSelectionScreen extends AppCompatActivity {
  }
 
  private void ListenerHandler() {
+
+//  tableRow = (TableRow)findViewById(R.id.listItemRow);
   listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
    @Override
    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-    TextView courseTextView = (TextView) view.findViewById(R.id.listText);
-//                Toast.makeText(CourseSelectionScreen.this, courseTextView.getText().toString().trim(),Toast.LENGTH_SHORT).show();
-    courseSign(courseTextView.getText().toString().trim());
+    TableRow tableRow = (TableRow)findViewById(R.id.listItemRow);
+//    TextView courseTextView = (TextView) view.findViewById(R.id.listText);
+    Toast.makeText(CourseSelectionScreen.this, String.format("Touched %s inside of %s", tableRow.toString(), parent.toString()),Toast.LENGTH_SHORT).show();
+    Log.d("Course Selection Touch:",String.format("String %s has been touched", view.toString()));
+//    courseSign(courseTextView.getText().toString().trim());
    }
   });
+
  }
 
  public void courseSign(String courseID) {

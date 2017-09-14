@@ -116,7 +116,6 @@ DBController(){
   return ref;
  }
 
-
 //Create User in Firebase Authentication
  public boolean CreateUser(Users user) {
   if(user.hasUser()){
@@ -135,10 +134,9 @@ DBController(){
   }
   return userWasCreated;
  }
-//Create user using Google Login
- public void CreateUserGoogle(Users user){
 
- }
+//Create user using Google Login
+ public void CreateUserGoogle(Users user){ }
 
  public boolean UserSignIn(Users user){
 //  Intent signInEvent = Auth.GoogleSignInApi.getSignInIntent();
@@ -156,6 +154,7 @@ DBController(){
     });
   return userWasCreated;
  }
+
  public void UserSignOut(){
   authRef.signOut();
  }

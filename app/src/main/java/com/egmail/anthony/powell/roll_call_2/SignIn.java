@@ -40,10 +40,11 @@ public class SignIn extends AppCompatActivity {
  public static final String LAST = "last";
  public static final String T = "tNum";
  public static final String COURSE = "course";
- private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
+ private static final int MY_PERMISSIONS_REQUEST = 0;
+ private static final int MY_PERMISSIONS_REQUEST_PHONE_STATE = 1;
  private dataJSONFormatter dataJSONFormatter;
  //    private final int permissionCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.SEND_SMS);
-//    public int MY_PERMISSIONS_REQUEST_SEND_SMS;
+//    public int MY_PERMISSIONS_REQUEST;
 
 
  private EditText password;
@@ -97,7 +98,9 @@ public class SignIn extends AppCompatActivity {
     //check if a PROXYTAG is stored
     if (proxyID.equals("Not found") || proxyLAST.equals("Not found")) {
 //                    Check for SMS permissions
+
      checkPermissions();
+//     sendMessage(studentMessage, contactNumber);
 
     } else {
      //Alert to ensure that user wants to use PROXY STUDENT prefs
@@ -109,7 +112,7 @@ public class SignIn extends AppCompatActivity {
         public void onClick(DialogInterface dialog, int which) {
 
          //Send users Course, Last Name, StudentID, and Time/Date stamp as a message
-         sentMessage(proxyMessage, contactNumber);
+         sendMessage(proxyMessage, contactNumber);
 
 
 //
@@ -127,7 +130,7 @@ public class SignIn extends AppCompatActivity {
        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-         sentMessage(studentMessage, contactNumber);
+         sendMessage(studentMessage, contactNumber);
          dialog.dismiss();
         }
        })
@@ -156,34 +159,34 @@ public class SignIn extends AppCompatActivity {
 
  @TargetApi(Build.VERSION_CODES.M)
  private void checkPermissions() {
-  int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
-  if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-   if (shouldShowRequestPermissionRationale(Manifest.permission.SEND_SMS)) {
-    Toast.makeText(this, "SMS permission is required in this application to update the database.", Toast.LENGTH_LONG).show();
+  int smsPermissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
+  int readPhoneStatePermissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+  if (smsPermissionCheck != PackageManager.PERMISSION_GRANTED || readPhoneStatePermissionCheck != PackageManager.PERMISSION_GRANTED) {
+   if (shouldShowRequestPermissionRationale(Manifest.permission.SEND_SMS) || shouldShowRequestPermissionRationale(Manifest.permission.READ_PHONE_STATE)) {
+    Toast.makeText(this, "Permissions are required to validate user signature.", Toast.LENGTH_LONG).show();
    }
-   ActivityCompat.requestPermissions(SignIn.this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST_SEND_SMS);
-  } else sentMessage(studentMessage, contactNumber);
-
+   ActivityCompat.requestPermissions(SignIn.this, new String[]{Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE}, MY_PERMISSIONS_REQUEST);
+  }else sendMessage(studentMessage, contactNumber);
  }
 
  @Override
  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
   switch (requestCode) {
-   case MY_PERMISSIONS_REQUEST_SEND_SMS: {
-    if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+   case MY_PERMISSIONS_REQUEST: {
+    if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
      //Send users Course, Last Name, StudentID, and Time/Date stamp as a message
-     sentMessage(studentMessage, contactNumber);
+     sendMessage(studentMessage, contactNumber);
     } else
-     Toast.makeText(SignIn.this, "We could not sign you in because permission was not granted.", Toast.LENGTH_SHORT).show();
+     Toast.makeText(SignIn.this, "Unable to sign in because permissions were not granted.", Toast.LENGTH_SHORT).show();
     break;
    }
    default:
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
   }
-
  }
 
- public void sentMessage(String messageToSend, String contactNumber) {
+ public void sendMessage(String messageToSend, String contactNumber) {
+
   //Google Forms HTTP section found @http://goo.gl/forms/HCtiSG0c0D
   //end Google Forms HTTP
   String sent = "MESSAGE_SENT";
@@ -201,10 +204,16 @@ public class SignIn extends AppCompatActivity {
    }
   };
   registerReceiver(broadcastReceiver, new IntentFilter(sent));
+  try{
+   SmsManager sms = SmsManager.getDefault();
+   //if SMS not sent message user
+   sms.sendTextMessage(contactNumber, null, messageToSend, sentPI, null);
+  }catch (Exception e){
+   Toast.makeText(getApplicationContext(), String.format("ERROR: \n%s",e.getMessage().toString()), Toast.LENGTH_LONG).show();
+   e.printStackTrace();
+  }
 
-  SmsManager sms = SmsManager.getDefault();
-  //if SMS not sent message user
-  sms.sendTextMessage(contactNumber, null, messageToSend, sentPI, null);
+
 
   dataJSONFormatter = new dataJSONFormatter(user, POD);
 
@@ -262,4 +271,3 @@ public class SignIn extends AppCompatActivity {
  }
 
 }
-

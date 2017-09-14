@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.egmail.anthony.powell.roll_call_2.model.DataItemImage;
 
@@ -27,11 +28,7 @@ public class CustomList extends ArrayAdapter<String> {
 
 
 //    private final int listImageID;
-    SearchView searchView;
-    private ListView listView;
-    private ArrayList<String> listImgKeys;
-    private Map<String, String> URLMAP;
-    private DataItemImage images = new DataItemImage();
+    private SearchView searchView;
     private Context context;
     WebView listItemImgView;
 
@@ -39,8 +36,7 @@ public class CustomList extends ArrayAdapter<String> {
     public CustomList(Context context, ArrayList<String> itemText, SearchView searchView){
         super(context, R.layout.course_selection_dialog, itemText);
         DataItemImage images = new DataItemImage();
-        listImgKeys = images.getCourseKeyList();
-        URLMAP = images.getImageMap();
+        images.getCourseKeyList();
         this.context = context;
 //        get searchView from activity to filter through list
         this.searchView = searchView;
@@ -60,12 +56,11 @@ public class CustomList extends ArrayAdapter<String> {
 
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public void initView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View listItemView = inflater.inflate(R.layout.course_selection_dialog, parent, false);
+        final View listItemView = inflater.inflate(R.layout.course_selection_dialog, parent, false);
 
-        TextView listItemTextView = (TextView) listItemView.findViewById(R.id.listText);
+        final TextView listItemTextView = (TextView) listItemView.findViewById(R.id.listText);
         listItemImgView = (WebView) listItemView.findViewById(R.id.listImg);
 //        listItemImgView.setInitialScale(1);
         listItemImgView.loadUrl("https://image.flaticon.com/icons/svg/164/164953.svg");
@@ -93,7 +88,57 @@ public class CustomList extends ArrayAdapter<String> {
 
         SetViewImage(getItem(position).toString().replaceAll("[^a-zA-Z ]", ""));
 
+        listItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, String.format("%s touched", listItemView.toString()), Toast.LENGTH_SHORT).show();
+            }
+        });
 
+
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        final View listItemView = inflater.inflate(R.layout.course_selection_dialog, parent, false);
+
+        final TextView listItemTextView = (TextView) listItemView.findViewById(R.id.listText);
+        listItemImgView = (WebView) listItemView.findViewById(R.id.listImg);
+//        listItemImgView.setInitialScale(1);
+        listItemImgView.loadUrl("https://image.flaticon.com/icons/svg/164/164953.svg");
+        listItemImgView.setBackgroundColor(Color.TRANSPARENT);
+
+        //Set up search view to query ListView
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                CustomList.this.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+
+        listItemTextView.setText(getItem(position));
+        /**
+         *  FIXME: Regex does remove trailing 'L' for lab courses which return a course that will never be in DB, I.E. "BIOL231L" will return "BIOLL".
+         **/
+
+        SetViewImage(getItem(position).toString().replaceAll("[^a-zA-Z ]", ""));
+
+        listItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Toast.makeText(context, String.format("%s touched", listItemTextView.getText()), Toast.LENGTH_SHORT).show();
+                CourseSelectionScreen courseSelectionScreen = (CourseSelectionScreen)context;
+                courseSelectionScreen.courseSign(listItemTextView.getText().toString());
+            }
+        });
 
         return listItemView;
     }
@@ -104,7 +149,5 @@ public class CustomList extends ArrayAdapter<String> {
         dataItemImage.getImageUrl(courseTitle);
         listItemImgView.loadUrl(dataItemImage.getImageUrl(courseTitle));
     }
-
-
 }
 
