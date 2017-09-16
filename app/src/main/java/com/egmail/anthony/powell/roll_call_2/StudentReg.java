@@ -22,74 +22,77 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 
 
 public class StudentReg extends ActionBarActivity {
- private boolean nameEntered, idEntered, emailEntered, passwordEntered;
- protected Users user;
- private DBController dbController;
- public static Context context;
- private boolean isUserLoggingIn, isUserRegistering;
- private final String D = "DEBUG";
+    private boolean nameEntered, idEntered, emailEntered, passwordEntered;
+    protected Users user;
+    private DBController dbController;
+    public static Context context;
+    private boolean isUserLoggingIn, isUserRegistering;
+    private final String D = "DEBUG";
 
- Button regButton;
- EditText lastName, Tnum, eMail, password;
- RadioButton loginSegment, registerSegment;
- SegmentedGroup login_registation_group;
- RelativeLayout nameLayout, tnumLayout, emailLayout, passwordLayout;
-
-
- @Override
- protected void onCreate(Bundle savedInstanceState) {
-  super.onCreate(savedInstanceState);
-  setContentView(R.layout.activity_student_reg);
-  nameEntered = false;
-  idEntered = false;
-  emailEntered = false;
-  passwordEntered = false;
-
-  isUserRegistering = true;
-  isUserLoggingIn = false;
+    Button regButton;
+    EditText lastName, Tnum, eMail, password;
+    RadioButton loginSegment, registerSegment;
+    SegmentedGroup login_registation_group;
+    RelativeLayout nameLayout, tnumLayout, emailLayout, passwordLayout;
 
 
-  context = this;
-  createAssociationsWithView();
-  handlers();
-  checkEnabled();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.new_student_reg_activity);
+        nameEntered = false;
+        idEntered = false;
+        emailEntered = false;
+        passwordEntered = false;
+
+        isUserRegistering = true;
+        isUserLoggingIn = false;
 
 
- }
-
- public void checkEnabled() {
-  regButton.setEnabled(false);
-  lastNameChecker();
-  tNumberChecker();
-  emailChecker();
-  passwordChecker();
-
- }
-
- public void activateRegistrationButton() {
-
-  if (nameEntered && idEntered && passwordEntered && emailEntered) {
-   Log.d(D, "checking to activate button");
-   regButton.setEnabled(true);
-  } else {
-   regButton.setEnabled(false);
-  }
- }
+        context = this;
+        createAssociationsWithView();
+        handlers();
+        checkEnabled();
 
 
- /*Function to save Student's last name and account number in studentInfo shared prefs the Email and Pass will be stored in a
- * another prefs setting later since it will not be sent in the message to the server phone.*/
- private void storeUserInfo() {
-  EditText eMail = (EditText) this.findViewById(R.id.EmailTextBox);
-  EditText studentPass = (EditText) this.findViewById(R.id.PassTextBox);
-  //Create User
-  user = new Users(this, lastName.getText().toString(), Tnum.getText().toString(), eMail.getText().toString(), studentPass.getText().toString());
-  dbController = new DBController(this, "Users");
-  dbController.addUser(user.getUserMap());
-  Toast.makeText(context, String.valueOf(user.hasUser() ? "Created user" : "Unable to create user"), Toast.LENGTH_SHORT).show();
-  Toast.makeText(context, user.get_tNum() + ":" + user.get_lastName(), Toast.LENGTH_SHORT).show();
+    }
 
-  //TODO:Fix user returning true when no user is in storage
+    public void checkEnabled() {
+        regButton.setEnabled(false);
+        lastNameChecker();
+        tNumberChecker();
+        emailChecker();
+        passwordChecker();
+
+    }
+
+    public void activateRegistrationButton() {
+
+        if (nameEntered && idEntered && passwordEntered && emailEntered) {
+            Log.d(D, "checking to activate button");
+            regButton.setEnabled(true);
+        } else {
+            regButton.setEnabled(false);
+        }
+    }
+
+
+    /*Function to save Student's last name and account number in studentInfo shared prefs the Email and Pass will be stored in a
+    * another prefs setting later since it will not be sent in the message to the server phone.*/
+    private void storeUserInfo() {
+//  TODO:IDENTIFY WHY ARE THESE 2 FIELDS BEING INSTANTIATED HERE
+//  EditText eMail = (EditText) this.findViewById(R.id.EmailTextBox);
+//  EditText studentPass = (EditText) this.findViewById(R.id.PassTextBox);
+        EditText eMail = (EditText) this.findViewById(R.id.student_reg_email_field);
+        EditText studentPass = (EditText) this.findViewById(R.id.student_reg_password_field);
+        //Create User
+        user = new Users(this, lastName.getText().toString(), Tnum.getText().toString(), eMail.getText().toString(), studentPass.getText().toString());
+        dbController = new DBController(this, "Users");
+        dbController.addUser(user.getUserMap());
+        Toast.makeText(context, String.valueOf(user.hasUser() ? "Created user" : "Unable to create user"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, user.get_tNum() + ":" + user.get_lastName(), Toast.LENGTH_SHORT).show();
+
+        //TODO:Fix user returning true when no user is in storage
 
 //  if (user.hasUser()) {
 //   //Save use to DB
@@ -106,109 +109,113 @@ public class StudentReg extends ActionBarActivity {
 //   dbController.addUser(user);
 //  } else
 //   Toast.makeText(this, "Error storing user data, please inform admin.", Toast.LENGTH_LONG).show();
- }
+    }
 
- protected void createAssociationsWithView() {
-  //        View hooks
-  //Buttons
-  regButton = (Button) findViewById(R.id.RegisterButton);
-  //TextFields
-  lastName = (EditText) this.findViewById(R.id.LastNameTextBox);
-  Tnum = (EditText) this.findViewById(R.id.TNumberTextBox);
-  eMail = (EditText) this.findViewById(R.id.EmailTextBox);
-  password = (EditText) this.findViewById(R.id.PassTextBox);
+    protected void createAssociationsWithView() {
+        //        View hooks
+        //Buttons
+        regButton = (Button) findViewById(R.id.student_reg_register_button);
+        //TextFields
+        lastName =  (EditText) this.findViewById(R.id.student_reg_name_field);
+        Tnum =      (EditText) this.findViewById(R.id.student_reg_tnum_field);
+        eMail =     (EditText) this.findViewById(R.id.student_reg_email_field);
+        password =  (EditText) this.findViewById(R.id.student_reg_password_field);
 //  TextInputLayout
-  nameLayout = (RelativeLayout) findViewById(R.id.name_view);
-  tnumLayout = (RelativeLayout) findViewById(R.id.tnumber_view);
-  emailLayout = (RelativeLayout) findViewById(R.id.email_view);
-  passwordLayout = (RelativeLayout) findViewById(R.id.passowrd_view);
+//                        TODO: This section was used for transitioning between Login and Register on the Student Registration Activity
+//        nameLayout = (RelativeLayout) findViewById(R.id.student_reg_name_layout);
+//        tnumLayout = (RelativeLayout) findViewById(R.id.student_reg_tnum_layout);
+//        emailLayout = (RelativeLayout) findViewById(R.id.student_reg_email_layout);
+//        passwordLayout = (RelativeLayout) findViewById(R.id.student_reg_password_layout);
 
 
-  //Segments
-  loginSegment = (RadioButton) findViewById(R.id.login_switch_segment);
-  registerSegment = (RadioButton) findViewById(R.id.register_switch_segment);
-  login_registation_group = (SegmentedGroup) findViewById(R.id.log_reg_seg);
-  registerSegment.setChecked(true);
- }
+        //Segments
+        loginSegment = (RadioButton) findViewById(R.id.student_reg_login_segment_button);
+        registerSegment = (RadioButton) findViewById(R.id.student_reg_register_segment_button);
+        login_registation_group = (SegmentedGroup) findViewById(R.id.student_reg_segment);
+        registerSegment.setChecked(true);
+    }
 
- protected void handlers() {
-  //TODO: Stop registration button from enabling on segment change
-  login_registation_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-   @Override
-   public void onCheckedChanged(RadioGroup radioGroup, int i) {
-    switch (i) {
-     case R.id.login_switch_segment:
-      new AlertDialog.Builder(StudentReg.this).setMessage("This feature will be available in version 2.0\n\nYou are being sent back to the Register section.")
-        .setCancelable(false)
-        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
-       @Override
-       public void onClick(DialogInterface dialog, int which) {
-        registerSegment.toggle();
-       }
-      }).create().show();
+    protected void handlers() {
+        //TODO: Stop registration button from enabling on segment change
+        login_registation_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i) {
+                    case R.id.student_reg_login_segment_button:
+                        new AlertDialog.Builder(StudentReg.this).setMessage("This feature will be available in version 2.0\n\nYou will be returned to Register.")
+                          .setCancelable(false)
+                          .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                              @Override
+                              public void onClick(DialogInterface dialog, int which) {
+                                  registerSegment.toggle();
+                              }
+                          }).create().show();
 //      Snackbar snackbar = Snackbar
 //        .make(coordinatorLayout, "Welcome to AndroidHive", Snackbar.LENGTH_LONG);
 //      snackbar.show();
 
-      Log.d(D, "User trying to login");
+                        Log.d(D, "User trying to login");
 //    User is logging in
-      isUserLoggingIn = true;
-      isUserRegistering = false;
-      //handle events while login segment is active
+                        isUserLoggingIn = true;
+                        isUserRegistering = false;
+                        //handle events while login segment is active
 //      Toast.makeText(StudentReg.this, String.valueOf(emailChecker() && passwordChecker()), Toast.LENGTH_SHORT).show();
 //      regButton.setEnabled(emailChecker()&&passwordChecker());
 
-      activateRegistrationButton();
-      regButton.setText("Login");
+                        activateRegistrationButton();
+                        regButton.setText("Login");
 
-      //view animations
-      nameLayout.animate().alpha(0.0f);
-      tnumLayout.animate().alpha(0.0f);
-      emailLayout.animate().translationY(-250);
-      passwordLayout.animate().translationY(-250);
-      regButton.animate().translationY(-250);
-      //set a delay on removing visibility for animation to show then remove.
-      new android.os.Handler().postDelayed(
-        new Runnable() {
-         @Override
-         public void run() {
-          nameLayout.setVisibility(View.INVISIBLE);
-          tnumLayout.setVisibility(View.INVISIBLE);
-         }
-        },
-        300);
+//                        TODO: This section was used for transitioning between Login and Register on the Student Registration Activity
+//                        nameLayout.animate().alpha(0.0f);
+//                        tnumLayout.animate().alpha(0.0f);
+//                        emailLayout.animate().translationY(-250);
+//                        passwordLayout.animate().translationY(-250);
+//                        regButton.animate().translationY(-250);
+                        //set a delay on removing visibility for animation to show then remove.
+//                        new android.os.Handler().postDelayed(
+//                          new Runnable() {
+//                              @Override
+//                              public void run() {
+//                                  nameLayout.setVisibility(View.INVISIBLE);
+//                                  tnumLayout.setVisibility(View.INVISIBLE);
+//                              }
+//                          },
+//                          300);
 
 
-      break;
+                        break;
 
-     case R.id.register_switch_segment:
-      Log.d(D, "User trying to register");
+                    case R.id.student_reg_register_segment_button:
+                        Log.d(D, "User trying to register");
 //      User is trying to register
-      isUserLoggingIn = false;
-      isUserRegistering = true;
+                        isUserLoggingIn = false;
+                        isUserRegistering = true;
 
-      //handle events while login segment is active
-      nameLayout.setVisibility(View.VISIBLE);
-      tnumLayout.setVisibility(View.VISIBLE);
+                        activateRegistrationButton();
+                        regButton.setText("Register");
 
-      activateRegistrationButton();
-      regButton.setText("Register");
+//                        TODO: This section was used for transitioning between Login and Register on the Student Registration Activity
 
-      //view animations
-      nameLayout.animate().alpha(1.0f);
-      tnumLayout.animate().alpha(1.0f);
-      emailLayout.animate().translationY(0);
-      passwordLayout.animate().translationY(0);
-      regButton.animate().translationY(0);
+                        //handle events while login segment is active
+//                        nameLayout.setVisibility(View.VISIBLE);
+//                        tnumLayout.setVisibility(View.VISIBLE);
 
-      break;
 
-     default:
-      //Nothing to do
+                        //view animations
+//                        nameLayout.animate().alpha(1.0f);
+//                        tnumLayout.animate().alpha(1.0f);
+//                        emailLayout.animate().translationY(0);
+//                        passwordLayout.animate().translationY(0);
+//                        regButton.animate().translationY(0);
 
-    }
-   }
-  });
+                        break;
+
+                    default:
+                        //Nothing to do
+
+                }
+            }
+        });
 
 //  lastName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 //   @Override
@@ -375,170 +382,170 @@ public class StudentReg extends ActionBarActivity {
 //   }
 //  });
 //
-  regButton.setOnClickListener(new View.OnClickListener() {
-   @Override
-   public void onClick(View v) {
-    if (isUserLoggingIn) {
-     login();
-    } else if (isUserRegistering) {
-     Log.d(D, "User trying to register w/ reg button");
-     register();
+        regButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isUserLoggingIn) {
+                    login();
+                } else if (isUserRegistering) {
+                    Log.d(D, "User trying to register w/ reg button");
+                    register();
 
+                }
+
+            }
+        });
     }
 
-   }
-  });
- }
-
- private void login() {
+    private void login() {
 //  TODO: retrieve user account from db the proceed
- }
+    }
 
- private void register() {
+    private void register() {
 
-  storeUserInfo();
-  startActivity(new Intent(StudentReg.this, CourseSelectionScreen.class));
-  finish();
-  overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
- }
+        storeUserInfo();
+        startActivity(new Intent(StudentReg.this, CourseSelectionScreen.class));
+        finish();
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
 
- private boolean lastNameChecker() {
-  lastName.addTextChangedListener(new TextWatcher() {
-   @Override
-   public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    private boolean lastNameChecker() {
+        lastName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-   }
+            }
 
-   @Override
-   public void onTextChanged(CharSequence s, int start, int before, int count) {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 //    Toast.makeText(StudentReg.this, "Changing Last Name", Toast.LENGTH_SHORT).show();
 
-    if (lastName.getText().toString().length() > 0) {
+                if (lastName.getText().toString().length() > 0) {
 //     Log.d("DEBUG", "Name > 0" + lastName.getText().toString().length());
-     if (String.valueOf(lastName.getText().toString()).matches("^[a-zA-Z\\s]+$")) {
+                    if (String.valueOf(lastName.getText().toString()).matches("^[a-zA-Z\\s]+$")) {
 //      Log.d("DEBUG", "Correct string for name");
-      nameEntered = true;
-      activateRegistrationButton();
-     } else {
+                        nameEntered = true;
+                        activateRegistrationButton();
+                    } else {
 //      Log.d("DEBUG", "Not correct string for name");
-      nameEntered = false;
-      activateRegistrationButton();
-     }
-    } else {
+                        nameEntered = false;
+                        activateRegistrationButton();
+                    }
+                } else {
 //     Log.d("DEBUG", "Name not long enough");
-     nameEntered = false;
-     activateRegistrationButton();
+                    nameEntered = false;
+                    activateRegistrationButton();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        activateRegistrationButton();
+        return nameEntered;
     }
-   }
 
-   @Override
-   public void afterTextChanged(Editable s) {
+    private boolean tNumberChecker() {
+        idEntered = false;
+        Tnum.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-   }
-  });
-  activateRegistrationButton();
-  return nameEntered;
- }
+            }
 
- private boolean tNumberChecker() {
-  idEntered = false;
-  Tnum.addTextChangedListener(new TextWatcher() {
-   @Override
-   public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (Tnum.getText().toString().length() != 0) {
+                    if (Tnum.getText().toString().length() == 8) {
+                        idEntered = true;
+                        activateRegistrationButton();
+                    } else {
+                        idEntered = false;
+                        activateRegistrationButton();
+                    }
+                } else {
+                    idEntered = false;
+                    activateRegistrationButton();
+                }
+            }
 
-   }
+            @Override
+            public void afterTextChanged(Editable s) {
 
-   @Override
-   public void onTextChanged(CharSequence s, int start, int before, int count) {
-    if (Tnum.getText().toString().length() != 0) {
-     if (Tnum.getText().toString().length() == 8) {
-      idEntered = true;
-      activateRegistrationButton();
-     } else {
-      idEntered = false;
-      activateRegistrationButton();
-     }
-    } else {
-     idEntered = false;
-     activateRegistrationButton();
+            }
+        });
+        activateRegistrationButton();
+        return idEntered;
     }
-   }
 
-   @Override
-   public void afterTextChanged(Editable s) {
+    private boolean emailChecker() {
+        emailEntered = false;
+        eMail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-   }
-  });
-  activateRegistrationButton();
-  return idEntered;
- }
+            }
 
- private boolean emailChecker() {
-  emailEntered = false;
-  eMail.addTextChangedListener(new TextWatcher() {
-   @Override
-   public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-   }
-
-   @Override
-   public void onTextChanged(CharSequence s, int start, int before, int count) {
-    if (eMail.getText().toString().length() != 0) {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (eMail.getText().toString().length() != 0) {
 //     Patterns.EMAIL_ADDRESS.matcher(eMail.getText().toString()).matches()
-     if (Patterns.EMAIL_ADDRESS.matcher(eMail.getText().toString()).matches()) {
-      emailEntered = true;
-      activateRegistrationButton();
-     } else {
-      emailEntered = false;
-      activateRegistrationButton();
-     }
-    } else {
-     emailEntered = false;
-     activateRegistrationButton();
+                    if (Patterns.EMAIL_ADDRESS.matcher(eMail.getText().toString()).matches()) {
+                        emailEntered = true;
+                        activateRegistrationButton();
+                    } else {
+                        emailEntered = false;
+                        activateRegistrationButton();
+                    }
+                } else {
+                    emailEntered = false;
+                    activateRegistrationButton();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        activateRegistrationButton();
+        return emailEntered;
     }
-   }
 
-   @Override
-   public void afterTextChanged(Editable s) {
+    private boolean passwordChecker() {
+        passwordEntered = false;
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-   }
-  });
-  activateRegistrationButton();
-  return emailEntered;
- }
+            }
 
- private boolean passwordChecker() {
-  passwordEntered = false;
-  password.addTextChangedListener(new TextWatcher() {
-   @Override
-   public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-   }
-
-   @Override
-   public void onTextChanged(CharSequence s, int start, int before, int count) {
-    if (password.getText().toString().length() != 0) {
-     if (password.getText().toString().length() > 2) {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (password.getText().toString().length() != 0) {
+                    if (password.getText().toString().length() > 2) {
 
 //      Log.d("DEBUG", String.valueOf(nameEntered && idEntered && passwordEntered && emailEntered));
 
-      passwordEntered = true;
-      activateRegistrationButton();
-     } else {
-      passwordEntered = false;
-      activateRegistrationButton();
-     }
-    } else {
-     passwordEntered = false;
-     activateRegistrationButton();
+                        passwordEntered = true;
+                        activateRegistrationButton();
+                    } else {
+                        passwordEntered = false;
+                        activateRegistrationButton();
+                    }
+                } else {
+                    passwordEntered = false;
+                    activateRegistrationButton();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        return passwordEntered;
     }
-   }
-
-   @Override
-   public void afterTextChanged(Editable s) {
-
-   }
-  });
-  return passwordEntered;
- }
 }
