@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:segmentedgroup="http://schemas.android.com/tools"
+    android:animateLayoutChanges="true"
+    android:id="@+id/student_reg_constraint_layout">
+
+    <ImageView
+        android:id="@+id/student_reg_name_icon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:padding="3dp"
+        android:src="@drawable/ic_account"
+        app:layout_constraintBottom_toBottomOf="@+id/student_reg_name_layout"
+        app:layout_constraintTop_toTopOf="@+id/student_reg_name_layout"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/student_reg_name_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/student_reg_name_icon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/student_reg_segment"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+        <EditText
+            android:id="@+id/student_reg_name_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Last Name"
+            android:inputType="textPersonName"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/student_reg_tnum_icon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:padding="3dp"
+        android:src="@drawable/ic_dialpad"
+        app:layout_constraintBottom_toBottomOf="@+id/student_reg_tnum_layout"
+        app:layout_constraintTop_toTopOf="@+id/student_reg_tnum_layout"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintVertical_bias="0.526"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/student_reg_tnum_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/student_reg_name_layout"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/student_reg_tnum_icon"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+        <EditText
+            android:id="@+id/student_reg_tnum_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="T# Numbers Only"
+            android:inputType="number"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/student_reg_email_icon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:padding="3dp"
+        android:src="@drawable/ic_gmail"
+        app:layout_constraintBottom_toBottomOf="@+id/student_reg_email_layout"
+        app:layout_constraintTop_toTopOf="@+id/student_reg_email_layout"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintVertical_bias="0.526"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/student_reg_email_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/student_reg_tnum_layout"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/student_reg_email_icon"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+        <EditText
+            android:id="@+id/student_reg_email_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/student_reg_password_icon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:padding="3dp"
+        android:src="@drawable/ic_lock_outline"
+        app:layout_constraintBottom_toBottomOf="@+id/student_reg_password_layout"
+        app:layout_constraintTop_toTopOf="@+id/student_reg_password_layout"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/student_reg_password_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/student_reg_email_layout"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/student_reg_password_icon"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+        <EditText
+            android:id="@+id/student_reg_password_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/student_reg_register_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@android:style/Widget.Material.Button.Colored"
+        app:layout_constraintRight_toRightOf="@+id/student_reg_password_layout"
+        app:layout_constraintTop_toBottomOf="@+id/student_reg_password_layout"
+        app:layout_constraintLeft_toLeftOf="@+id/student_reg_password_icon"
+        android:layout_marginStart="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:enabled="false"
+        android:text="REGISTER"
+        app:layout_constraintHorizontal_bias="0.497"/>
+
+    <info.hoang8f.android.segmented.SegmentedGroup
+        android:id="@+id/student_reg_segment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:orientation="horizontal"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sc_border_width="2dp"
+        app:sc_corner_radius="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginRight="8dp"
+        app:sc_tint_color="#009688"
+        segmentedgroup:layout_editor_absoluteY="191dp">
+
+        <RadioButton
+            android:id="@+id/student_reg_login_segment_button"
+            style="@style/RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="LOGIN"/>
+
+        <RadioButton
+            android:id="@+id/student_reg_register_segment_button"
+            style="@style/RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="REGISTER"/>
+
+    </info.hoang8f.android.segmented.SegmentedGroup>
+
+
+</android.support.constraint.ConstraintLayout>
