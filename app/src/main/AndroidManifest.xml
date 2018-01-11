@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.egmail.anthony.powell.roll_call_2">
+
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SET_DEBUG_APP" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/splash_rollcall_icon"
         android:label="@string/app_name"
         android:theme="@style/MyAppBar">
-
         <activity
-            android:name="com.egmail.anthony.powell.roll_call_2.CourseSelectionScreen"
+            android:name=".CourseSelectionScreen"
             android:label="@string/title_activity_course_selection_screen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name=".CourseSelectionScreen" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <!--<meta-data-->
-                <!--android:name="android.support.PARENT_ACTIVITY"-->
-                <!--android:value=".StudentReg" />-->
+            <!-- <meta-data -->
+            <!-- android:name="android.support.PARENT_ACTIVITY" -->
+            <!-- android:value=".StudentReg" /> -->
         </activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
