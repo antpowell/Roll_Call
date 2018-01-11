@@ -27,5 +27,8 @@
     <color name="DeepOrangeA400">#FF3D00</color>
     <color name="Brown500">#795548</color>
     <color name="Brown700">#5D4037</color>
+    <color name="TSUPrimary">#860037</color>
+    <color name="TSUPrimaryDark">#600027</color>
+    <color name="TSUAccent">#B2B7BB</color>
 
 </resources>

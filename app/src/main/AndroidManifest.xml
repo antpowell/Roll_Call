@@ -12,26 +12,6 @@
         android:icon="@drawable/splash_rollcall_icon"
         android:label="@string/app_name"
         android:theme="@style/MyAppBar">
-        <activity
-            android:name="com.egmail.anthony.powell.roll_call_2.MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name="com.egmail.anthony.powell.roll_call_2.StudentReg"
-            android:label="@string/title_activity_student_reg"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name=".StudentReg" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name="com.egmail.anthony.powell.roll_call_2.CourseSelectionScreen"
@@ -44,31 +24,6 @@
             <!--<meta-data-->
                 <!--android:name="android.support.PARENT_ACTIVITY"-->
                 <!--android:value=".StudentReg" />-->
-        </activity>
-
-        <activity
-            android:name="com.egmail.anthony.powell.roll_call_2.SignIn"
-            android:label="SignIn"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name=".SignIn" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.egmail.anthony.powell.roll_call_2.CourseSelectionScreen" />
-        </activity>
-        <activity
-            android:name="com.egmail.anthony.powell.roll_call_2.Proxy"
-            android:label="Proxy"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name=".Proxy" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.egmail.anthony.powell.roll_call_2.SignIn" />
         </activity>
 
 

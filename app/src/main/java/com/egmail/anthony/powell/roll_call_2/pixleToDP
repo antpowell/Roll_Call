@@ -1,3 +1,0 @@
-float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMatrix());
-//assign pixels to the height or width of item we need dp size on
-//myButton.getLayout.Param().height = (int) pixels;
