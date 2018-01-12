@@ -1,22 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/TSUPrimary"
     tools:context="com.egmail.anthony.powell.roll_call_2.SignInRegister"
     android:orientation="vertical">
-    <RelativeLayout
-        android:layout_weight="1.25"
-        android:layout_width="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        android:layout_weight="1.45"
+        android:layout_width="match_parent"
         android:layout_height="0dp">
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/splash_rollcall3"
+            android:scaleType="centerCrop"
+            android:alpha=".70"
+            app:layout_constraintBottom_toTopOf="@id/spacer_sign_in_register_85"
             />
-    </RelativeLayout>
+
+        <Space
+            android:id="@+id/spacer_sign_in_register_85"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.80" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/editText_sign_in_register_lname"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Last Name"
+                android:layout_centerInParent="true"
+                android:drawableLeft=""/>
+
+            <EditText
+                android:id="@+id/editText_sign_in_register_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:layout_below="@id/editText_sign_in_register_lname"
+                android:layout_alignLeft="@id/editText_sign_in_register_lname"/>
+        </RelativeLayout>
+
+    </android.support.constraint.ConstraintLayout>
         <RelativeLayout
             android:layout_weight="1"
             android:layout_width="match_parent"

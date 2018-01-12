@@ -15,13 +15,6 @@
     <string-array name="course_list">
         <item>LOADING... Please Wait</item>
     </string-array>
-    <array name="course_imgs">
-        <item>@drawable/ic_code_braces</item>
-        <item>@drawable/ic_biohazard</item>
-        <item>@drawable/ic_sigma</item>
-        <item>@drawable/ic_timetable</item>
-        <item>@drawable/ic_book_open_page_variant</item>
-    </array>
     <string name="AdMod_TEST_App_ID">ca-app-pub-3940256099942544/6300978111</string>
     <string name="AdMod_App_ID">ca-app-pub-2063573536051422~5568151294</string>
 
