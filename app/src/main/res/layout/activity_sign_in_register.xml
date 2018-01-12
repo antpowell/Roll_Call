@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/TSUPrimary"
-    tools:context="com.egmail.anthony.powell.roll_call_2.SignInRegister">
-
-
-    <ImageView
-        android:id="@+id/imageView_sign_in_register_logo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="287dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/splash_rollcall3"
-        android:alpha="0.75"/>
-    
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/White"
-        android:layout_marginTop=""
-        app:layout_constraintTop_toTopOf="parent"/>
-</android.support.constraint.ConstraintLayout>
+    tools:context="com.egmail.anthony.powell.roll_call_2.SignInRegister"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_weight="1.25"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/splash_rollcall3"
+            />
+    </RelativeLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/White">
+            <Button
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:background="@color/White"
+                android:textColor="#000000"
+                android:text="@string/RegButton"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="75dp"
+                android:layout_marginEnd="75dp"
+                />
+        </RelativeLayout>
+</LinearLayout>
