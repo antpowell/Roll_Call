@@ -1,16 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="MyAppBar" parent="@style/Theme.AppCompat">
+    <style name="MyAppBar" parent="@style/Theme.AppCompat.NoActionBar">
         <!--<item name="android:windowTranslucentNavigation">false</item>-->
         <!--<item name="android:windowTranslucentStatus">true</item>-->
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:icon">@drawable/splash_rollcall_icon</item>
         <item name="logo">@drawable/splash_rollcall_icon</item>
         <item name="displayOptions">useLogo|showHome|showTitle</item>
-        <item name="colorPrimary">@color/Brown500</item>
-        <item name="colorPrimaryDark">@color/Brown700</item>
-        <item name="colorAccent">@color/teal700</item>
-        <item name="colorButtonNormal">@color/teal700</item>
+        <item name="colorPrimary">@color/TSUPrimary</item>
+        <item name="colorPrimaryDark">@color/TSUPrimaryDark</item>
+        <item name="colorAccent">@color/TSUAccent</item>
+        <item name="colorButtonNormal">@color/TSUPrimary</item>
         <item name="android:textColor">@color/White</item>
     </style>
 
