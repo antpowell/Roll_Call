@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,70 +7,123 @@
     android:background="@color/TSUPrimary"
     tools:context="com.egmail.anthony.powell.roll_call_2.SignInRegister"
     android:orientation="vertical">
-    <android.support.constraint.ConstraintLayout
-        android:layout_weight="1.45"
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/splash_rollcall3"
-            android:scaleType="centerCrop"
-            android:alpha=".70"
-            app:layout_constraintBottom_toTopOf="@id/spacer_sign_in_register_85"
-            />
+        android:layout_height="match_parent"
+        android:background="@color/TSUPrimary"
+        android:orientation="vertical">
 
-        <Space
-            android:id="@+id/spacer_sign_in_register_85"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.80" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:id="@+id/editText_sign_in_register_lname"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Last Name"
-                android:layout_centerInParent="true"
-                android:drawableLeft=""/>
-
-            <EditText
-                android:id="@+id/editText_sign_in_register_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPassword"
-                android:layout_below="@id/editText_sign_in_register_lname"
-                android:layout_alignLeft="@id/editText_sign_in_register_lname"/>
-        </RelativeLayout>
-
-    </android.support.constraint.ConstraintLayout>
-        <RelativeLayout
-            android:layout_weight="1"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/log_in_constraint_layout_sign_in_register"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="1.45">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha=".70"
+                android:scaleType="centerCrop"
+                android:src="@drawable/splash_rollcall3"
+                app:layout_constraintBottom_toTopOf="@id/spacer_sign_in_register_85"
+                />
+
+            <Space
+                android:id="@+id/spacer_sign_in_register_85"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.80"/>
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_sign_in_register_email"
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginEnd="75dp"
+                    android:layout_marginStart="75dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/text_input_edit_text_sign_in_register_email"
+                        android:layout_width="fill_parent"
+                        android:layout_height="45dp"
+                        android:layout_centerInParent="true"
+                        android:ems="10"
+                        android:hint="Email"
+                        android:inputType="textPersonName"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_sign_in_register_password"
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp"
+                    android:layout_below="@+id/text_input_layout_sign_in_register_email"
+                    android:layout_marginEnd="75dp"
+                    android:layout_marginStart="75dp"
+                    android:layout_marginTop="8dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/text_input_edit_text_sign_in_register_password"
+                        android:layout_width="fill_parent"
+                        android:layout_height="45dp"
+                        android:layout_centerInParent="true"
+                        android:ems="10"
+                        android:hint="Password"
+                        android:inputType="textPassword"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <Button
+                    style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp"
+                    android:layout_below="@id/text_input_layout_sign_in_register_password"
+                    android:layout_marginEnd="75dp"
+                    android:layout_marginStart="75dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/LoginButton"/>
+
+
+            </RelativeLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <RelativeLayout
+            android:id="@+id/register_relative_layout_sign_in_register"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:background="@color/White">
+
             <Button
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_width="fill_parent"
                 android:layout_height="45dp"
-                android:background="@color/White"
-                android:textColor="#000000"
-                android:text="@string/RegButton"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="75dp"
                 android:layout_marginEnd="75dp"
-                />
+                android:layout_marginStart="75dp"
+                android:backgroundTintMode="src_over"
+                android:text="@string/RegButton"
+                android:textColor="#000000"/>
         </RelativeLayout>
-</LinearLayout>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6"
+        android:background="@color/White"/>
+</android.support.constraint.ConstraintLayout>
