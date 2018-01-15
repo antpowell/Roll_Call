@@ -8,7 +8,7 @@
         <item name="colorPrimary">@color/TSUPrimary</item>
         <item name="colorPrimaryDark">@color/TSUPrimaryDark</item>
         <item name="colorAccent">@color/TSUAccent</item>
-        <item name="colorButtonNormal">@color/TSUPrimaryDark</item>
+        <item name="colorButtonNormal">@color/TSUPrimary</item>
         <item name="android:textColor">@color/White</item>
     </style>
 
