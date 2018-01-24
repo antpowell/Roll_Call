@@ -105,7 +105,8 @@
             android:background="@color/White">
 
             <Button
-                android:layout_width="fill_parent"
+                android:id="@+id/register_button_sign_in"
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
