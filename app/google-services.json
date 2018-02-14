@@ -15,11 +15,23 @@
       },
       "oauth_client": [
         {
+          "client_id": "169911930724-t354hp46t3ap1277i9bpho402jvikg3q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.egmail.anthony.powell.roll_call_2",
+            "certificate_hash": "fbddac5ab8f651e3dcdef0fa691a4f649f1ca904"
+          }
+        },
+        {
+          "client_id": "169911930724-8f92kuckqjffg8s3mcd6qve1mr7ljjbn.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
           "client_id": "169911930724-ecbtg41ealb96uofim4u3lsivuf328rk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.egmail.anthony.powell.roll_call_2",
-            "certificate_hash": "056F55A7DE02A3665EC0AE496A3C5D176C56B48D"
+            "certificate_hash": "056f55a7de02a3665ec0ae496a3c5d176c56b48d"
           }
         },
         {
@@ -40,7 +52,69 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "169911930724-1ghkcgd93lqtfssahl2amm1hv31rigmk.apps.googleusercontent.com",
+              "client_id": "169911930724-ttlbgias3lqupkpp1vfivstaqb5709up.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "antony-powell.com.FirebaseDBPractice"
+              }
+            },
+            {
+              "client_id": "169911930724-8f92kuckqjffg8s3mcd6qve1mr7ljjbn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169911930724:android:47c42c1af56abf27",
+        "android_client_info": {
+          "package_name": "com.example.sgt_powell.tsumad_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169911930724-8f92kuckqjffg8s3mcd6qve1mr7ljjbn.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "169911930724-bhj5l9698a7t0t1ji0ffu6q1ra0hue9t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sgt_powell.tsumad_app",
+            "certificate_hash": "056f55a7de02a3665ec0ae496a3c5d176c56b48d"
+          }
+        },
+        {
+          "client_id": "169911930724-1ghkcgd93lqtfssahl2amm1hv31rigmk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAURgOKFVZOC3FAnm-ARaHfWKYnP4LN5P0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169911930724-ttlbgias3lqupkpp1vfivstaqb5709up.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "antony-powell.com.FirebaseDBPractice"
+              }
+            },
+            {
+              "client_id": "169911930724-8f92kuckqjffg8s3mcd6qve1mr7ljjbn.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

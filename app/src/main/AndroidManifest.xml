@@ -10,18 +10,21 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/splash_rollcall_icon"
+        android:icon="@drawable/splash_rollcall_icon_small"
         android:label="@string/app_name"
         android:theme="@style/MyAppBar">
-        <activity android:name=".SignInRegister">
+        <activity
+            android:name=".SignInRegister"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Register" />
-        <activity android:name=".CourseList"></activity>
+        <activity android:name=".Register" android:screenOrientation="portrait"/>
+        <activity android:name=".CourseList" android:screenOrientation="portrait"/>
+        <activity android:name=".StudentSignature" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

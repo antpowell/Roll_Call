@@ -2,8 +2,8 @@
 
     <style name="MyAppBar" parent="@style/Theme.Design.NoActionBar">
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:icon">@drawable/splash_rollcall_icon</item>
-        <item name="logo">@drawable/splash_rollcall_icon</item>
+        <item name="android:icon">@drawable/splash_rollcall_icon_small</item>
+        <item name="logo">@drawable/splash_rollcall_icon_small</item>
         <item name="displayOptions">useLogo|showHome|showTitle</item>
         <item name="colorPrimary">@color/TSUPrimary</item>
         <item name="colorPrimaryDark">@color/TSUPrimaryDark</item>

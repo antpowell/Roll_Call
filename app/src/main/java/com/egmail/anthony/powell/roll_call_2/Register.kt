@@ -19,6 +19,5 @@ class Register : AppCompatActivity() {
         button_register.setOnClickListener {
             startActivity(Intent(this, CourseList::class.java))
         }
-
     }
 }

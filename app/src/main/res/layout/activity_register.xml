@@ -38,51 +38,101 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintVertical_bias=".35"/>
+        app:layout_constraintVertical_bias=".35"
+        android:backgroundTint="@color/TSUPrimary"/>
 
     <LinearLayout
         android:id="@+id/linear_layout_register_form"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintVertical_bias=".40">
+        app:layout_constraintVertical_bias=".40"
+        android:paddingRight="36dp"
+        android:paddingLeft="36dp">
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/text_input_edit_text_register_last_name"
+        <!--<android.support.design.widget.TextInputEditText-->
+            <!--android:id="@+id/text_input_edit_text_register_last_name"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="45dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:ems="10"-->
+            <!--android:hint="LastName"-->
+            <!--android:inputType="text"/>-->
+        <!--<android.support.design.widget.TextInputEditText-->
+            <!--android:id="@+id/text_input_edit_text_register_t_num"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="45dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:ems="10"-->
+            <!--android:hint="TNumber (Numbers Only)"-->
+            <!--android:inputType="number"/>-->
+        <!--<android.support.design.widget.TextInputEditText-->
+            <!--android:id="@+id/text_input_edit_text_register_email"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="45dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:ems="10"-->
+            <!--android:hint="Email"-->
+            <!--android:inputType="textEmailAddress"/>-->
+        <!--<android.support.design.widget.TextInputEditText-->
+            <!--android:id="@+id/text_input_edit_text_register_password"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="45dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:ems="10"-->
+            <!--android:hint="Password"-->
+            <!--android:inputType="textPassword"/>-->
+
+        <com.github.florent37.materialtextfield.MaterialTextField
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_centerInParent="true"
-            android:ems="10"
-            android:hint="LastName"
-            android:inputType="text"/>
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/text_input_edit_text_register_t_num"
+            android:layout_height="wrap_content"
+            app:mtf_openKeyboardOnFocus="true">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Last Name"
+                android:textColor="#000"/>
+        </com.github.florent37.materialtextfield.MaterialTextField>
+        <com.github.florent37.materialtextfield.MaterialTextField
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_centerInParent="true"
-            android:ems="10"
-            android:hint="TNumber (Numbers Only)"
-            android:inputType="number"/>
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/text_input_edit_text_register_email"
+            android:layout_height="wrap_content"
+            app:mtf_openKeyboardOnFocus="true">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="TNumber (Numbers Only)"
+                android:textColor="#000"/>
+        </com.github.florent37.materialtextfield.MaterialTextField>
+
+        <com.github.florent37.materialtextfield.MaterialTextField
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_centerInParent="true"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textEmailAddress"/>
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/text_input_edit_text_register_password"
+            android:layout_height="wrap_content"
+            app:mtf_openKeyboardOnFocus="true">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="Email"
+                android:textColor="#000"/>
+        </com.github.florent37.materialtextfield.MaterialTextField>
+
+        <com.github.florent37.materialtextfield.MaterialTextField
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_centerInParent="true"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword"/>
+            android:layout_height="wrap_content"
+            app:mtf_openKeyboardOnFocus="true">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Password"
+                android:textColor="#000"/>
+        </com.github.florent37.materialtextfield.MaterialTextField>
 
     </LinearLayout>
 
@@ -94,6 +144,10 @@
         android:layout_marginStart="75dp"
         android:text="Register"
         app:layout_constraintTop_toBottomOf="@id/linear_layout_register_form"
-        android:layout_marginTop="35dp"/>
+        android:layout_marginTop="35dp"
+        android:backgroundTint="@color/White"
+        android:textColor="#000"/>
+
+
 
 </android.support.constraint.ConstraintLayout>

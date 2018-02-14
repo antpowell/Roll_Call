@@ -25,9 +25,15 @@
       <configuration version="3" platform="JVM 1.8" useProjectSettings="false">
         <compilerSettings />
         <compilerArguments>
+          <option name="destination" value="$MODULE_DIR$/build/tmp/kotlin-classes/debug" />
+          <option name="noStdlib" value="true" />
+          <option name="noReflect" value="true" />
+          <option name="moduleName" value="app_debug" />
           <option name="jvmTarget" value="1.8" />
+          <option name="addCompilerBuiltIns" value="true" />
+          <option name="loadBuiltInsFromDependencies" value="true" />
           <option name="languageVersion" value="1.2" />
-          <option name="apiVersion" value="1.1" />
+          <option name="apiVersion" value="1.2" />
           <option name="pluginOptions">
             <array>
               <option value="plugin:org.jetbrains.kotlin.android:experimental=false" />
@@ -36,8 +42,11 @@
             </array>
           </option>
           <option name="pluginClasspaths">
-            <array />
+            <array>
+              <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-android-extensions/1.2.10/10eb9a3d66aa7c5e17afdf93116082018d0d4643/kotlin-android-extensions-1.2.10.jar" />
+            </array>
           </option>
+          <option name="coroutinesState" value="enable" />
         </compilerArguments>
       </configuration>
     </facet>
@@ -152,7 +161,6 @@
     <orderEntry type="library" name="info.hoang8f:android-segmented-1.0.6" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-iid-11.8.0" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-base-license-11.8.0" level="project" />
-    <orderEntry type="library" name="org.jetbrains.kotlin:kotlin-stdlib:1.2.10@jar" level="project" />
     <orderEntry type="library" name="com.android.databinding:library-1.3.1" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-auth-license-11.8.0" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-basement-license-11.8.0" level="project" />
@@ -167,8 +175,10 @@
     <orderEntry type="library" name="com.android.support:support-core-ui-27.0.2" level="project" />
     <orderEntry type="library" name="com.android.support:support-compat-27.0.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-tasks-11.8.0" level="project" />
+    <orderEntry type="library" name="org.jetbrains.kotlin:kotlin-stdlib:1.2.21@jar" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-common-license-11.8.0" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-core-11.8.0" level="project" />
+    <orderEntry type="library" name="org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.1@jar" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-database-connection-license-11.8.0" level="project" />
     <orderEntry type="library" name="com.android.support:support-fragment-27.0.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-auth-api-phone-license-11.8.0" level="project" />
@@ -186,6 +196,7 @@
     <orderEntry type="library" name="__local_aars__:E.\Android development\Roll_Call\app\libs\libSimpleAndroidRuntime.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-auth-api-phone-11.8.0" level="project" />
     <orderEntry type="library" name="com.android.support:transition-27.0.2" level="project" />
+    <orderEntry type="library" name="com.github.florent37:materialtextfield-1.0.7" level="project" />
     <orderEntry type="library" name="com.android.support:recyclerview-v7-27.0.2" level="project" />
     <orderEntry type="library" name="com.android.databinding:adapters-1.3.1" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-analytics-11.8.0" level="project" />
