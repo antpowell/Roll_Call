@@ -17,6 +17,9 @@
     </string-array>
     <string name="AdMod_TEST_App_ID">ca-app-pub-3940256099942544/6300978111</string>
     <string name="AdMod_App_ID">ca-app-pub-2063573536051422~5568151294</string>
+    <string name="smsSent">SMS_SENT</string>
+    <string name="smsDelivered">SMS_DELIVERED</string>
+    <string name="TestNumber">8329473457</string>
 
 
 </resources>

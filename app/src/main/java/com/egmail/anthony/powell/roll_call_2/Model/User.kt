@@ -1,11 +1,23 @@
 package com.egmail.anthony.powell.roll_call_2.Model
 
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalTime
+import java.util.*
+
 /**
  * Created by powel on 1/13/2018.
  */
-data class User(
-  val name:String ="",
-  val uid: String ="",
-  val email:String = "",
-  val password:String = ""
-)
+data class User(val _email: String = "",
+                val _lastName: String = "",
+                val _tNum: String = ""){
+    companion object {
+        var user:User = User()
+        fun createUser(_email: String = "",
+                      _lastName: String = "",
+                      _tNum: String = ""){
+            user = User(_email, _lastName, _tNum)
+        }
+        fun getInstance() = user
+    }
+}

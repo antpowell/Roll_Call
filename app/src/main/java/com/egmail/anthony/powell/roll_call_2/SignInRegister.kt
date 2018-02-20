@@ -6,8 +6,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.widget.Toast
 import com.egmail.anthony.powell.roll_call_2.Model.Course
 import com.egmail.anthony.powell.roll_call_2.Service.FirebaseService
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_in_register.*
 
 class SignInRegister : AppCompatActivity() {
@@ -15,9 +17,7 @@ class SignInRegister : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in_register)
 
-        println("Start")
         FirebaseService.fetchCourseData {
-            println("First")
         }
 
         register_button_sign_in.setOnClickListener {
@@ -42,7 +42,7 @@ class SignInRegister : AppCompatActivity() {
                         } else {
                             FirebaseService.loginWithEmail(emailEntered.toString(), passwordEntered.toString(),
                                     onError = {
-                                        println("Error: ${it}")
+                                        println("Error: ${it.toString()}")
                                     },
                                     onSuccess = {
                                         if (it) {
@@ -54,6 +54,10 @@ class SignInRegister : AppCompatActivity() {
                     })
                     .create()
                     .show()
+        }
+        if(FirebaseAuth.getInstance().currentUser != null){
+            FirebaseService.fetchCourseData { startActivity(Intent(this, CourseList::class.java)) }
+            Toast.makeText(this, "Current User: ${FirebaseAuth.getInstance().currentUser?.email}", Toast.LENGTH_LONG).show()
         }
     }
 }

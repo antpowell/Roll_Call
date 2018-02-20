@@ -10,6 +10,7 @@
         <item name="colorAccent">@color/TSUAccent</item>
         <item name="colorButtonNormal">@color/TSUPrimary</item>
         <item name="android:textColor">@color/White</item>
+        <item name="android:fontFamily">@font/muli</item>
     </style>
 
 

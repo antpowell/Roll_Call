@@ -1,13 +1,13 @@
 package com.egmail.anthony.powell.roll_call_2.Service
 
-import android.widget.Toast
 import com.egmail.anthony.powell.roll_call_2.Model.Course
+import com.egmail.anthony.powell.roll_call_2.Model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import java.util.*
+import java.lang.Exception
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -23,7 +23,7 @@ object FirebaseService {
     private val ATTENDANCE = FirebaseDatabase.getInstance().getReference("Attendance")
     private val mAuth = FirebaseAuth.getInstance()
 
-    fun loginWithEmail(withEmail: String, andPassword: String, onError: (error: String) -> Unit, onSuccess: (wasSuccessful: Boolean) -> Unit) {
+    fun loginWithEmail(withEmail: String, andPassword: String, onError: (error: Exception?) -> Unit, onSuccess: (wasSuccessful: Boolean) -> Unit) {
         mAuth.signInWithEmailAndPassword(withEmail, andPassword)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
@@ -31,7 +31,7 @@ object FirebaseService {
                         onSuccess(it.isSuccessful)
                     } else {
                         println(it.exception)
-                        onError(it.exception.toString())
+                        onError(it.exception)
                     }
                 }
     }
@@ -45,36 +45,50 @@ object FirebaseService {
     }
 
 
-    fun fetchUserData() {
-        println("inside fetch user")
-        USERS.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError?) {
-                println("ERROR: ${p0.toString().trim()}")
-            }
-
-            override fun onDataChange(p0: DataSnapshot?) {
-
-            }
-        })
+    fun createUser(withEmail: String, andPassword: String, userCreated: (Boolean) -> Unit, userNotCreated: (Exception?) -> Unit) {
+        mAuth.createUserWithEmailAndPassword(withEmail, andPassword)
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        userCreated(it.isSuccessful)
+                    } else {
+                        userNotCreated(it.exception)
+                    }
+                }
     }
 
-//    fun fetchCoursesData() {
-//        println("inside fetch courses")
-//        println("First")
-//        COURSES.addListenerForSingleValueEvent(object : ValueEventListener {
-//            override fun onCancelled(p0: DatabaseError) {
-//                println("ERROR: ${p0.toString().trim()}")
-//            }
-//
-//            override fun onDataChange(s: DataSnapshot) {
-//                println(s.children)
-//                println("Second")
-//                Course.codes.addAll(s.child("Codes").value as ArrayList<String>)
-//                Course.images = s.child("Images").value as HashMap<String, String>
-//            }
-//        })
-//        println("Third")
-//    }
+    fun resetUserPassword(fromEmail: String) {
+        mAuth.sendPasswordResetEmail(fromEmail)
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+
+                    }
+                }
+    }
+
+
+    fun fetchUserData(userFound: (User) -> Unit, userNotFound: (String) -> Unit) {
+        println("Looking user up by UID")
+        if (!mAuth.currentUser?.uid.isNullOrEmpty()) {
+            USERS.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError?) {
+//                    println("ERROR: ${p0.toString().trim()}")
+                    userNotFound("Error: ${p0.toString()}")
+                }
+
+                override fun onDataChange(p0: DataSnapshot?) {
+                    if (p0?.hasChild(mAuth.currentUser?.uid)!!) {
+                        val holder = p0.child(mAuth.currentUser?.uid)
+                        User.createUser(holder.child("_email").value.toString(),
+                                holder.child("_lastName").value.toString(),
+                                holder.child("_tNum").value.toString())
+                        userFound(User.getInstance())
+                    } else {
+                        userNotFound("No user found for that UID.")
+                    }
+                }
+            })
+        }
+    }
 
     fun fetchCourseData(callback: () -> Unit) {
         println("inside fetch courses")
@@ -86,6 +100,8 @@ object FirebaseService {
 
             override fun onDataChange(s: DataSnapshot) {
                 println("Third")
+                Course.codes = arrayListOf()
+                Course.images = hashMapOf()
                 Course.codes.addAll(s.child("Codes").value as ArrayList<String>)
                 Course.images = s.child("Images").value as HashMap<String, String>
                 callback()
