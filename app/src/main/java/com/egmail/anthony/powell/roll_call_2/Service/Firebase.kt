@@ -2,6 +2,7 @@ package com.egmail.anthony.powell.roll_call_2.Service
 
 import com.egmail.anthony.powell.roll_call_2.Model.Course
 import com.egmail.anthony.powell.roll_call_2.Model.User
+import com.egmail.anthony.powell.roll_call_2.StudentSignature
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -21,13 +22,13 @@ object FirebaseService {
     private val COURSES = FirebaseDatabase.getInstance().getReference("Courses")
     private val USERS = FirebaseDatabase.getInstance().getReference("Users")
     private val ATTENDANCE = FirebaseDatabase.getInstance().getReference("Attendance")
+    private val TESTER = FirebaseDatabase.getInstance().getReference("Tester")
     private val mAuth = FirebaseAuth.getInstance()
 
     fun loginWithEmail(withEmail: String, andPassword: String, onError: (error: Exception?) -> Unit, onSuccess: (wasSuccessful: Boolean) -> Unit) {
         mAuth.signInWithEmailAndPassword(withEmail, andPassword)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        println(it.result.user.email)
                         onSuccess(it.isSuccessful)
                     } else {
                         println(it.exception)
@@ -81,6 +82,8 @@ object FirebaseService {
                         User.createUser(holder.child("_email").value.toString(),
                                 holder.child("_lastName").value.toString(),
                                 holder.child("_tNum").value.toString())
+                        println(holder.javaClass.name)
+                        println(holder.javaClass.kotlin)
                         userFound(User.getInstance())
                     } else {
                         userNotFound("No user found for that UID.")
@@ -91,15 +94,12 @@ object FirebaseService {
     }
 
     fun fetchCourseData(callback: () -> Unit) {
-        println("inside fetch courses")
-        println("Second")
         COURSES.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 println("ERROR: ${p0.toString().trim()}")
             }
 
             override fun onDataChange(s: DataSnapshot) {
-                println("Third")
                 Course.codes = arrayListOf()
                 Course.images = hashMapOf()
                 Course.codes.addAll(s.child("Codes").value as ArrayList<String>)
@@ -107,8 +107,20 @@ object FirebaseService {
                 callback()
             }
         })
-        println("Fourth")
     }
+
+    fun sendSignatureForAttendance( complete: () -> Unit){
+
+        TESTER.child("ATTENDANCE")
+                .child(SignatureService.getInstance().course)
+                .child(SignatureService.dbDate)
+                .child(User.getInstance()._tNum)
+                .setValue(SignatureService.signatureForDB())
+                .addOnCompleteListener {
+            complete()
+        }
+    }
+
 
 
 }
