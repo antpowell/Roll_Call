@@ -20,6 +20,7 @@
     <string name="smsSent">SMS_SENT</string>
     <string name="smsDelivered">SMS_DELIVERED</string>
     <string name="TestNumber">8329473457</string>
-
+    <string name="CrinerNumber">7138998111</string>
+    <string name="TEST_NUMBER">8329473457</string>
 
 </resources>

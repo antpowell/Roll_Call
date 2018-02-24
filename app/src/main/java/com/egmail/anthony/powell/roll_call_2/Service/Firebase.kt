@@ -45,7 +45,6 @@ object FirebaseService {
 
     }
 
-
     fun createUser(withEmail: String, andPassword: String, userCreated: (Boolean) -> Unit, userNotCreated: (Exception?) -> Unit) {
         mAuth.createUserWithEmailAndPassword(withEmail, andPassword)
                 .addOnCompleteListener {
@@ -66,13 +65,12 @@ object FirebaseService {
                 }
     }
 
-
     fun fetchUserData(userFound: (User) -> Unit, userNotFound: (String) -> Unit) {
         println("Looking user up by UID")
         if (!mAuth.currentUser?.uid.isNullOrEmpty()) {
             USERS.addListenerForSingleValueEvent(object : ValueEventListener {
+
                 override fun onCancelled(p0: DatabaseError?) {
-//                    println("ERROR: ${p0.toString().trim()}")
                     userNotFound("Error: ${p0.toString()}")
                 }
 
@@ -82,8 +80,6 @@ object FirebaseService {
                         User.createUser(holder.child("_email").value.toString(),
                                 holder.child("_lastName").value.toString(),
                                 holder.child("_tNum").value.toString())
-                        println(holder.javaClass.name)
-                        println(holder.javaClass.kotlin)
                         userFound(User.getInstance())
                     } else {
                         userNotFound("No user found for that UID.")
@@ -95,6 +91,7 @@ object FirebaseService {
 
     fun fetchCourseData(callback: () -> Unit) {
         COURSES.addListenerForSingleValueEvent(object : ValueEventListener {
+
             override fun onCancelled(p0: DatabaseError) {
                 println("ERROR: ${p0.toString().trim()}")
             }
@@ -111,7 +108,7 @@ object FirebaseService {
 
     fun sendSignatureForAttendance( complete: () -> Unit){
 
-        TESTER.child("ATTENDANCE")
+        ATTENDANCE
                 .child(SignatureService.getInstance().course)
                 .child(SignatureService.dbDate)
                 .child(User.getInstance()._tNum)
@@ -120,7 +117,5 @@ object FirebaseService {
             complete()
         }
     }
-
-
 
 }
