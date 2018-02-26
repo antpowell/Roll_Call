@@ -103,6 +103,7 @@ class StudentSignature : AppCompatActivity() {
                     Activity.RESULT_OK -> {
                         showNotification()
                     }
+                    else -> println(resultCode)
                 }
             }
         }

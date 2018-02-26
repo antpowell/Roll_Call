@@ -31,7 +31,7 @@ object FirebaseService {
                     if (it.isSuccessful) {
                         onSuccess(it.isSuccessful)
                     } else {
-                        println(it.exception)
+                        println(it.exception?.message)
                         onError(it.exception)
                     }
                 }
@@ -117,5 +117,7 @@ object FirebaseService {
             complete()
         }
     }
+
+    fun signOut(){mAuth.signOut()}
 
 }

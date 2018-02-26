@@ -1,6 +1,7 @@
 package com.egmail.anthony.powell.roll_call_2
 
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
@@ -28,34 +29,41 @@ class SignInRegister : AppCompatActivity() {
         log_in_button_sign_in_register.setOnClickListener {
             val emailEntered = text_input_edit_text_sign_in_register_email.text
             val passwordEntered = text_input_edit_text_sign_in_register_password.text
+            val getUserProgressDialog = ProgressDialog(this)
+            getUserProgressDialog.setTitle("Searching")
+            getUserProgressDialog.setMessage("Looking up $emailEntered")
+            getUserProgressDialog.setCancelable(false)
 
-            AlertDialog.Builder(this)
-                    .setTitle("Title")
-                    .setMessage("Email: %s\nPassword: %s".format(emailEntered, passwordEntered))
-                    .setPositiveButton("Ok", { dialogInterface, i ->
-                        if (emailEntered.isNullOrEmpty() && passwordEntered.isNullOrEmpty()) {
+
+            if (emailEntered.isNullOrEmpty() && passwordEntered.isNullOrEmpty()) {
+                AlertDialog.Builder(this)
+                        .setTitle("Error")
+                        .setMessage("Email and Password required.")
+                        .setCancelable(true)
+                        .create().show()
+            } else {
+                getUserProgressDialog.show()
+                FirebaseService.loginWithEmail(emailEntered.toString(), passwordEntered.toString(),
+                        onError = {
+                            getUserProgressDialog.dismiss()
                             AlertDialog.Builder(this)
+                                    .setIcon(R.drawable.ic_warning_white_36px)
                                     .setTitle("Error")
-                                    .setMessage("Email and Password required.")
-                                    .setCancelable(true)
-                                    .create().show()
-                        } else {
-                            FirebaseService.loginWithEmail(emailEntered.toString(), passwordEntered.toString(),
-                                    onError = {
-                                        println("Error: ${it.toString()}")
-                                    },
-                                    onSuccess = {
-                                        if (it) {
-                                            println("user found")
-                                            startActivity(Intent(this, CourseList::class.java))
-                                        }
-                                    })
-                        }
-                    })
-                    .create()
-                    .show()
+                                    .setMessage(it?.localizedMessage)
+                                    .setCancelable(true).create().show()
+                            println("Error: ${it.toString()}")
+                        },
+                        onSuccess = {
+                            getUserProgressDialog.dismiss()
+                            if (it) {
+                                println("user found")
+                                startActivity(Intent(this, CourseList::class.java))
+                            }
+                        })
+
+            }
         }
-        if(FirebaseAuth.getInstance().currentUser != null){
+        if (FirebaseAuth.getInstance().currentUser != null) {
             FirebaseService.fetchCourseData { startActivity(Intent(this, CourseList::class.java)) }
             Toast.makeText(this, "Current User: ${FirebaseAuth.getInstance().currentUser?.email}", Toast.LENGTH_LONG).show()
         }
