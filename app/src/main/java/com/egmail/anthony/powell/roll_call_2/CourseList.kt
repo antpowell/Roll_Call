@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
+import com.egmail.anthony.powell.roll_call_2.Model.Course
 import com.egmail.anthony.powell.roll_call_2.Service.FirebaseService
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_course_list.*
@@ -32,8 +33,14 @@ class CourseList : AppCompatActivity() {
 //            startActivity(Intent(this, SignInRegister::class.java))
         }
 
-//        course_item_favorite_image_view.onclick
+        course_list_search_view
 
+    }
+
+    private fun filter(searchBy:String){
+        var filteredCourseList : ArrayList<Course>
+
+//        for(Course c in )
     }
 }
 

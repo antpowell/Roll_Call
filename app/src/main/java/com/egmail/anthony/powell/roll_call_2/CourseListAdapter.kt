@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import android.widget.Toast
 import com.egmail.anthony.powell.roll_call_2.Model.Course
 import com.egmail.anthony.powell.roll_call_2.Service.FirebaseService
@@ -23,7 +24,6 @@ import kotlinx.coroutines.experimental.launch
 
 class CourseListAdapter(context: Context) : RecyclerView.Adapter<CourseListCustomViewHolder>() {
     val context = context
-
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CourseListCustomViewHolder {
         val inflater = LayoutInflater.from(parent?.context)
@@ -49,7 +49,6 @@ class CourseListAdapter(context: Context) : RecyclerView.Adapter<CourseListCusto
             holder.v.course_item_image_view.loadUrl(Course.images.get("DEFAULT"))
         }
         holder.v.course_item_text_view.text = courseCode
-
 
     }
 

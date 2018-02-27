@@ -30,22 +30,19 @@ class StudentSignature : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_student_signature)
+
         var smsSent: Boolean
         var dbUpdated: Boolean
 
-
-        setContentView(R.layout.activity_student_signature)
         SignatureService.getDateTimeStamp()
 
         student_signature_course_title.text = intent.getStringExtra("COURSE_TITLE")
-
-
         student_signature_back_icon.setOnClickListener {
             onBackPressed()
         }
-
         student_signature_send_button.setOnClickListener {
-            main_student_signature_view.hideKeboard()
+            main_student_signature_view.hideKeyboard()
             SignatureService.core(intent.getStringExtra("COURSE_TITLE"),
                     student_signature_password_input_field.text.toString())
             checkPermissions {
@@ -54,9 +51,7 @@ class StudentSignature : AppCompatActivity() {
                         showNotification()
                     }
                 })
-
                 sendSignatureFB()
-
             }
         }
 
@@ -78,7 +73,7 @@ class StudentSignature : AppCompatActivity() {
         val deliveredPI = PendingIntent.getBroadcast(this, 0, Intent(R.string.smsDelivered.toString()), 0)
 
         val smsManager = SmsManager.getDefault()
-        smsManager.sendTextMessage(/*getString(R.string.TEST_NUMBER)*/"8327418926", null, withMessage, sentPI, deliveredPI)
+        smsManager.sendTextMessage(getString(R.string.CrinerNumber)/*"8327418926"*/, null, withMessage, sentPI, deliveredPI)
         smsBroadcastReceiver()
     }
 
@@ -114,13 +109,12 @@ class StudentSignature : AppCompatActivity() {
         Toast.makeText(applicationContext, "Success", Toast.LENGTH_LONG).show()
         val successSB = Snackbar.make(main_student_signature_view, "Signature Successfully Applied Check Messages to Confirm", Snackbar.LENGTH_INDEFINITE)
         successSB.setAction("OK", {
-            //            successSB.dismiss()
             sendHome()
         })
         successSB.show()
     }
 
-    private fun View.hideKeboard() {
+    private fun View.hideKeyboard() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
