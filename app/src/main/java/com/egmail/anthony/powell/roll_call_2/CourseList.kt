@@ -3,7 +3,10 @@ package com.egmail.anthony.powell.roll_call_2
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.SearchView
+import android.view.Menu
 import android.widget.Toast
 import com.egmail.anthony.powell.roll_call_2.Model.Course
 import com.egmail.anthony.powell.roll_call_2.Service.FirebaseService
@@ -19,6 +22,8 @@ class CourseList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_list)
 
+        setSupportActionBar(course_list_toolbar)
+
         println("Fetching Firebase")
         FirebaseService.fetchUserData(
                 userFound = {println("User found data: $it")},
@@ -33,14 +38,18 @@ class CourseList : AppCompatActivity() {
 //            startActivity(Intent(this, SignInRegister::class.java))
         }
 
-        course_list_search_view
+//        course_list_search_view
 
     }
 
-    private fun filter(searchBy:String){
-        var filteredCourseList : ArrayList<Course>
-
-//        for(Course c in )
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.search_menu, menu)
+//        val searchMenuItem = menu?.findItem(R.id.course_list_search_menu_item)
+//        val searchView = MenuItemCompat.getActionProvider(searchMenuItem) as SearchView
+//
+//        searchView.setOnQueryTextListener(SearchView.OnQueryTextListener){}
+        return true
     }
+
 }
 
