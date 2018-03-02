@@ -146,7 +146,8 @@
         app:layout_constraintTop_toBottomOf="@id/linear_layout_register_form"
         android:layout_marginTop="35dp"
         android:backgroundTint="@color/White"
-        android:textColor="#000"/>
+        android:textColor="#000"
+        style="@style/PrimaryButton"/>
 
 
 

@@ -38,16 +38,11 @@ class CourseList : AppCompatActivity() {
 //            startActivity(Intent(this, SignInRegister::class.java))
         }
 
-//        course_list_search_view
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.search_menu, menu)
-//        val searchMenuItem = menu?.findItem(R.id.course_list_search_menu_item)
-//        val searchView = MenuItemCompat.getActionProvider(searchMenuItem) as SearchView
-//
-//        searchView.setOnQueryTextListener(SearchView.OnQueryTextListener){}
+
         return true
     }
 

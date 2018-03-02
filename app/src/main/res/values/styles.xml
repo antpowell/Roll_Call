@@ -12,5 +12,10 @@
         <item name="android:fontFamily">@font/muli</item>
     </style>
 
+    <style name="PrimaryButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/TSUPrimaryDark</item>
+        <item name="colorButtonNormal">@color/TSUPrimary</item>
+    </style>
+
 
 </resources>
