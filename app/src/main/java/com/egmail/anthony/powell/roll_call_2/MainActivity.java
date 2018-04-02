@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.egmail.anthony.powell.roll_call_2.model.DataItemImage;
@@ -41,8 +42,14 @@ public class MainActivity extends Activity {
 
   new DataItemImage().getImages();
 
-  getVersionNumberTask task = new getVersionNumberTask();
-  task.execute();
+
+
+//  getVersionNumberTask task = new getVersionNumberTask();
+//   try{
+//    task.execute();
+//   } catch(Error e){
+//
+//  }
 
   studentInfo = getSharedPreferences(TAG, MODE_PRIVATE);
   SharedPreferences.Editor editor = studentInfo.edit();
@@ -62,6 +69,15 @@ public class MainActivity extends Activity {
 
   user = studentInfo.getString(LAST, "Not found");
   t = studentInfo.getString(T, "Not found");
+
+  if (t.equals("Not found") || user.equals("Not found")) {
+   startActivity(new Intent(MainActivity.this, StudentReg.class));
+   overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+  } else {
+   startActivity(new Intent(MainActivity.this, CourseSelectionScreen.class));
+   overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+  }
 
 //  ====================>SCREEN SIZE IN PIXELS<====================
 //  Display display = getWindowManager().getDefaultDisplay();
@@ -88,12 +104,13 @@ public class MainActivity extends Activity {
        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
        .referrer("http://www.google.com")
        .get()
-       .select("div[itemprop=softwareVersion]")
+       .select("span.htlgb")
        .first()
        .ownText();
     } catch (IOException e) {
      e.printStackTrace();
     }
+    Log.d("Play Version",playVersionCode);
     return playVersionCode;
    }
 

@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +16,7 @@ import android.widget.TextView;
 /*
  * Created by ap198_000 on 1/19/2015.
  */
-public class Proxy extends ActionBarActivity {
+public class Proxy extends AppCompatActivity {
 
     public static final String PROXYTAG = "proxy_tag";
     public static final String LAST = "last";

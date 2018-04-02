@@ -5,8 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
@@ -23,7 +23,7 @@ import android.widget.Toast;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 
-public class StudentReg extends ActionBarActivity {
+public class StudentReg extends AppCompatActivity {
     private boolean nameEntered, idEntered, emailEntered, passwordEntered;
     protected Users user;
     private DBController dbController;
