@@ -67,16 +67,13 @@ object FirebaseService {
 
     fun fetchUserData(userFound: (User) -> Unit, userNotFound: (String) -> Unit) {
         println("Looking user up by UID")
+
+
         if (!mAuth.currentUser?.uid.isNullOrEmpty()) {
-            USERS.addListenerForSingleValueEvent(object : ValueEventListener {
-
-                override fun onCancelled(p0: DatabaseError?) {
-                    userNotFound("Error: ${p0.toString()}")
-                }
-
-                override fun onDataChange(p0: DataSnapshot?) {
-                    if (p0?.hasChild(mAuth.currentUser?.uid)!!) {
-                        val holder = p0.child(mAuth.currentUser?.uid)
+            val postListener =  object : ValueEventListener {
+                override fun onDataChange(p0: DataSnapshot) {
+                    if (p0.hasChild(mAuth.currentUser?.uid!!)) {
+                        val holder = p0.child(mAuth.currentUser?.uid!!)
                         User.createUser(holder.child("_email").value.toString(),
                                 holder.child("_lastName").value.toString(),
                                 holder.child("_tNum").value.toString())
@@ -85,7 +82,12 @@ object FirebaseService {
                         userNotFound("No user found for that UID.")
                     }
                 }
-            })
+
+                override fun onCancelled(p0: DatabaseError) {
+                    userNotFound("Error: ${p0.toString()}")
+                }
+            }
+            USERS.addListenerForSingleValueEvent(postListener);
         }
     }
 

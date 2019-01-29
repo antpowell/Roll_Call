@@ -13,8 +13,6 @@ import com.egmail.anthony.powell.roll_call_2.Service.FirebaseService
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_course_list.*
 import kotlinx.android.synthetic.main.course_item.*
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.launch
 
 class CourseList : AppCompatActivity() {
 
