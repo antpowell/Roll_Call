@@ -1,6 +1,5 @@
 package com.egmail.anthony.powell.roll_call;
 
-import android.*;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -17,13 +16,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +26,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -71,7 +65,7 @@ public class SignIn extends AppCompatActivity {
 
   proxyInfo = getSharedPreferences(PROXYTAG, MODE_PRIVATE);
 
-  password = (EditText) findViewById(R.id.editText);
+  password = findViewById(R.id.editText);
 
   studentLAST = user.get_lastName();
   studentID = user.get_tNum();
@@ -81,7 +75,7 @@ public class SignIn extends AppCompatActivity {
 
 
   //Click sign in button saves password of the day entry then sends the sharedpreferences as a text message
-  final Button signInButton = (Button) findViewById(R.id.signIn_button);
+  final Button signInButton = findViewById(R.id.signIn_button);
   signInButton.setOnClickListener(new View.OnClickListener() {
 
 

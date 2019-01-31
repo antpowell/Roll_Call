@@ -3,30 +3,16 @@ package com.egmail.anthony.powell.roll_call;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.appcompat.*;
-import android.support.v7.appcompat.BuildConfig;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
-import org.jsoup.Jsoup;
-
-import java.io.IOException;
-
-
-public class StudentReg extends ActionBarActivity {
+public class StudentReg extends AppCompatActivity {
  private boolean nameEntered, idEntered;
  protected Users user;
  private DBController dbController;
@@ -43,9 +29,9 @@ public class StudentReg extends ActionBarActivity {
 
   context = this;
 //        View hooks
-  regButton = (Button) findViewById(R.id.RegisterButton);
-  lastName = (EditText) this.findViewById(R.id.LastNameTextBox);
-  Tnum = (EditText) this.findViewById(R.id.TNumberTextBox);
+  regButton = findViewById(R.id.RegisterButton);
+  lastName = this.findViewById(R.id.LastNameTextBox);
+  Tnum = this.findViewById(R.id.TNumberTextBox);
 
   lastName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
    @Override
@@ -113,8 +99,8 @@ public class StudentReg extends ActionBarActivity {
  /*Function to save Student's last name and account number in studentInfo shared prefs the Email and Pass will be stored in a
  * another prefs setting later since it will not be sent in the message to the server phone.*/
  private void storeUserInfo() {
-  EditText eMail = (EditText) this.findViewById(R.id.EmailTextBox);
-  EditText studentPass = (EditText) this.findViewById(R.id.PassTextBox);
+  EditText eMail = this.findViewById(R.id.EmailTextBox);
+  EditText studentPass = this.findViewById(R.id.PassTextBox);
   //Create User
   user = new Users(this, lastName.getText().toString(), Tnum.getText().toString(), eMail.getText().toString(), studentPass.getText().toString());
   if (user.hasUser()) {

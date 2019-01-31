@@ -2,14 +2,10 @@ package com.egmail.anthony.powell.roll_call;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -28,7 +24,7 @@ public class CustomList extends ArrayAdapter<String> {
     public CustomList(Context context, String[] itemText) {
         super(context, R.layout.course_selection_dialog, itemText);
         Activity activity = (Activity) context;
-        searchView = (SearchView) activity.findViewById(R.id.editTextSearch);
+        searchView = activity.findViewById(R.id.editTextSearch);
 
     }
 
@@ -37,8 +33,8 @@ public class CustomList extends ArrayAdapter<String> {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View listItemView = inflater.inflate(R.layout.course_selection_dialog, parent, false);
 
-        TextView listItemTextView = (TextView) listItemView.findViewById(R.id.listText);
-        ImageView listItemImgView = (ImageView) listItemView.findViewById(R.id.listImg);
+        TextView listItemTextView = listItemView.findViewById(R.id.listText);
+        ImageView listItemImgView = listItemView.findViewById(R.id.listImg);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

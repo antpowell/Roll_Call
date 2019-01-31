@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '21.1.2'
+    compileSdkVersion 28
+//    buildToolsVersion '21.1.2'
 
     defaultConfig {
         applicationId "com.egmail.anthony.powell.roll_call"
-        minSdkVersion 13
-        targetSdkVersion 23
+        minSdkVersion 14
+        targetSdkVersion 28
         versionCode 5
         versionName "3.1.0"
     }
@@ -21,13 +21,15 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
-    compile 'com.google.firebase:firebase-core:9.2.0'
-    compile 'com.google.firebase:firebase-database:9.2.0'
-    compile 'com.google.firebase:firebase-crash:9.2.0'
-    compile 'com.google.firebase:firebase-storage:9.2.0'
-    compile 'com.google.firebase:firebase-auth:9.2.0'
-    compile 'com.google.firebase:firebase-messaging:9.2.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:support-media-compat:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.google.firebase:firebase-core:16.0.6'
+    implementation 'com.google.firebase:firebase-database:16.0.6'
+    implementation 'com.google.firebase:firebase-crash:16.2.1'
+    implementation 'com.google.firebase:firebase-storage:16.0.5'
+    implementation 'com.google.firebase:firebase-auth:16.1.0'
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
 }

@@ -6,8 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +16,7 @@ import android.widget.TextView;
 /*
  * Created by ap198_000 on 1/19/2015.
  */
-public class Proxy extends ActionBarActivity {
+public class Proxy extends AppCompatActivity {
 
     public static final String PROXYTAG = "proxy_tag";
     public static final String LAST = "last";
@@ -37,13 +36,13 @@ public class Proxy extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        proxy_last = (TextView) this.findViewById(R.id.ProxyLastNameTextField);
-        proxy_id = (TextView) this.findViewById(R.id.ProxyTNumberTextField);
+        proxy_last = this.findViewById(R.id.ProxyLastNameTextField);
+        proxy_id = this.findViewById(R.id.ProxyTNumberTextField);
         proxyInfo = getSharedPreferences(PROXYTAG, MODE_PRIVATE);
 
         //On button press get proxy users last name and student number from text field and save to PROXYTAG
         //then return to sign in activity.
-        final Button signIn = (Button) findViewById(R.id.StoreProxyButton);
+        final Button signIn = findViewById(R.id.StoreProxyButton);
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
