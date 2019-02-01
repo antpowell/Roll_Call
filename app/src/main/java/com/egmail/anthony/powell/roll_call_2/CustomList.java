@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -61,8 +62,10 @@ public class CustomList extends ArrayAdapter<String> {
         final View listItemView = inflater.inflate(R.layout.course_selection_dialog, parent, false);
 
         final TextView listItemTextView = (TextView) listItemView.findViewById(R.id.listText);
+
         listItemImgView = (WebView) listItemView.findViewById(R.id.listImg);
 //        listItemImgView.setInitialScale(1);
+        listItemImgView.setWebViewClient(new WebViewClient());
         listItemImgView.loadUrl("https://image.flaticon.com/icons/svg/164/164953.svg");
         listItemImgView.setBackgroundColor(Color.TRANSPARENT);
 
@@ -147,6 +150,7 @@ public class CustomList extends ArrayAdapter<String> {
         DataItemImage dataItemImage = new DataItemImage();
 
         dataItemImage.getImageUrl(courseTitle);
+        listItemImgView.setWebViewClient(new WebViewClient());
         listItemImgView.loadUrl(dataItemImage.getImageUrl(courseTitle));
     }
 }
