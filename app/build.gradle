@@ -9,8 +9,8 @@ android {
         applicationId "com.egmail.anthony.powell.roll_call_2"
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 12
-        versionName "1.6.6"
+        versionCode 13
+        versionName "1.6.7"
     }
     buildTypes {
         release {
