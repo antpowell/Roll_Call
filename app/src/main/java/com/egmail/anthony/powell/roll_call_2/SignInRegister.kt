@@ -2,11 +2,9 @@ package com.egmail.anthony.powell.roll_call_2
 
 import android.app.AlertDialog
 import android.app.ProgressDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import android.widget.Toast
 import com.egmail.anthony.powell.roll_call_2.Model.Course
 import com.egmail.anthony.powell.roll_call_2.Service.FirebaseService

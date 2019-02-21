@@ -1,10 +1,5 @@
 package com.egmail.anthony.powell.roll_call_2.Model
 
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalTime
-import java.util.*
-
 /**
  * Created by powel on 1/13/2018.
  */

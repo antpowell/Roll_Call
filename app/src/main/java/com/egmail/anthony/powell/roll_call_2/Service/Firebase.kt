@@ -2,15 +2,11 @@ package com.egmail.anthony.powell.roll_call_2.Service
 
 import com.egmail.anthony.powell.roll_call_2.Model.Course
 import com.egmail.anthony.powell.roll_call_2.Model.User
-import com.egmail.anthony.powell.roll_call_2.StudentSignature
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import java.lang.Exception
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 /**
  * Created by powel on 1/13/2018.

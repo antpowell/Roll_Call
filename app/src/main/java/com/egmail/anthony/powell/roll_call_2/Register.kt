@@ -1,15 +1,12 @@
 package com.egmail.anthony.powell.roll_call_2
 
 import android.app.ProgressDialog
-import android.content.DialogInterface
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
-import android.widget.Toast
+import android.support.v7.app.AppCompatActivity
 import com.egmail.anthony.powell.roll_call_2.Service.FirebaseService
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.activity_sign_in_register.*
 
 class Register : AppCompatActivity() {
 

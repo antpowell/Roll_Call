@@ -1,11 +1,8 @@
 package com.egmail.anthony.powell.roll_call_2.Service
 
-import android.os.Build
 import com.egmail.anthony.powell.roll_call_2.Model.User
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.*
-import kotlin.collections.HashMap
 
 /**
  * Created by powel on 1/13/2018.

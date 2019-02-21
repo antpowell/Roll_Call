@@ -1,20 +1,16 @@
 package com.egmail.anthony.powell.roll_call_2
 
-import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.view.MenuItemCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.view.Menu
-import android.widget.Toast
 import com.egmail.anthony.powell.roll_call_2.Model.Course
 import com.egmail.anthony.powell.roll_call_2.Service.FirebaseService
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_course_list.*
-import kotlinx.android.synthetic.main.course_item.*
 
 class CourseList : AppCompatActivity() {
+    private val adapter = CourseListAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +24,7 @@ class CourseList : AppCompatActivity() {
                 userNotFound = { println(it) })
 
         course_list_recycler_view_listing.layoutManager = LinearLayoutManager(this)
-        course_list_recycler_view_listing.adapter = CourseListAdapter(this)
+        course_list_recycler_view_listing.adapter = adapter
 
         course_list_image_view_log_out.setOnClickListener {
             FirebaseService.signOut()
@@ -38,10 +34,34 @@ class CourseList : AppCompatActivity() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.search_menu, menu)
 
+        val searchItem = menu.findItem(R.id.course_list_search_menu_item)
+        val searchView = searchItem.actionView as SearchView
+        
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(query: String?): Boolean {
+                filter(query)
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                println("final ---> $query")
+                filter(query)
+                return false
+            }
+        })
+
         return true
+    }
+
+    fun filter(query: String?){
+        val filteredCourseCodes = Course.codes.filter { it.contains(query!!.toUpperCase()) }
+        println("filtered course codes ::::>> $filteredCourseCodes")
+        adapter.filterList(filteredCourseCodes as ArrayList<String>)
+
+//        adapter.filterList()
     }
 
 }

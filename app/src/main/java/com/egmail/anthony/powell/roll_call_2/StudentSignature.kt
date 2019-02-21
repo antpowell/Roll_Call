@@ -1,29 +1,26 @@
 package com.egmail.anthony.powell.roll_call_2
 
 import android.Manifest
-import android.app.*
+import android.app.Activity
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
-import android.support.v4.app.NotificationCompat
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.telephony.SmsManager
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import com.egmail.anthony.powell.roll_call_2.Model.User
 import com.egmail.anthony.powell.roll_call_2.Service.FirebaseService
-import com.egmail.anthony.powell.roll_call_2.Service.Signature
 import com.egmail.anthony.powell.roll_call_2.Service.SignatureService
 import com.egmail.anthony.powell.roll_call_2.Service.SignatureSmsService
 import kotlinx.android.synthetic.main.activity_student_signature.*
-import kotlin.system.exitProcess
 
 class StudentSignature : AppCompatActivity() {
 

@@ -1,9 +1,6 @@
 package com.egmail.anthony.powell.roll_call_2.Model
 
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
-import kotlin.properties.Delegates
+import android.arch.lifecycle.ViewModel
 
 /**
  * Created by powel on 1/13/2018.
@@ -41,7 +38,7 @@ object Course {
 //    }
 //}
 
-//suspend fun Course() {
-//    var codes: ArrayList<String>
-//    var images: HashMap<String, String>
+//class Course : ViewModel() {
+//    var codes: ArrayList<String> = ArrayList()
+//    var images: HashMap<String, String> = HashMap()
 //}

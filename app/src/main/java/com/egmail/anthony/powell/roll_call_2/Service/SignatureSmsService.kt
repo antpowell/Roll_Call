@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.telephony.SmsManager
-import android.widget.Toast
 import com.egmail.anthony.powell.roll_call_2.R
 
 /**
