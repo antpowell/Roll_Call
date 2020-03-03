@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '21.1.2'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "com.egmail.anthony.powell.roll_call"
-        minSdkVersion 13
-        targetSdkVersion 23
+        minSdkVersion 23
+        targetSdkVersion 28
         versionCode 5
         versionName "3.1.0"
     }
@@ -21,13 +21,13 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
-    compile 'com.google.firebase:firebase-core:9.2.0'
-    compile 'com.google.firebase:firebase-database:9.2.0'
-    compile 'com.google.firebase:firebase-crash:9.2.0'
-    compile 'com.google.firebase:firebase-storage:9.2.0'
-    compile 'com.google.firebase:firebase-auth:9.2.0'
-    compile 'com.google.firebase:firebase-messaging:9.2.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.firebase:firebase-core:17.2.3'
+    implementation 'com.google.firebase:firebase-database:19.2.1'
+    implementation 'com.google.firebase:firebase-crash:16.2.1'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-messaging:20.1.1'
 }

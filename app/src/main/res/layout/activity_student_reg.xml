@@ -32,7 +32,7 @@
         android:layout_weight="3"
         android:layout_below="@+id/imageView"
         android:gravity="top|center">
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/viewLastName"
@@ -49,8 +49,8 @@
                 android:layout_centerInParent="true"
                 android:drawableLeft="@drawable/ic_account"
                 android:capitalize="words" />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/viewTNumber"
@@ -69,8 +69,8 @@
                 android:hint="@string/tnumberHint"
                 android:inputType="number"
                 android:drawableLeft="@drawable/ic_dialpad"/>
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/viewEmail"
@@ -89,8 +89,8 @@
                 android:hint="Email Address(Optional)"
                 android:inputType="textEmailAddress"
                 android:drawableLeft="@drawable/ic_gmail"/>
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/viewPassword"
@@ -109,7 +109,7 @@
                 android:hint="Create Password(Optional)"
                 android:inputType="textPassword"
                 android:drawableLeft="@drawable/ic_lock_outline"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/RegisterButton"
