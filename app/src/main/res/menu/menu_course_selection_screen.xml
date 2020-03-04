@@ -12,7 +12,7 @@
         android:title="Search List"
         android:icon="@android:drawable/ic_menu_search"
         app:showAsAction="ifRoom|collapseActionView"
-        app:actionViewClass="android.support.v7.widget.SearchView"/>
+        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
     <SearchView
 
         android:layout_width="match_parent"

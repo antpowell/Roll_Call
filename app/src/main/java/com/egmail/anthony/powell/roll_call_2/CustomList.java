@@ -2,24 +2,21 @@ package com.egmail.anthony.powell.roll_call_2;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
+
+import androidx.appcompat.widget.SearchView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.egmail.anthony.powell.roll_call_2.model.DataItemImage;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 
 /**

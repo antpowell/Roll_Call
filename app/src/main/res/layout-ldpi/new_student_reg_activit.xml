@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,7 +19,7 @@
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/student_reg_name_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             android:hint="Last Name"
             android:inputType="textPersonName"/>
 
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
         android:id="@+id/student_reg_tnum_icon"
@@ -54,7 +54,7 @@
         app:layout_constraintVertical_bias="0.526"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/student_reg_tnum_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
             android:hint="T# Numbers Only"
             android:inputType="number"/>
 
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
         android:id="@+id/student_reg_email_icon"
@@ -88,7 +88,7 @@
         app:layout_constraintVertical_bias="0.526"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/student_reg_email_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
             android:hint="Email"
             android:inputType="textEmailAddress"/>
 
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
         android:id="@+id/student_reg_password_icon"
@@ -121,7 +121,7 @@
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/student_reg_password_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
             android:hint="Password"
             android:inputType="textPassword"/>
 
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/student_reg_register_button"
@@ -196,4 +196,4 @@
     </info.hoang8f.android.segmented.SegmentedGroup>
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
