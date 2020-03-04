@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -40,8 +41,6 @@ public class SignIn extends AppCompatActivity {
     public static final String LAST = "last";
     public static final String T = "tNum";
     public static final String COURSE = "course";
-    private static final int MY_PERMISSIONS_REQUEST = 0;
-    private static final int MY_PERMISSIONS_REQUEST_PHONE_STATE = 1;
     private dataJSONFormatter dataJSONFormatter;
     //    private final int permissionCheck = ContextCompat.checkSelfPermission(this, android.Manifest.permission.SEND_SMS);
 //    public int MY_PERMISSIONS_REQUEST;
@@ -52,10 +51,9 @@ public class SignIn extends AppCompatActivity {
     private SharedPreferences proxyInfo;
     private Users user;
 
-    private String studentLAST, studentID, c, POD;
+    private String studentLAST, studentID, course, POD;
     private final static String contactNumber = /*"8327418926"*/"7138998111";
-    private String studentMessage, proxyMessage;
-    private BroadcastReceiver broadcastReceiver;
+    private String studentMessage;
 
 
     @Override
@@ -71,9 +69,9 @@ public class SignIn extends AppCompatActivity {
 
         studentLAST = user.get_lastName();
         studentID = user.get_tNum();
-        c = user.get_course();
+        course = user.get_course();
 
-        setTitle(this, c);
+        setTitle(this, course);
 
 
         //Click sign in button saves password of the day entry then sends the sharedpreferences as a text message
@@ -92,53 +90,9 @@ public class SignIn extends AppCompatActivity {
                 final Calendar cal = Calendar.getInstance();
 
                 //Messages strings
-                studentMessage = "(" + c + "," + studentLAST + "," + studentID + "," + date + "," + POD + ")";
-                proxyMessage = "(" + c + "," + proxyLAST + "," + "T" + proxyID + "," + date + "," + POD + ")";
+                studentMessage = "(" + course + "," + studentLAST + "," + studentID + "," + date + "," + POD + ")";
 
-
-                //check if a PROXYTAG is stored
-                if (proxyID.equals("Not found") || proxyLAST.equals("Not found")) {
-//                    Check for SMS permissions
-
-                    checkPermissions();
-//     sendMessage(studentMessage, contactNumber);
-
-                } else {
-                    //Alert to ensure that user wants to use PROXY STUDENT prefs
-                    AlertDialog.Builder builder = new AlertDialog.Builder(SignIn.this)
-                      .setTitle("Proxy User Found!")
-                      .setMessage("To sign in using proxy data press \"OK\"")
-                      .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                          @Override
-                          public void onClick(DialogInterface dialog, int which) {
-
-                              //Send users Course, Last Name, StudentID, and Time/Date stamp as a message
-                              sendMessage(proxyMessage, contactNumber);
-
-
-//
-
-                              //get data from PROXY STUDENT prefs and send it with course and date/time stamp in a message
-                              Toast.makeText(SignIn.this, proxyMessage, Toast.LENGTH_LONG).show();
-                          }
-                      }).setNeutralButton("Clear Proxy", new DialogInterface.OnClickListener() {
-                          @Override
-                          public void onClick(DialogInterface dialog, int which) {
-                              SharedPreferences.Editor proxyEdit = proxyInfo.edit();
-                              proxyEdit.remove(LAST).remove(T).clear().commit();
-
-                          }
-                      }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                          @Override
-                          public void onClick(DialogInterface dialog, int which) {
-                              sendMessage(studentMessage, contactNumber);
-                              dialog.dismiss();
-                          }
-                      })
-                      .setCancelable(false);
-                    AlertDialog proxy_found = builder.create();
-                    proxy_found.show();
-                }
+                sendMessage(studentMessage, contactNumber);
 
             }
 
@@ -151,75 +105,40 @@ public class SignIn extends AppCompatActivity {
         super.onStop();
     }
 
-    //Method to be called to set the title of this screen from another Activity
+    /**
+     *  Method to be called to set the title of this screen from another Activity
+     * @param title title to be shown at the top of the Activity
+     */
     public void setTitle(Activity a, String title) {
-        //TextView tv = (TextView) a.findViewById(R.id.SignInTitle);
-
         getSupportActionBar().setTitle(title);
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
-    private void checkPermissions() {
-        int smsPermissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
-        int readPhoneStatePermissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
-        if (smsPermissionCheck != PackageManager.PERMISSION_GRANTED || readPhoneStatePermissionCheck != PackageManager.PERMISSION_GRANTED) {
-            if (shouldShowRequestPermissionRationale(Manifest.permission.SEND_SMS) || shouldShowRequestPermissionRationale(Manifest.permission.READ_PHONE_STATE)) {
-                Toast.makeText(this, "Permissions are required to validate user signature.", Toast.LENGTH_LONG).show();
-            }
-            ActivityCompat.requestPermissions(SignIn.this, new String[]{Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE}, MY_PERMISSIONS_REQUEST);
-        } else sendMessage(studentMessage, contactNumber);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                    //Send users Course, Last Name, StudentID, and Time/Date stamp as a message
-                    sendMessage(studentMessage, contactNumber);
-                } else
-                    Toast.makeText(SignIn.this, "Unable to sign in because permissions were not granted.", Toast.LENGTH_SHORT).show();
-                break;
-            }
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
-
+    /**
+     * Prepare message and send to SMS application for user to send.
+     *
+     * @param messageToSend User signature used to sign roll
+     * @param contactNumber Static phone number to send message
+     */
     public void sendMessage(String messageToSend, String contactNumber) {
 
         //Google Forms HTTP section found @http://goo.gl/forms/HCtiSG0c0D
         //end Google Forms HTTP
-        String sent = "MESSAGE_SENT";
-        PendingIntent sentPI = PendingIntent.getBroadcast(this, 0, new Intent(sent), 0);
 
-        broadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                if (getResultCode() == Activity.RESULT_OK) {
-                    Toast.makeText(SignIn.this, "Signed in with:\n" + studentMessage, Toast.LENGTH_LONG).show();
-                    Toast.makeText(getBaseContext(), "SMS sent", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getBaseContext(), "SMS could not sent", Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
-        registerReceiver(broadcastReceiver, new IntentFilter(sent));
-        try {
-            SmsManager sms = SmsManager.getDefault();
-            //if SMS not sent message user
-            sms.sendTextMessage(contactNumber, null, messageToSend, sentPI, null);
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), String.format("ERROR: \n%s", e.getMessage().toString()), Toast.LENGTH_LONG).show();
-            e.printStackTrace();
+        Intent sendSMS = new Intent(Intent.ACTION_SENDTO);
+        sendSMS.setData(Uri.parse("smsto:"));
+        sendSMS.putExtra("address", contactNumber);
+        sendSMS.putExtra("sms_body", messageToSend);
+        if(sendSMS.resolveActivity(getPackageManager()) != null){
+            startActivity(sendSMS);
         }
 
-
+//        Add roll signature to Firebase for record.
         dataJSONFormatter = new dataJSONFormatter(user, POD);
-
-
         DBController dbController = new DBController(this, "Attendance");
-        dbController.getDB().child(dataJSONFormatter.get_courseNumber()).child(String.valueOf(new SimpleDateFormat("EEE, MMM d, yyyy").format(new Date()))).child(dataJSONFormatter.get_tNumber()).setValue(dataJSONFormatter.loginObject());
+        dbController.getDB().child(dataJSONFormatter.get_courseNumber())
+                .child(String.valueOf(new SimpleDateFormat("EEE, MMM d, yyyy")
+                        .format(new Date()))).child(dataJSONFormatter.get_tNumber())
+                .setValue(dataJSONFormatter.loginObject());
 
     }
 
@@ -244,8 +163,6 @@ public class SignIn extends AppCompatActivity {
             k.show();
             startActivity(new Intent(SignIn.this, Proxy.class));
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            //finish();  --->if finished when back button is press returns to the Course Selection Activity (ADD || DROP)?
-            unregisterReceiver(broadcastReceiver);
             return true;
         }
         if (id == android.R.id.home) {
