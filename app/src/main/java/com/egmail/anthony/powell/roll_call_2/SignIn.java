@@ -119,13 +119,14 @@ public class SignIn extends AppCompatActivity {
      * @param messageToSend User signature used to sign roll
      * @param contactNumber Static phone number to send message
      */
-    public void sendMessage(String messageToSend, String contactNumber) {
+    public void sendMessage(String messageToSend, String contactNumber)  {
 
         //Google Forms HTTP section found @http://goo.gl/forms/HCtiSG0c0D
         //end Google Forms HTTP
 
         Intent sendSMS = new Intent(Intent.ACTION_SENDTO);
         sendSMS.setData(Uri.parse("smsto:"));
+//        sendSMS.setDataAndType(Uri.parse("smsto:"),"text/plain");
         sendSMS.putExtra("address", contactNumber);
         sendSMS.putExtra("sms_body", messageToSend);
         if(sendSMS.resolveActivity(getPackageManager()) != null){

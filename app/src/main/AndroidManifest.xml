@@ -50,12 +50,15 @@
             android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name=".SignIn" />
+                <action android:name="android.intent.action.SENDTO"/>
                 <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain"/>
             </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.egmail.anthony.powell.roll_call_2.CourseSelectionScreen" />
         </activity>
+
         <activity
             android:name="com.egmail.anthony.powell.roll_call_2.Proxy"
             android:label="Proxy"
