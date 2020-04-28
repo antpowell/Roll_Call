@@ -28,10 +28,10 @@ public class CustomList extends ArrayAdapter<String> {
 //    private final int listImageID;
     private SearchView searchView;
     private Context context;
-    WebView listItemImgView;
+    private WebView listItemImgView;
 
 
-    public CustomList(Context context, ArrayList<String> itemText, SearchView searchView){
+    CustomList(Context context, ArrayList<String> itemText, SearchView searchView){
         super(context, R.layout.course_selection_dialog, itemText);
         DataItemImage images = new DataItemImage();
         images.getCourseKeyList();
@@ -54,6 +54,14 @@ public class CustomList extends ArrayAdapter<String> {
 
     }
 
+    /**
+     * Creates list view for each course in database. Assigning the list view a corresponding
+     * courseID, Icon, and location - currently not in use
+     *
+     * @param position {int}
+     * @param convertView {View}
+     * @param parent {ViewGroup}
+     */
     public void initView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = LayoutInflater.from(getContext());
         final View listItemView = inflater.inflate(R.layout.course_selection_dialog, parent, false);
@@ -143,6 +151,11 @@ public class CustomList extends ArrayAdapter<String> {
         return listItemView;
     }
 
+    /**
+     * Sets course Icon in WebView to the right of courseID
+     *
+     * @param courseTitle {String}
+     */
     private void SetViewImage(String courseTitle){
         DataItemImage dataItemImage = new DataItemImage();
 

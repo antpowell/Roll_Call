@@ -22,10 +22,15 @@ import android.widget.Toast;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 
+/**
+ * New student user registration activity.
+ * - not currently in use
+ * @author Powell, Anthony
+ *
+ */
 public class StudentReg extends AppCompatActivity {
     private boolean nameEntered, idEntered, emailEntered, passwordEntered;
     protected Users user;
-    private DBController dbController;
     public static Context context;
     private boolean isUserLoggingIn, isUserRegistering;
     private final String D = "DEBUG";
@@ -42,7 +47,6 @@ public class StudentReg extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_student_reg_activity);
 
-
         nameEntered = false;
         idEntered = false;
         emailEntered = false;
@@ -50,7 +54,6 @@ public class StudentReg extends AppCompatActivity {
 
         isUserRegistering = true;
         isUserLoggingIn = false;
-
 
         context = this;
         createAssociationsWithView();
@@ -80,8 +83,11 @@ public class StudentReg extends AppCompatActivity {
     }
 
 
-    /*Function to save Student's last name and account number in studentInfo shared prefs the Email and Pass will be stored in a
-    * another prefs setting later since it will not be sent in the message to the server phone.*/
+    /**
+     * Method to save student's last name and account number into studentInfo shared prefs
+     * the email and password will be stored in another pref setting later since it will not be
+     * sent in the message to the server phone.
+     */
     private void storeUserInfo() {
 //  TODO:IDENTIFY WHY ARE THESE 2 FIELDS BEING INSTANTIATED HERE
 //  EditText eMail = (EditText) this.findViewById(R.id.EmailTextBox);
@@ -90,7 +96,7 @@ public class StudentReg extends AppCompatActivity {
         EditText studentPass = (EditText) this.findViewById(R.id.student_reg_password_field);
         //Create User
         user = new Users(this, lastName.getText().toString(), Tnum.getText().toString(), eMail.getText().toString(), studentPass.getText().toString());
-        dbController = new DBController(this, "Users");
+        DBController dbController = new DBController(this, "Users");
         dbController.addUser(user.getUserMap());
         Toast.makeText(context, String.valueOf(user.hasUser() ? "Created user" : "Unable to create user"), Toast.LENGTH_SHORT).show();
         Toast.makeText(context, user.get_tNum() + ":" + user.get_lastName(), Toast.LENGTH_SHORT).show();
@@ -114,6 +120,9 @@ public class StudentReg extends AppCompatActivity {
 //   Toast.makeText(this, "Error storing user data, please inform admin.", Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * Set up view associations with required fields
+     */
     protected void createAssociationsWithView() {
         //        View hooks
         //Buttons
@@ -138,6 +147,9 @@ public class StudentReg extends AppCompatActivity {
         registerSegment.setChecked(true);
     }
 
+    /**
+     * Handlers for input fields
+     */
     protected void handlers() {
         //TODO: Stop registration button from enabling on segment change
         login_registation_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -400,10 +412,16 @@ public class StudentReg extends AppCompatActivity {
         });
     }
 
+    /**
+     * Log user in with Firebase Auth Controller
+     */
     private void login() {
 //  TODO: retrieve user account from db the proceed
     }
 
+    /**
+     * Create user in firebase with Firebase Auth Controller
+     */
     private void register() {
 
         storeUserInfo();
@@ -412,6 +430,11 @@ public class StudentReg extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
+    /**
+     * Verify if user entered valid name in last name field
+     *
+     * @return nameEntered {boolean}
+     */
     private boolean lastNameChecker() {
         lastName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -449,7 +472,11 @@ public class StudentReg extends AppCompatActivity {
         activateRegistrationButton();
         return nameEntered;
     }
-
+    /**
+     * Verify if user entered valid T-Number in id field
+     *
+     * @return idEntered {boolean}
+     */
     private boolean tNumberChecker() {
         idEntered = false;
         Tnum.addTextChangedListener(new TextWatcher() {
@@ -482,7 +509,11 @@ public class StudentReg extends AppCompatActivity {
         activateRegistrationButton();
         return idEntered;
     }
-
+    /**
+     * Verify if user entered valid email in email field
+     *
+     * @return emailEntered {boolean}
+     */
     private boolean emailChecker() {
         emailEntered = false;
         eMail.addTextChangedListener(new TextWatcher() {
@@ -516,7 +547,11 @@ public class StudentReg extends AppCompatActivity {
         activateRegistrationButton();
         return emailEntered;
     }
-
+    /**
+     * Verify if user entered valid password in password field
+     *
+     * @return passwordEntered {boolean}
+     */
     private boolean passwordChecker() {
         passwordEntered = false;
         password.addTextChangedListener(new TextWatcher() {

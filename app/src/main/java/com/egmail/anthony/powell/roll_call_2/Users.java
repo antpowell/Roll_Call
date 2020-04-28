@@ -9,6 +9,10 @@ import java.util.HashMap;
 
 /**
  * Created by SGT_POWELL on 6/26/2016.
+ * @author Powell, Anthony
+ *
+ * Local storage for user data.
+ *
  */
 public class Users {
  //Local
@@ -54,32 +58,56 @@ public class Users {
  }
 
  //LOCAL STORAGE
- protected void addUser() {
+
+ /**
+  * Stores user data into local storage also known as SharedPreferences
+  */
+ private void addUser() {
   SharedPreferences.Editor edit = studentInfo.edit();
   edit.putString(LAST, _lastName).apply();
   edit.putString(T, _tNum).apply();
   edit.apply();
  }
 
- protected void addCourse(String course) {
+ /**
+  * Stores course into local storage
+  *
+  * @param course {String}
+  */
+ void addCourse(String course) {
   _course = course;
   SharedPreferences.Editor edit = studentInfo.edit();
   edit.putString(COURSE, _course).apply();
   edit.apply();
  }
 
- protected void dropUser(Context context) {
+ /**
+  * Remove user from local storage
+  *
+  * @param context {Context}
+  */
+ void dropUser(Context context) {
   //Clear local data
   SharedPreferences.Editor edit = studentInfo.edit().clear();
   edit.apply();
   if (hasUser()) Toast.makeText(context, "User Deleted...", Toast.LENGTH_SHORT).show();
  }
 
- protected boolean hasUser() {
+ /**
+  * Returns true if user exist or false if no use is found in the SharedPreferences.
+  * @return hasUser {boolean}
+  */
+ boolean hasUser() {
   return !studentInfo.getString(LAST, "").equals("") || !studentInfo.getString(T, "").equals("");
  }
 
- protected Users getUser(Context context) {
+ /**
+  * Return current User object
+  *
+  * @param context {Context}
+  * @return user {User}
+  */
+ Users getUser(Context context) {
   studentInfo = context.getSharedPreferences(TAG, Context.MODE_PRIVATE);
   _course = studentInfo.getString(COURSE, "Not Found");
   if (!studentInfo.getString(COURSE, "Not Found").equals("Not Found")) {
@@ -90,30 +118,63 @@ public class Users {
   return new Users(context, studentInfo.getString(LAST, "Not found"), studentInfo.getString(T, "Not found"));
  }
 
- public String get_lastName() {
+ /**
+  * Return user's last name
+  *
+  * @return lastName {String}
+  */
+ String get_lastName() {
   return _lastName;
  }
 
- public String get_tNum() {
+ /**
+  * Return T-Number {String}
+  *
+  * @return tNum
+  */
+ String get_tNum() {
   return "T" + _tNum;
  }
 
- public String get_email() {
+ /**
+  * Return user's email
+  *
+  * @return email {String}
+  */
+ String get_email() {
   return _email;
  }
 
- public String get_course() {
+ /**
+  * Return course
+  *
+  * @return course {String}
+  */
+ String get_course() {
   return _course;
  }
 
- public String get_password() { return _password;}
+ /**
+  * Return user password - CAUTION CAUTION CAUTION ->SHOULD NEVER BE USED<- CAUTION CAUTION CAUTION
+  *
+  * @return _password {String}
+  */
+ String get_password() { return _password;}
 
 
- public HashMap<String, String> getUserMap() {
+ /**
+  * Returns dictionary of user data.
+  *
+  * @return userMap {HashMap<String, String>}
+  */
+ HashMap<String, String> getUserMap() {
   return userMap;
  }
 
- public void setUserMap() {
+ /**
+  * Setup {User} dictionary for storage purposes.
+  */
+ private void setUserMap() {
   if (!_lastName.isEmpty() && !_tNum.isEmpty()) {
 
    userMap.put("Last Name", _lastName);

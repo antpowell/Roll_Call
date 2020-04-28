@@ -27,6 +27,8 @@ import java.util.Map;
 /**
  * Created by SGT_POWELL on 6/26/2016.
  * @author Anthony Powell
+ *
+ * Database Manager responsible for all Firebase Database and Authentication activities.
  */
 public class DBController {
  //Web
@@ -50,7 +52,7 @@ public class DBController {
  private Context context;
 
 
-DBController(){
+private DBController(){
  courseRef = firebaseDatabase.getReference("Courses").child("Codes");
  authRef = FirebaseAuth.getInstance();
  authListener = new FirebaseAuth.AuthStateListener(){
@@ -69,20 +71,19 @@ DBController(){
   ref = firebaseDatabase.getReference("Users");
  }
 
- protected DBController(Context c, String db) {
+ DBController(Context c, String db) {
   this();
   this.context = c;
   _db = db;
   ref = firebaseDatabase.getReference(db);
  }
 
-
  /**
   * Add user to Database
   *
-  * @param user of type User
+  * @param user {HashMap<String, String>}
   */
- public void addUser(HashMap<String, String> user) {
+ void addUser(HashMap<String, String> user) {
         /*
         * Unique ID as parent
         * User data as child
@@ -100,11 +101,9 @@ DBController(){
 
  }
 
- //Delete user form DB
-
  /**
   * Remove user form Database
-  * @param user of type User
+  * @param user {User}
   */
  public void dropUser(Users user) {
   DeleteUser();
@@ -112,32 +111,29 @@ DBController(){
   ref.child(user.get_tNum()).removeValue();
  }
 
-
  /**
   * Get user T-Number and return it as a key
   *
-  * @param user of type User
-  * @return T-Number to use as key
+  * @param user {User}
+  * @return T-Number as key {String}
   */
  public String getKEY(Users user) {
   return user.get_tNum();
  }
 
-
  /**
   * Get database reference
   *
-  * @return DatabaseReference ref
+  * @return ref {DatabaseReference}
   */
- public DatabaseReference getDB() {
+ DatabaseReference getDB() {
   return ref;
  }
-
 
  /**
   * Create Firebase Auth user in firebase using User data and return success status
   *
-  * @param user of type User
+  * @param user {User}
   * @return Boolean userWasCreated
   */
  public boolean CreateUser(Users user) {
@@ -158,20 +154,18 @@ DBController(){
   return userWasCreated;
  }
 
-
  /**
   * Create user using Google Login and return success status
   *
-  * @param user of type User
+  * @param user {User}
   * @return Boolean userWasCreated
   */
  public Boolean CreateUserGoogle(Users user){ return userWasCreated; }
 
-
  /**
   * Firebase Auth user sign in with User return success status
   *
-  * @param user of type User
+  * @param user {User}
   * @return userWasCreated
   */
  public boolean UserSignIn(Users user){
@@ -198,12 +192,10 @@ DBController(){
   authRef.signOut();
  }
 
-/// Delete user from FirebaseDatebase
-
  /**
   * Firebase Auth delete currently signed in user
   */
- public void DeleteUser(){
+ private void DeleteUser(){
   _dbUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
    @Override
    public void onComplete(@NonNull Task<Void> task) {
@@ -224,7 +216,6 @@ DBController(){
  public void startListener(){
   authRef.addAuthStateListener(authListener);
  }
-
 
  /**
   * Stop Firebase Auth listener
@@ -252,7 +243,6 @@ DBController(){
  public Boolean wasUserDeleted(){
   return userDeleted;
  }
-
 
  /**
   * Returns list of courses stored in the Database

@@ -23,6 +23,11 @@ import java.io.IOException;
 import static com.egmail.anthony.powell.roll_call_2.R.layout.activity_splash;
 
 
+/**
+ * @author Powell, Anthony
+ *
+ * Main entry point into RollCall 2
+ */
 public class MainActivity extends Activity {
 
  public static final String TAG = "tag";
@@ -35,7 +40,13 @@ public class MainActivity extends Activity {
  //Use SharedPreferences(like database) to get store student Last Name and Student Number
  private SharedPreferences studentInfo;
 
- //First activity. Show splash screen if preferences are stored goto Course Selection Activity if not goto Student Registration Activity
+ /**
+  *
+  * Show splash screen if no user is found in preferences, if found bypass sign in activity and go to course selection activity
+  *
+  *
+  * @param savedInstanceState {Bundle}
+  */
  protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(activity_splash);
@@ -90,6 +101,13 @@ public class MainActivity extends Activity {
  }
 
 
+ /**
+  * Custom method to check if application is up to date with the latest version on the Google Play store.
+  * This class crawls the Play store website for RollCall2 and checks version number with local version number.
+  * If they are different prompts user to download latest version of application.
+  *
+  * Because this crawls the website to verify the version, changes to the website could cause this method to break.
+  */
   class getVersionNumberTask extends AsyncTask<Void, Void, String> {
    @Override
    protected void onPreExecute() {

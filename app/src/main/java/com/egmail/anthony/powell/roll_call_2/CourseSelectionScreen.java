@@ -2,6 +2,8 @@ package com.egmail.anthony.powell.roll_call_2;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.core.view.MenuItemCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,11 +27,15 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-/*This Activity is form the student to select the course they wish to sign in to(current course)
+/**
+ * @author Powell, Anthony
+ *
+ * This Activity is form the student to select the course they wish to sign in to (current course)
  * onCreate the 'Course List' and 'Re-Register buttons are displayed
-   * if the Course List button is clicked a Alert with a ListView populated with the current courses appears,
-   * student selects course the name of the course gets saved in sharedPrefs and assigned to the title for the SignIn Activity
-   * else if the student press Re-Register the studentInfo sharedPrefs are cleared they are taken back to the registration Activity to re register*/
+ * if the Course List button is clicked a Alert with a ListView populated with the current courses appears,
+ * student selects course the name of the course gets saved in sharedPrefs and assigned to the title for the SignIn Activity
+ * else if the student press Re-Register the studentInfo sharedPrefs are cleared they are taken back to the registration Activity to re register
+ * */
 public class CourseSelectionScreen extends AppCompatActivity {
 
  public Users user;
@@ -38,7 +44,8 @@ public class CourseSelectionScreen extends AppCompatActivity {
  private ListView listView;
  private TableRow tableRow;
  private DatabaseReference courseRef;
- private  static SearchView searchView;
+ private static SearchView searchView;
+
  DBController dbController;
 
  public void onCreate(Bundle savedInstanceState) {
@@ -56,13 +63,15 @@ public class CourseSelectionScreen extends AppCompatActivity {
   TV.setOnClickListener(new View.OnClickListener() {
    @Override
    public void onClick(View view) {
-    Toast.makeText(CourseSelectionScreen.this, String.format("Course Selection Title Clicked"), Toast.LENGTH_SHORT).show();
+//    Toast.makeText(CourseSelectionScreen.this, String.format("Course Selection Title Clicked"), Toast.LENGTH_SHORT).show();
    }
   });
   
 
   
   listView = (ListView) findViewById(R.id.course_selection_list_dialog);
+
+
 //  listView.setOnClickListener(new View.OnClickListener() {
 //   @Override
 //   public void onClick(View view) {
@@ -77,7 +86,7 @@ public class CourseSelectionScreen extends AppCompatActivity {
 
   ListenerHandler();
 
-  //Pull in current user info from device local storage.
+
   /**
    * Pull in current User info from device Local Storage
    * i.e. Email, and  TNUmber
@@ -149,13 +158,12 @@ public class CourseSelectionScreen extends AppCompatActivity {
  /**
   * Get course listings from Firebase and create the course listings
   * with the adapter.
-  *
   */
  public void adaptorSetup() {
   courseRef = FirebaseDatabase.getInstance().getReference("Courses").child("Codes");
   courseRef.addListenerForSingleValueEvent(new ValueEventListener() {
    @Override
-   public void onDataChange(DataSnapshot dataSnapshot) {
+   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
     courses = (ArrayList<String>) dataSnapshot.getValue();
 
     adapter = new CustomList(CourseSelectionScreen.this, courses, searchView);
@@ -163,7 +171,7 @@ public class CourseSelectionScreen extends AppCompatActivity {
    }
 
    @Override
-   public void onCancelled(DatabaseError databaseError) {
+   public void onCancelled(@NonNull DatabaseError databaseError) {
 
    }
   });
@@ -172,6 +180,9 @@ public class CourseSelectionScreen extends AppCompatActivity {
 
  }
 
+ /**
+  * Listener manager for the Scroll View individual cells
+  */
  private void ListenerHandler() {
 
 //  tableRow = (TableRow)findViewById(R.id.listItemRow);
@@ -188,6 +199,11 @@ public class CourseSelectionScreen extends AppCompatActivity {
 
  }
 
+ /**
+  *Get courseID of course user selected and switches to the Sign In activity passing it the courseID
+  *
+  * @param courseID {String}
+  */
  public void courseSign(String courseID) {
   startActivity(new Intent(CourseSelectionScreen.this, SignIn.class));
   overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

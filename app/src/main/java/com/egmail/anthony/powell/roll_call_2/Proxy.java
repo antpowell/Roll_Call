@@ -13,8 +13,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-/*
+/**
  * Created by ap198_000 on 1/19/2015.
+ * @author Powell, Anthony
+ *
+ * Class for Proxy user sign access. Proxy user would be another user, secondary user, who would
+ * sign in on the primary user's device with the secondary users email, password, and T-Number.
  */
 public class Proxy extends AppCompatActivity {
 
@@ -22,10 +26,15 @@ public class Proxy extends AppCompatActivity {
     public static final String LAST = "last";
     public static final String T = "tNum";
     public TextView proxy_last, proxy_id;
-//    private Toolbar tb;
 
     private SharedPreferences proxyInfo;
 
+    /**
+     * Entry into Proxy Activity.
+     * Sets title; get last name and T-Number that secondary user enters into the input fields
+     *
+     * @param savedInstanceState {Bundle}
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +49,7 @@ public class Proxy extends AppCompatActivity {
         proxy_id = (TextView) this.findViewById(R.id.ProxyTNumberTextField);
         proxyInfo = getSharedPreferences(PROXYTAG, MODE_PRIVATE);
 
-        //On button press get proxy users last name and student number from text field and save to PROXYTAG
+        //On button press get proxy users last name and student T-Number from text field and save to PROXYTAG
         //then return to sign in activity.
         final Button signIn = (Button) findViewById(R.id.StoreProxyButton);
 
@@ -89,6 +98,13 @@ public class Proxy extends AppCompatActivity {
         return true;
     }
 
+
+    /**
+     * Setup options menu and returns if a options item was selected.
+     *
+     * @param item {MenuItem}
+     * @return onOptionsItemSelected {boolean}
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -108,6 +124,10 @@ public class Proxy extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    /**
+     * Back button press handler
+     */
     @Override
     public void onBackPressed() {
         NavUtils.navigateUpFromSameTask(this);

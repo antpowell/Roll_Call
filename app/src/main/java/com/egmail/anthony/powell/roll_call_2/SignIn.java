@@ -31,8 +31,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/*
+/**
  * Created by ap198_000 on 1/19/2015.
+ * @author Powell, Anthony
  */
 public class SignIn extends AppCompatActivity {
 
@@ -107,7 +108,9 @@ public class SignIn extends AppCompatActivity {
 
     /**
      *  Method to be called to set the title of this screen from another Activity
-     * @param title title to be shown at the top of the Activity
+     *
+     * @param a {Activity}
+     * @param title {String} title to be shown at the top of the Activity
      */
     public void setTitle(Activity a, String title) {
         getSupportActionBar().setTitle(title);
@@ -116,13 +119,13 @@ public class SignIn extends AppCompatActivity {
     /**
      * Prepare message and send to SMS application for user to send.
      *
-     * @param messageToSend User signature used to sign roll
-     * @param contactNumber Static phone number to send message
+     * Google Forms HTTP section found @ http://goo.gl/forms/HCtiSG0c0D
+     * end Google Forms HTTP
+     *
+     * @param messageToSend {String} User signature used to sign roll
+     * @param contactNumber {String} Static phone number to send message
      */
     public void sendMessage(String messageToSend, String contactNumber)  {
-
-        //Google Forms HTTP section found @http://goo.gl/forms/HCtiSG0c0D
-        //end Google Forms HTTP
 
         Intent sendSMS = new Intent(Intent.ACTION_SENDTO);
         sendSMS.setData(Uri.parse("smsto:"));
@@ -150,11 +153,17 @@ public class SignIn extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Handle action bar item clicks. The action bar will
+     * automatically handle clicks on the Home/Up button,
+     * so long as a parent activity in AndroidManifest.xml.
+     *
+     * @param item {MenuItem}
+     * @return onOptionsItemSelected
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 //        Toast t = Toast.makeText(this, item.toString(),Toast.LENGTH_SHORT);
 //        t.show();
